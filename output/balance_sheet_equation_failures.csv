@@ -1,0 +1,5 @@
+id,company_id,year,equity_capital,reserves,borrowings,other_liabilities,total_liabilities,fixed_assets,cwip,investments,other_asset,total_assets
+149,ADANIENSOL,Mar 2014,0.1,0,0,0,0,0,0,0,0,0
+365,BEL,Mar 2017,9.0,6,29,32,77,6,0,0,71,77
+757,INDIGO,Mar 2013,0.4,4,11,11,26,5,0,0,21,26
+758,INDIGO,Mar 2014,0.4,4,14,16,35,10,0,0,25,35
