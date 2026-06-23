@@ -51,3 +51,37 @@ def test_cashflow_table_exists():
     assert cursor.fetchone() is not None
 
     conn.close()
+
+
+def test_marketcap_table_exists():
+    conn = sqlite3.connect("db/nifty100.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT name
+        FROM sqlite_master
+        WHERE type='table'
+        AND name='marketcap'
+    """)
+
+    assert cursor.fetchone() is not None
+
+    conn.close()
+
+
+def test_stockprices_table_exists():
+    conn = sqlite3.connect("db/nifty100.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT name
+        FROM sqlite_master
+        WHERE type='table'
+        AND name='stockprices'
+    """)
+
+    assert cursor.fetchone() is not None
+
+    conn.close()
+
+    

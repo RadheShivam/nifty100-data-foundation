@@ -23,12 +23,6 @@ def test_companies_columns():
     assert list(df.columns) == expected_columns
 
 
-
-
-
-
-
-
 def test_companies_columns():
     df = load_companies()
     assert "id" in df.columns

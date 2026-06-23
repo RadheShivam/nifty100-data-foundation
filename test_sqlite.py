@@ -70,6 +70,13 @@
 
 # conn.close()
 
+from src.etl.load_to_sqlite import *
+
+create_database()
+load_data_to_sqlite()
+
+print("✅ Database and tables created successfully")
+print("✅ Data loaded successfully")
 
 
 

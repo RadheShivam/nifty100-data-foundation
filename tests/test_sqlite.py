@@ -52,3 +52,25 @@ def test_cashflow_row_count():
     assert count == 1187
 
     conn.close()
+
+
+def test_marketcap_row_count():
+    conn = sqlite3.connect("db/nifty100.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM marketcap")
+
+    assert cursor.fetchone()[0] > 0
+
+    conn.close()
+
+
+def test_stockprices_row_count():
+    conn = sqlite3.connect("db/nifty100.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT COUNT(*) FROM stockprices")
+
+    assert cursor.fetchone()[0] > 0
+
+    conn.close()

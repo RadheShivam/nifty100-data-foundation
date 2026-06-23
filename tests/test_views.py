@@ -6,10 +6,10 @@ def test_vw_top_sales_exists():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT name
-        FROM sqlite_master
-        WHERE type='view'
-        AND name='vw_top_sales'
+    SELECT name
+    FROM sqlite_master
+    WHERE type='view'
+    AND name='vw_top_sales'
     """)
 
     assert cursor.fetchone() is not None
@@ -22,10 +22,10 @@ def test_vw_top_roe_exists():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT name
-        FROM sqlite_master
-        WHERE type='view'
-        AND name='vw_top_roe'
+    SELECT name
+    FROM sqlite_master
+    WHERE type='view'
+    AND name='vw_top_roe'
     """)
 
     assert cursor.fetchone() is not None
@@ -38,10 +38,10 @@ def test_vw_sector_distribution_exists():
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT name
-        FROM sqlite_master
-        WHERE type='view'
-        AND name='vw_sector_distribution'
+    SELECT name
+    FROM sqlite_master
+    WHERE type='view'
+    AND name='vw_sector_distribution'
     """)
 
     assert cursor.fetchone() is not None

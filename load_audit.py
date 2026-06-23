@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 
-def generate_load_audit():
+def create_load_audit():
     conn = sqlite3.connect("db/nifty100.db")
 
     tables = [
@@ -13,24 +13,26 @@ def generate_load_audit():
         "analysis",
         "documents",
         "prosandcons",
-        "sectors"
+        "sectors",
+        "marketcap",
+        "stockprices"
     ]
 
-    data = []
-
-    cursor = conn.cursor()
+    rows = []
 
     for table in tables:
-        cursor.execute(f"SELECT COUNT(*) FROM {table}")
+        cursor = conn.execute(
+            f"SELECT COUNT(*) FROM {table}"
+        )
 
         count = cursor.fetchone()[0]
 
-        data.append({
+        rows.append({
             "table_name": table,
             "row_count": count
         })
 
-    audit_df = pd.DataFrame(data)
+    audit_df = pd.DataFrame(rows)
 
     audit_df.to_csv(
         "output/load_audit.csv",
@@ -39,4 +41,4 @@ def generate_load_audit():
 
     conn.close()
 
-    print("✅ load_audit.csv created")
+    print("✅ load_audit.csv updated")

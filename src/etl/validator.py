@@ -10,14 +10,38 @@ def check_primary_key_uniqueness(df, table_name, pk_column):
         print(f"❌ {table_name}: Duplicate primary keys found")
         print(duplicates)
 
-def check_composite_key_uniqueness(df, table_name, columns):
-    duplicates = df[df.duplicated(subset=columns, keep=False)]
+def check_opm_consistency(df):
 
-    if duplicates.empty:
-        print(f"✅ {table_name}: Composite key uniqueness passed")
+    calculated_opm = (
+        df["operating_profit"] / df["sales"]
+    ) * 100
+
+    difference = abs(
+        calculated_opm - df["opm_percentage"]
+    )
+
+    invalid_rows = df[
+        difference > 1
+    ]
+
+    if invalid_rows.empty:
+        print(
+            "✅ profitandloss: OPM consistency passed"
+        )
+
     else:
-        print(f"❌ {table_name}: Duplicate composite keys found")
-        print(duplicates)
+        print(
+            "❌ profitandloss: OPM consistency failed"
+        )
+
+        invalid_rows.to_csv(
+            "output/opm_consistency_failures.csv",
+            index=False
+        )
+
+        print(
+            "Saved to output/opm_consistency_failures.csv"
+        )
 
 def check_composite_key_uniqueness(df, table_name, columns):
     duplicates = df[df.duplicated(subset=columns, keep=False)]
@@ -54,20 +78,39 @@ def check_foreign_key_integrity(
         print(f"Saved to {filename}")
 
 def check_balance_sheet_equation(df):
-    equity = df["equity_capital"] + df["reserves"]
-    liabilities = df["borrowings"] + df["other_liabilities"]
+
+    equity = (
+        df["equity_capital"]
+        + df["reserves"]
+    )
+
+    liabilities = (
+        df["borrowings"]
+        + df["other_liabilities"]
+    )
 
     expected_assets = equity + liabilities
 
-    difference_percentage = (
-        abs(df["total_assets"] - expected_assets)
-        / df["total_assets"]
+    difference = abs(
+        df["total_assets"] - expected_assets
     )
 
-    invalid_rows = df[difference_percentage > 0.01]
+    # avoid division by zero
+    denominator = df["total_assets"].replace(0, 1)
+
+    difference_percentage = (
+        difference / denominator
+    )
+
+    invalid_rows = df[
+        (df["total_assets"] != 0)
+        &
+        (difference_percentage > 0.01)
+    ]
 
     if invalid_rows.empty:
         print("✅ balancesheet: Balance equation passed")
+
     else:
         print("❌ balancesheet: Balance equation failed")
 
@@ -78,33 +121,6 @@ def check_balance_sheet_equation(df):
 
         print(
             "Saved to output/balance_sheet_equation_failures.csv"
-        )
-
-
-
-def check_opm_consistency(df):
-    calculated_opm = (
-        df["operating_profit"] / df["sales"]
-    ) * 100
-
-    difference = abs(
-        calculated_opm - df["opm_percentage"]
-    )
-
-    invalid_rows = df[difference > 1]
-
-    if invalid_rows.empty:
-        print("✅ profitandloss: OPM consistency passed")
-    else:
-        print("❌ profitandloss: OPM consistency failed")
-
-        invalid_rows.to_csv(
-            "output/opm_consistency_failures.csv",
-            index=False
-        )
-
-        print(
-            "Saved to output/opm_consistency_failures.csv"
         )
 
 def check_positive_sales(df):
