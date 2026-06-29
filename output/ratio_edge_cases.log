@@ -1,0 +1,789 @@
+Company,Year,Computed ROCE,Source ROCE,Difference,Category
+Abbott India Ltd,Dec 2012,34.16,46.0,11.84,Version difference
+Abbott India Ltd,Mar 2014,36.68,46.0,9.32,Formula discrepancy
+Abbott India Ltd,Mar 2015,34.9,46.0,11.1,Version difference
+Abbott India Ltd,Mar 2016,31.72,46.0,14.28,Version difference
+Abbott India Ltd,Mar 2017,29.85,46.0,16.15,Version difference
+Abbott India Ltd,Mar 2018,31.96,46.0,14.04,Version difference
+Abbott India Ltd,Mar 2019,30.98,46.0,15.02,Version difference
+Abbott India Ltd,Mar 2020,31.35,46.0,14.65,Version difference
+Abbott India Ltd,Mar 2021,35.57,46.0,10.43,Version difference
+Abbott India Ltd,Mar 2022,38.63,46.0,7.37,Formula discrepancy
+Abbott India Ltd,Mar 2023,38.65,46.0,7.35,Formula discrepancy
+Abbott India Ltd,Mar 2024,40.3,46.0,5.7,Formula discrepancy
+Adani Energy Solutions Ltd,Mar 2014,0.0,9.0,9.0,Formula discrepancy
+Adani Energy Solutions Ltd,Mar 2015,1.28,9.0,7.72,Formula discrepancy
+Adani Energy Solutions Ltd,Mar 2016,22.09,9.0,13.09,Version difference
+Adani Energy Solutions Ltd,Mar 2017,21.41,9.0,12.41,Version difference
+Adani Energy Solutions Ltd,Mar 2018,20.66,9.0,11.66,Version difference
+Adani Energy Solutions Ltd,Mar 2020,16.59,9.0,7.59,Formula discrepancy
+Adani Energy Solutions Ltd,Mar 2021,14.66,9.0,5.66,Formula discrepancy
+Adani Energy Solutions Ltd,Mar 2022,14.15,9.0,5.15,Formula discrepancy
+Adani Energy Solutions Ltd,Mar 2024,15.06,9.0,6.06,Formula discrepancy
+Adani Enterprises Ltd,Mar 2016,6.14,11.6,5.46,Formula discrepancy
+Adani Enterprises Ltd,Mar 2017,6.34,11.6,5.26,Formula discrepancy
+Adani Green Energy Ltd,Mar 2017,13.26,96.5,83.24,Data source issue
+Adani Green Energy Ltd,Mar 2018,12.37,96.5,84.13,Data source issue
+Adani Green Energy Ltd,Mar 2019,19.79,96.5,76.71,Data source issue
+Adani Green Energy Ltd,Mar 2020,10.71,96.5,85.79,Data source issue
+Adani Green Energy Ltd,Mar 2021,10.33,96.5,86.17,Data source issue
+Adani Green Energy Ltd,Mar 2022,7.87,96.5,88.63,Data source issue
+Adani Green Energy Ltd,Mar 2023,10.19,96.5,86.31,Data source issue
+Adani Green Energy Ltd,Mar 2024,12.35,96.5,84.15,Data source issue
+"Adani Ports & Special Economic Zone Ltd
+",Mar 2018,19.28,12.9,6.38,Formula discrepancy
+"Adani Ports & Special Economic Zone Ltd
+",Mar 2024,19.05,12.9,6.15,Formula discrepancy
+"Adani Ports & Special Economic Zone Ltd
+",Mar 2018,19.28,12.9,6.38,Formula discrepancy
+"Adani Ports & Special Economic Zone Ltd
+",Mar 2024,19.05,12.9,6.15,Formula discrepancy
+Adani Power Ltd,Mar 2013,4.88,32.2,27.32,Data source issue
+Adani Power Ltd,Mar 2014,12.88,32.2,19.32,Version difference
+Adani Power Ltd,Mar 2015,12.87,32.2,19.33,Version difference
+Adani Power Ltd,Mar 2016,19.05,32.2,13.15,Version difference
+Adani Power Ltd,Mar 2017,15.59,32.2,16.61,Version difference
+Adani Power Ltd,Mar 2018,15.14,32.2,17.06,Version difference
+Adani Power Ltd,Mar 2019,14.14,32.2,18.06,Version difference
+Adani Power Ltd,Mar 2020,14.17,32.2,18.03,Version difference
+Adani Power Ltd,Mar 2021,18.12,32.2,14.08,Version difference
+Adani Power Ltd,Mar 2022,19.23,32.2,12.97,Version difference
+Adani Power Ltd,Mar 2023,18.55,32.2,13.65,Version difference
+Ambuja Cements Ltd,Dec 2012,34.35,12.8,21.55,Data source issue
+Ambuja Cements Ltd,Dec 2013,22.74,12.8,9.94,Formula discrepancy
+Ambuja Cements Ltd,Dec 2014,24.22,12.8,11.42,Version difference
+Ambuja Cements Ltd,Dec 2015,21.08,12.8,8.28,Formula discrepancy
+Ambuja Cements Ltd,Dec 2016,23.39,12.8,10.59,Version difference
+Ambuja Cements Ltd,Dec 2017,24.53,12.8,11.73,Version difference
+Ambuja Cements Ltd,Dec 2018,23.05,12.8,10.25,Version difference
+Ambuja Cements Ltd,Dec 2019,23.84,12.8,11.04,Version difference
+Ambuja Cements Ltd,Dec 2020,26.55,12.8,13.75,Version difference
+Ambuja Cements Ltd,Dec 2021,28.5,12.8,15.7,Version difference
+Ambuja Cements Ltd,Mar 2024,19.03,12.8,6.23,Formula discrepancy
+"Apollo Hospitals
+Chain of Indian private hospitals",Mar 2020,31.88,17.2,14.68,Version difference
+"Apollo Hospitals
+Chain of Indian private hospitals",Mar 2022,28.79,17.2,11.59,Version difference
+"Apollo Hospitals
+Chain of Indian private hospitals",Mar 2023,25.45,17.2,8.25,Formula discrepancy
+"Apollo Hospitals
+Chain of Indian private hospitals",Mar 2024,25.11,17.2,7.91,Formula discrepancy
+"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Mar 2013,52.05,41.75,10.3,Version difference
+"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Mar 2013,52.05,41.75,10.3,Version difference
+"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Mar 2014,52.47,41.75,10.72,Version difference
+"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Mar 2014,52.47,41.75,10.72,Version difference
+"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Mar 2015,48.62,41.75,6.87,Formula discrepancy
+"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Mar 2015,48.62,41.75,6.87,Formula discrepancy
+"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Mar 2022,36.5,41.75,5.25,Formula discrepancy
+"Asian Paints
+Indian Multi-National Paint and Coating Manufacturing Company",Mar 2022,36.5,41.75,5.25,Formula discrepancy
+Adani Total Gas Ltd,Mar 2019,34.89,21.2,13.69,Version difference
+Adani Total Gas Ltd,Mar 2020,34.02,21.2,12.82,Version difference
+Adani Total Gas Ltd,Mar 2021,31.14,21.2,9.94,Formula discrepancy
+Bajaj Auto Ltd,Mar 2013,46.74,33.5,13.24,Version difference
+Bajaj Auto Ltd,Mar 2014,42.48,33.5,8.98,Formula discrepancy
+Bajaj Auto Ltd,Mar 2015,39.22,33.5,5.72,Formula discrepancy
+Bajaj Auto Ltd,Mar 2017,26.35,33.5,7.15,Formula discrepancy
+Bajaj Auto Ltd,Mar 2018,25.12,33.5,8.38,Formula discrepancy
+Bajaj Auto Ltd,Mar 2019,23.39,33.5,10.11,Version difference
+Bajaj Auto Ltd,Mar 2020,24.58,33.5,8.92,Formula discrepancy
+Bajaj Auto Ltd,Mar 2021,18.97,33.5,14.53,Version difference
+Bajaj Auto Ltd,Mar 2022,18.44,33.5,15.06,Version difference
+Bajaj Auto Ltd,Mar 2023,22.9,33.5,10.6,Version difference
+Bajaj Finserv Ltd,Mar 2014,15.69,21.14,5.45,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2015,14.84,21.14,6.3,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2016,13.69,21.14,7.45,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2017,13.64,21.14,7.5,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2018,12.7,21.14,8.44,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2019,12.36,21.14,8.78,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2020,11.81,21.14,9.33,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2021,12.26,21.14,8.88,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2022,10.93,21.14,10.21,Version difference
+Bajaj Finserv Ltd,Mar 2023,11.81,21.14,9.33,Formula discrepancy
+Bajaj Finserv Ltd,Mar 2024,11.96,21.14,9.18,Formula discrepancy
+Bajaj Holdings & Investment Ltd,Mar 2013,3.13,13.1,9.97,Formula discrepancy
+Bajaj Holdings & Investment Ltd,Mar 2014,3.38,13.1,9.72,Formula discrepancy
+Bajaj Holdings & Investment Ltd,Mar 2015,3.66,13.1,9.44,Formula discrepancy
+Bajaj Holdings & Investment Ltd,Mar 2016,2.84,13.1,10.26,Version difference
+Bajaj Holdings & Investment Ltd,Mar 2017,3.55,13.1,9.55,Formula discrepancy
+Bajaj Holdings & Investment Ltd,Mar 2018,1.43,13.1,11.67,Version difference
+Bajaj Holdings & Investment Ltd,Mar 2019,1.3,13.1,11.8,Version difference
+Bajaj Holdings & Investment Ltd,Mar 2020,1.2,13.1,11.9,Version difference
+Bajaj Holdings & Investment Ltd,Mar 2021,1.03,13.1,12.07,Version difference
+Bajaj Holdings & Investment Ltd,Mar 2022,0.93,13.1,12.17,Version difference
+Bajaj Holdings & Investment Ltd,Mar 2023,0.94,13.1,12.16,Version difference
+Bajaj Holdings & Investment Ltd,Mar 2024,2.94,13.1,10.16,Version difference
+Bajaj Finance Ltd,Mar 2015,5.68,11.9,6.22,Formula discrepancy
+Bajaj Finance Ltd,Mar 2016,5.42,11.9,6.48,Formula discrepancy
+Bajaj Finance Ltd,Mar 2017,5.64,11.9,6.26,Formula discrepancy
+Bajaj Finance Ltd,Mar 2018,5.12,11.9,6.78,Formula discrepancy
+Bajaj Finance Ltd,Mar 2019,4.62,11.9,7.28,Formula discrepancy
+Bajaj Finance Ltd,Mar 2020,5.83,11.9,6.07,Formula discrepancy
+Bajaj Finance Ltd,Mar 2021,6.62,11.9,5.28,Formula discrepancy
+Bajaj Finance Ltd,Mar 2022,5.87,11.9,6.03,Formula discrepancy
+Bajaj Finance Ltd,Mar 2023,4.86,11.9,7.04,Formula discrepancy
+Bajaj Finance Ltd,Mar 2024,4.54,11.9,7.36,Formula discrepancy
+Bharti Airtel Ltd,Mar 2013,32.27,13.1,19.17,Version difference
+Bharti Airtel Ltd,Mar 2014,31.08,13.1,17.98,Version difference
+Bharti Airtel Ltd,Mar 2015,43.4,13.1,30.3,Data source issue
+Bharti Airtel Ltd,Mar 2016,30.72,13.1,17.62,Version difference
+Bharti Airtel Ltd,Mar 2017,31.53,13.1,18.43,Version difference
+Bharti Airtel Ltd,Mar 2018,27.27,13.1,14.17,Version difference
+Bharti Airtel Ltd,Mar 2019,23.93,13.1,10.83,Version difference
+Bharti Airtel Ltd,Mar 2020,28.53,13.1,15.43,Version difference
+Bharti Airtel Ltd,Mar 2021,33.68,13.1,20.58,Data source issue
+Bharti Airtel Ltd,Mar 2022,38.36,13.1,25.26,Data source issue
+Bharti Airtel Ltd,Mar 2023,35.48,13.1,22.38,Data source issue
+Bharti Airtel Ltd,Mar 2024,39.51,13.1,26.41,Data source issue
+Bharat Electronics Ltd,Mar 2013,2683.33,34.6,2648.73,Data source issue
+Bharat Electronics Ltd,Mar 2014,3839.29,34.6,3804.69,Data source issue
+Bharat Electronics Ltd,Mar 2015,4075.76,34.6,4041.16,Data source issue
+Bharat Electronics Ltd,Mar 2016,4283.78,34.6,4249.18,Data source issue
+Bharat Electronics Ltd,Mar 2017,4554.55,34.6,4519.95,Data source issue
+Bharat Electronics Ltd,Mar 2018,2925.32,34.6,2890.72,Data source issue
+Bharat Electronics Ltd,Mar 2019,3382.29,34.6,3347.69,Data source issue
+Bharat Electronics Ltd,Mar 2020,3162.63,34.6,3128.03,Data source issue
+Bharat Electronics Ltd,Mar 2021,3334.26,34.6,3299.66,Data source issue
+Bharat Electronics Ltd,Mar 2022,2948.82,34.6,2914.22,Data source issue
+Bharat Electronics Ltd,Mar 2023,3964.04,34.6,3929.44,Data source issue
+Bharat Electronics Ltd,Mar 2024,4325.98,34.6,4291.38,Data source issue
+"Bharat Heavy Electricals Limited
+",Mar 2013,31.4,3.28,28.12,Data source issue
+"Bharat Heavy Electricals Limited
+",Mar 2014,14.69,3.28,11.41,Version difference
+"Bharat Heavy Electricals Limited
+",Mar 2015,8.93,3.28,5.65,Formula discrepancy
+"Bharat Heavy Electricals Limited
+",Mar 2021,-8.33,3.28,11.61,Version difference
+Bosch Ltd,Dec 2012,29.59,20.6,8.99,Formula discrepancy
+Bosch Ltd,Dec 2013,25.83,20.6,5.23,Formula discrepancy
+Bosch Ltd,Mar 2015,33.91,20.6,13.31,Version difference
+Bosch Ltd,Mar 2017,27.49,20.6,6.89,Formula discrepancy
+Bosch Ltd,Mar 2018,25.65,20.6,5.05,Formula discrepancy
+Bosch Ltd,Mar 2019,28.0,20.6,7.4,Formula discrepancy
+Bosch Ltd,Mar 2021,15.23,20.6,5.37,Formula discrepancy
+Bharat Petroleum Corporation Ltd,Mar 2013,18.37,32.1,13.73,Version difference
+Bharat Petroleum Corporation Ltd,Mar 2014,22.86,32.1,9.24,Formula discrepancy
+Bharat Petroleum Corporation Ltd,Mar 2015,26.65,32.1,5.45,Formula discrepancy
+Bharat Petroleum Corporation Ltd,Mar 2017,23.88,32.1,8.22,Formula discrepancy
+Bharat Petroleum Corporation Ltd,Mar 2018,24.51,32.1,7.59,Formula discrepancy
+Bharat Petroleum Corporation Ltd,Mar 2019,22.16,32.1,9.94,Formula discrepancy
+Bharat Petroleum Corporation Ltd,Mar 2020,12.8,32.1,19.3,Version difference
+Bharat Petroleum Corporation Ltd,Mar 2021,23.44,32.1,8.66,Formula discrepancy
+Bharat Petroleum Corporation Ltd,Mar 2022,21.1,32.1,11.0,Version difference
+Bharat Petroleum Corporation Ltd,Mar 2023,14.05,32.1,18.05,Version difference
+Bharat Petroleum Corporation Ltd,Mar 2024,39.05,32.1,6.95,Formula discrepancy
+Britannia Industries Ltd,Mar 2014,74.89,48.9,25.99,Data source issue
+Britannia Industries Ltd,Mar 2015,72.95,48.9,24.05,Data source issue
+Britannia Industries Ltd,Mar 2016,60.14,48.9,11.24,Version difference
+Britannia Industries Ltd,Mar 2019,42.96,48.9,5.94,Formula discrepancy
+Britannia Industries Ltd,Mar 2020,34.14,48.9,14.76,Version difference
+Britannia Industries Ltd,Mar 2024,57.73,48.9,8.83,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2013,4.12,10.4,6.28,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2014,4.7,10.4,5.7,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2015,4.82,10.4,5.58,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2016,4.91,10.4,5.49,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2017,4.8,10.4,5.6,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2018,3.46,10.4,6.94,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2019,2.97,10.4,7.43,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2020,4.01,10.4,6.39,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2021,4.11,10.4,6.29,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2022,3.74,10.4,6.66,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2023,3.35,10.4,7.05,Formula discrepancy
+Cholamandalam Investment & Finance Company Ltd,Mar 2024,3.62,10.4,6.78,Formula discrepancy
+"Cipla Ltd
+",Mar 2013,64.04,22.8,41.24,Data source issue
+"Cipla Ltd
+",Mar 2014,74.33,22.8,51.53,Data source issue
+"Cipla Ltd
+",Mar 2015,77.47,22.8,54.67,Data source issue
+"Cipla Ltd
+",Mar 2016,72.16,22.8,49.36,Data source issue
+"Cipla Ltd
+",Mar 2017,79.37,22.8,56.57,Data source issue
+"Cipla Ltd
+",Mar 2018,74.49,22.8,51.69,Data source issue
+"Cipla Ltd
+",Mar 2019,75.49,22.8,52.69,Data source issue
+"Cipla Ltd
+",Mar 2020,81.28,22.8,58.48,Data source issue
+"Cipla Ltd
+",Mar 2021,78.54,22.8,55.74,Data source issue
+"Cipla Ltd
+",Mar 2022,83.4,22.8,60.6,Data source issue
+"Cipla Ltd
+",Mar 2023,78.06,22.8,55.26,Data source issue
+"Cipla Ltd
+",Mar 2024,75.31,22.8,52.51,Data source issue
+Coal India Ltd,Mar 2013,104.52,63.6,40.92,Data source issue
+Coal India Ltd,Mar 2014,128.78,63.6,65.18,Data source issue
+Coal India Ltd,Mar 2015,144.98,63.6,81.38,Data source issue
+Coal India Ltd,Mar 2016,171.99,63.6,108.39,Data source issue
+Coal India Ltd,Mar 2017,249.25,63.6,185.65,Data source issue
+Coal India Ltd,Mar 2018,363.87,63.6,300.27,Data source issue
+Coal India Ltd,Mar 2019,272.21,63.6,208.61,Data source issue
+Coal India Ltd,Mar 2020,201.99,63.6,138.39,Data source issue
+Coal India Ltd,Mar 2021,177.15,63.6,113.55,Data source issue
+Coal India Ltd,Mar 2022,191.66,63.6,128.06,Data source issue
+Coal India Ltd,Mar 2023,154.74,63.6,91.14,Data source issue
+Coal India Ltd,Mar 2024,113.26,63.6,49.66,Data source issue
+Dabur India Ltd,Mar 2013,33.18,22.3,10.88,Version difference
+Dabur India Ltd,Mar 2014,37.43,22.3,15.13,Version difference
+Dabur India Ltd,Mar 2015,35.1,22.3,12.8,Version difference
+Dabur India Ltd,Mar 2016,33.18,22.3,10.88,Version difference
+Dabur India Ltd,Mar 2017,28.43,22.3,6.13,Formula discrepancy
+Dabur India Ltd,Mar 2019,30.28,22.3,7.98,Formula discrepancy
+Dabur India Ltd,Mar 2020,28.23,22.3,5.93,Formula discrepancy
+Dabur India Ltd,Mar 2021,27.43,22.3,5.13,Formula discrepancy
+Divis Laboratories Ltd,Mar 2013,35.24,16.5,18.74,Version difference
+Divis Laboratories Ltd,Mar 2014,37.22,16.5,20.72,Data source issue
+Divis Laboratories Ltd,Mar 2015,37.16,16.5,20.66,Data source issue
+Divis Laboratories Ltd,Mar 2016,35.55,16.5,19.05,Version difference
+Divis Laboratories Ltd,Mar 2017,29.17,16.5,12.67,Version difference
+Divis Laboratories Ltd,Mar 2018,23.56,16.5,7.06,Formula discrepancy
+Divis Laboratories Ltd,Mar 2019,28.93,16.5,12.43,Version difference
+Divis Laboratories Ltd,Mar 2020,27.38,16.5,10.88,Version difference
+Divis Laboratories Ltd,Mar 2021,33.58,16.5,17.08,Version difference
+Divis Laboratories Ltd,Mar 2022,35.77,16.5,19.27,Version difference
+Avenue Supermarts Ltd,Mar 2014,24.92,19.4,5.52,Formula discrepancy
+Avenue Supermarts Ltd,Mar 2015,25.57,19.4,6.17,Formula discrepancy
+Avenue Supermarts Ltd,Mar 2016,28.09,19.4,8.69,Formula discrepancy
+Avenue Supermarts Ltd,Mar 2018,29.6,19.4,10.2,Version difference
+Avenue Supermarts Ltd,Mar 2019,29.35,19.4,9.95,Formula discrepancy
+Avenue Supermarts Ltd,Mar 2023,25.58,19.4,6.18,Formula discrepancy
+Avenue Supermarts Ltd,Mar 2024,25.08,19.4,5.68,Formula discrepancy
+Dr Reddys Laboratories Ltd,Mar 2013,32.03,26.5,5.53,Formula discrepancy
+Dr Reddys Laboratories Ltd,Mar 2014,31.59,26.5,5.09,Formula discrepancy
+Dr Reddys Laboratories Ltd,Mar 2017,20.37,26.5,6.13,Formula discrepancy
+Dr Reddys Laboratories Ltd,Mar 2018,19.43,26.5,7.07,Formula discrepancy
+Dr Reddys Laboratories Ltd,Mar 2020,20.44,26.5,6.06,Formula discrepancy
+Eicher Motors Ltd,Dec 2013,39.5,31.1,8.4,Formula discrepancy
+Eicher Motors Ltd,Dec 2014,51.98,31.1,20.88,Data source issue
+Eicher Motors Ltd,Mar 2016,49.7,31.1,18.6,Version difference
+Eicher Motors Ltd,Mar 2017,42.66,31.1,11.56,Version difference
+Eicher Motors Ltd,Mar 2018,42.22,31.1,11.12,Version difference
+Eicher Motors Ltd,Mar 2020,25.07,31.1,6.03,Formula discrepancy
+Eicher Motors Ltd,Mar 2021,19.16,31.1,11.94,Version difference
+Eicher Motors Ltd,Mar 2022,20.68,31.1,10.42,Version difference
+Eicher Motors Ltd,Mar 2023,26.0,31.1,5.1,Formula discrepancy
+GAIL (India) Ltd,Mar 2018,20.48,14.7,5.78,Formula discrepancy
+GAIL (India) Ltd,Mar 2019,24.06,14.7,9.36,Formula discrepancy
+GAIL (India) Ltd,Mar 2020,19.76,14.7,5.06,Formula discrepancy
+GAIL (India) Ltd,Mar 2022,23.98,14.7,9.28,Formula discrepancy
+Godrej Consumer Products Ltd,Mar 2013,18.58,26.49,7.91,Formula discrepancy
+Godrej Consumer Products Ltd,Mar 2014,20.35,26.49,6.14,Formula discrepancy
+Godrej Consumer Products Ltd,Mar 2015,20.92,26.49,5.57,Formula discrepancy
+Godrej Consumer Products Ltd,Mar 2020,20.49,26.49,6.0,Formula discrepancy
+Godrej Consumer Products Ltd,Mar 2022,19.75,26.49,6.74,Formula discrepancy
+Godrej Consumer Products Ltd,Mar 2023,17.95,26.49,8.54,Formula discrepancy
+Godrej Consumer Products Ltd,Mar 2024,20.21,26.49,6.28,Formula discrepancy
+Grasim Industries Ltd,Mar 2013,24.57,9.3,15.27,Version difference
+Grasim Industries Ltd,Mar 2014,20.36,9.3,11.06,Version difference
+Grasim Industries Ltd,Mar 2015,19.12,9.3,9.82,Formula discrepancy
+Grasim Industries Ltd,Mar 2016,19.39,9.3,10.09,Version difference
+Grasim Industries Ltd,Mar 2017,22.65,9.3,13.35,Version difference
+Grasim Industries Ltd,Mar 2021,15.68,9.3,6.38,Formula discrepancy
+Grasim Industries Ltd,Mar 2022,16.35,9.3,7.05,Formula discrepancy
+Grasim Industries Ltd,Mar 2023,14.38,9.3,5.08,Formula discrepancy
+Hindustan Aeronautics Ltd,Mar 2016,2421.01,38.9,2382.11,Data source issue
+Hindustan Aeronautics Ltd,Mar 2017,2901.48,38.9,2862.58,Data source issue
+Hindustan Aeronautics Ltd,Mar 2018,3313.53,38.9,3274.63,Data source issue
+Hindustan Aeronautics Ltd,Mar 2019,3966.67,38.9,3927.77,Data source issue
+Hindustan Aeronautics Ltd,Mar 2020,4198.57,38.9,4159.67,Data source issue
+Hindustan Aeronautics Ltd,Mar 2021,4332.0,38.9,4293.1,Data source issue
+Hindustan Aeronautics Ltd,Mar 2022,3957.58,38.9,3918.68,Data source issue
+Hindustan Aeronautics Ltd,Mar 2023,3773.66,38.9,3734.76,Data source issue
+Hindustan Aeronautics Ltd,Mar 2024,3464.29,38.9,3425.39,Data source issue
+Havells India Ltd,Mar 2013,32.34,24.4,7.94,Formula discrepancy
+Havells India Ltd,Mar 2014,32.83,24.4,8.43,Formula discrepancy
+Havells India Ltd,Mar 2015,39.88,24.4,15.48,Version difference
+Havells India Ltd,Mar 2016,29.42,24.4,5.02,Formula discrepancy
+Havells India Ltd,Mar 2018,30.51,24.4,6.11,Formula discrepancy
+Havells India Ltd,Mar 2019,31.17,24.4,6.77,Formula discrepancy
+Havells India Ltd,Mar 2021,32.26,24.4,7.86,Formula discrepancy
+Havells India Ltd,Mar 2022,30.76,24.4,6.36,Formula discrepancy
+HCL Technologies Ltd,Jun 2013,44.46,29.6,14.86,Version difference
+HCL Technologies Ltd,Jun 2014,42.38,29.6,12.78,Version difference
+HCL Technologies Ltd,Jun 2015,35.74,29.6,6.14,Formula discrepancy
+HCL Technologies Ltd,Mar 2019,35.12,29.6,5.52,Formula discrepancy
+HCL Technologies Ltd,Mar 2020,35.0,29.6,5.4,Formula discrepancy
+HCL Technologies Ltd,Mar 2021,36.93,29.6,7.33,Formula discrepancy
+HCL Technologies Ltd,Mar 2022,36.41,29.6,6.81,Formula discrepancy
+HCL Technologies Ltd,Mar 2023,38.14,29.6,8.54,Formula discrepancy
+HCL Technologies Ltd,Mar 2024,38.33,29.6,8.73,Formula discrepancy
+HDFC Life Insurance Company Ltd,Mar 2013,1014.96,6.61,1008.35,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2014,861.1,6.61,854.49,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2015,1038.33,6.61,1031.72,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2016,555.33,6.61,548.72,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2017,776.66,6.61,770.05,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2018,663.76,6.61,657.15,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2019,667.94,6.61,661.33,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2020,415.54,6.61,408.93,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2021,761.31,6.61,754.7,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2022,409.55,6.61,402.94,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2023,503.5,6.61,496.89,Data source issue
+HDFC Life Insurance Company Ltd,Mar 2024,646.96,6.61,640.35,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2014,386.47,29.1,357.37,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2015,369.85,29.1,340.75,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2016,269.98,29.1,240.88,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2017,231.89,29.1,202.79,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2018,227.04,29.1,197.94,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2019,220.15,29.1,191.05,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2020,175.18,29.1,146.08,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2021,172.61,29.1,143.51,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2022,164.02,29.1,134.92,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2023,178.57,29.1,149.47,Data source issue
+"Hero MotoCorp Ltd
+",Mar 2024,181.98,29.1,152.88,Data source issue
+Hindalco Industries Ltd,Mar 2013,81.62,11.3,70.32,Data source issue
+Hindalco Industries Ltd,Mar 2014,78.79,11.3,67.49,Data source issue
+Hindalco Industries Ltd,Mar 2015,92.63,11.3,81.33,Data source issue
+Hindalco Industries Ltd,Mar 2016,88.14,11.3,76.84,Data source issue
+Hindalco Industries Ltd,Mar 2017,84.03,11.3,72.73,Data source issue
+Hindalco Industries Ltd,Mar 2018,99.13,11.3,87.83,Data source issue
+Hindalco Industries Ltd,Mar 2019,109.0,11.3,97.7,Data source issue
+Hindalco Industries Ltd,Mar 2020,85.96,11.3,74.66,Data source issue
+Hindalco Industries Ltd,Mar 2021,90.53,11.3,79.23,Data source issue
+Hindalco Industries Ltd,Mar 2022,121.56,11.3,110.26,Data source issue
+Hindalco Industries Ltd,Mar 2023,133.87,11.3,122.57,Data source issue
+Hindalco Industries Ltd,Mar 2024,122.84,11.3,111.54,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2013,797.06,27.2,769.86,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2014,691.35,27.2,664.15,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2015,660.49,27.2,633.29,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2016,394.5,27.2,367.3,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2017,388.35,27.2,361.15,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2018,392.34,27.2,365.14,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2019,389.09,27.2,361.89,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2020,375.79,27.2,348.59,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2021,76.51,27.2,49.31,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2022,81.19,27.2,53.99,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2023,92.33,27.2,65.13,Data source issue
+"Hindustan Unilever Ltd
+",Mar 2024,91.94,27.2,64.74,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2013,226.74,22.5,204.24,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2014,193.32,22.5,170.82,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2015,156.27,22.5,133.77,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2016,164.54,22.5,142.04,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2017,150.66,22.5,128.16,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2018,143.75,22.5,121.25,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2019,161.33,22.5,138.83,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2020,148.59,22.5,126.09,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2021,126.42,22.5,103.92,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2022,160.36,22.5,137.86,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2023,159.88,22.5,137.38,Data source issue
+ICICI Lombard General Insurance Company Ltd,Mar 2024,147.42,22.5,124.92,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2013,487.78,8.75,479.03,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2014,466.14,8.75,457.39,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2015,623.7,8.75,614.95,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2016,299.24,8.75,290.49,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2017,563.03,8.75,554.28,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2018,564.44,8.75,555.69,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2019,596.41,8.75,587.66,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2020,296.76,8.75,288.01,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2021,811.25,8.75,802.5,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2022,635.21,8.75,626.46,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2023,463.41,8.75,454.66,Data source issue
+ICICI Prudential Life Insurance Company Ltd,Mar 2024,755.83,8.75,747.08,Data source issue
+IndusInd Bank Ltd,Mar 2013,2.84,7.93,5.09,Formula discrepancy
+Infosys Ltd,Mar 2013,33.26,40.0,6.74,Formula discrepancy
+Infosys Ltd,Mar 2014,33.03,40.0,6.97,Formula discrepancy
+Infosys Ltd,Mar 2015,31.34,40.0,8.66,Formula discrepancy
+Infosys Ltd,Mar 2016,30.02,40.0,9.98,Formula discrepancy
+Infosys Ltd,Mar 2017,29.44,40.0,10.56,Version difference
+Infosys Ltd,Mar 2018,31.86,40.0,8.14,Formula discrepancy
+Infosys Ltd,Mar 2019,34.15,40.0,5.85,Formula discrepancy
+Infosys Ltd,Mar 2023,47.02,40.0,7.02,Formula discrepancy
+"Indian Oil Corporation
+",Mar 2013,12.8,21.31,8.51,Formula discrepancy
+"Indian Oil Corporation
+",Mar 2014,14.48,21.31,6.83,Formula discrepancy
+"Indian Oil Corporation
+",Mar 2015,11.81,21.31,9.5,Formula discrepancy
+"Indian Oil Corporation
+",Mar 2018,27.47,21.31,6.16,Formula discrepancy
+"Indian Oil Corporation
+",Mar 2020,11.69,21.31,9.62,Formula discrepancy
+"Indian Oil Corporation
+",Mar 2023,15.19,21.31,6.12,Formula discrepancy
+"Indian Oil Corporation
+",Mar 2024,28.96,21.31,7.65,Formula discrepancy
+Indian Railway Catering & Tourism Corporation Ltd,Mar 2015,38.74,53.8,15.06,Version difference
+Indian Railway Catering & Tourism Corporation Ltd,Mar 2016,38.93,53.8,14.87,Version difference
+Indian Railway Catering & Tourism Corporation Ltd,Mar 2017,42.69,53.8,11.11,Version difference
+Indian Railway Catering & Tourism Corporation Ltd,Mar 2018,31.2,53.8,22.6,Data source issue
+Indian Railway Catering & Tourism Corporation Ltd,Mar 2019,38.47,53.8,15.33,Version difference
+Indian Railway Catering & Tourism Corporation Ltd,Mar 2021,15.24,53.8,38.56,Data source issue
+Indian Railway Catering & Tourism Corporation Ltd,Mar 2022,46.73,53.8,7.07,Formula discrepancy
+Indian Railway Catering & Tourism Corporation Ltd,Mar 2024,46.29,53.8,7.51,Formula discrepancy
+"ITC Ltd
+",Mar 2013,51.93,34.76,17.17,Version difference
+"ITC Ltd
+",Mar 2014,51.11,34.76,16.35,Version difference
+"ITC Ltd
+",Mar 2015,47.74,34.76,12.98,Version difference
+Jindal Steel & Power Ltd,Mar 2019,19.39,13.2,6.19,Formula discrepancy
+Jindal Steel & Power Ltd,Mar 2021,21.62,13.2,8.42,Formula discrepancy
+Jindal Steel & Power Ltd,Mar 2022,35.85,13.2,22.65,Data source issue
+Jindal Steel & Power Ltd,Mar 2023,24.41,13.2,11.21,Version difference
+Jindal Steel & Power Ltd,Mar 2024,21.43,13.2,8.23,Formula discrepancy
+JSW Energy Ltd,Mar 2013,20.89,8.59,12.3,Version difference
+JSW Energy Ltd,Mar 2014,24.37,8.59,15.78,Version difference
+JSW Energy Ltd,Mar 2015,26.26,8.59,17.67,Version difference
+JSW Energy Ltd,Mar 2016,19.88,8.59,11.29,Version difference
+JSW Energy Ltd,Mar 2017,17.37,8.59,8.78,Formula discrepancy
+JSW Energy Ltd,Mar 2018,16.0,8.59,7.41,Formula discrepancy
+JSW Energy Ltd,Mar 2019,17.96,8.59,9.37,Formula discrepancy
+JSW Energy Ltd,Mar 2020,21.85,8.59,13.26,Version difference
+JSW Energy Ltd,Mar 2021,17.83,8.59,9.24,Formula discrepancy
+JSW Energy Ltd,Mar 2022,17.84,8.59,9.25,Formula discrepancy
+JSW Steel Ltd,Mar 2013,22.61,13.36,9.25,Formula discrepancy
+JSW Steel Ltd,Mar 2014,21.78,13.36,8.42,Formula discrepancy
+JSW Steel Ltd,Mar 2015,20.97,13.36,7.61,Formula discrepancy
+JSW Steel Ltd,Mar 2017,23.85,13.36,10.49,Version difference
+JSW Steel Ltd,Mar 2018,27.16,13.36,13.8,Version difference
+JSW Steel Ltd,Mar 2019,27.95,13.36,14.59,Version difference
+JSW Steel Ltd,Mar 2021,22.77,13.36,9.41,Formula discrepancy
+JSW Steel Ltd,Mar 2022,32.33,13.36,18.97,Version difference
+JSW Steel Ltd,Mar 2024,21.93,13.36,8.57,Formula discrepancy
+Life Insurance Corporation of India,Mar 2019,2.32,63.79,61.47,Data source issue
+Life Insurance Corporation of India,Mar 2020,-2.58,63.79,66.37,Data source issue
+Life Insurance Corporation of India,Mar 2021,2.4,63.79,61.39,Data source issue
+Life Insurance Corporation of India,Mar 2022,33.18,63.79,30.61,Data source issue
+Life Insurance Corporation of India,Mar 2023,75.0,63.79,11.21,Version difference
+Life Insurance Corporation of India,Mar 2024,40.18,63.79,23.61,Data source issue
+Larsen & Toubro Ltd,Mar 2013,828.42,17.18,811.24,Data source issue
+Larsen & Toubro Ltd,Mar 2014,903.02,17.18,885.84,Data source issue
+Larsen & Toubro Ltd,Mar 2015,815.82,17.18,798.64,Data source issue
+Larsen & Toubro Ltd,Mar 2016,792.34,17.18,775.16,Data source issue
+Larsen & Toubro Ltd,Mar 2017,604.01,17.18,586.83,Data source issue
+Larsen & Toubro Ltd,Mar 2018,578.6,17.18,561.42,Data source issue
+Larsen & Toubro Ltd,Mar 2019,506.62,17.18,489.44,Data source issue
+Larsen & Toubro Ltd,Mar 2020,427.72,17.18,410.54,Data source issue
+Larsen & Toubro Ltd,Mar 2021,325.4,17.18,308.22,Data source issue
+Larsen & Toubro Ltd,Mar 2022,187.42,17.18,170.24,Data source issue
+Larsen & Toubro Ltd,Mar 2023,169.13,17.18,151.95,Data source issue
+Larsen & Toubro Ltd,Mar 2024,151.87,17.18,134.69,Data source issue
+LTIMindtree Ltd,Mar 2013,63.13,34.1,29.03,Data source issue
+LTIMindtree Ltd,Mar 2014,74.24,34.1,40.14,Data source issue
+LTIMindtree Ltd,Mar 2015,51.83,34.1,17.73,Version difference
+LTIMindtree Ltd,Mar 2016,55.14,34.1,21.04,Data source issue
+LTIMindtree Ltd,Mar 2017,44.78,34.1,10.68,Version difference
+LTIMindtree Ltd,Mar 2019,41.49,34.1,7.39,Formula discrepancy
+LTIMindtree Ltd,Mar 2022,40.19,34.1,6.09,Formula discrepancy
+"Mahindra & Mahindra Ltd
+",Mar 2014,21.1,26.98,5.88,Formula discrepancy
+"Mahindra & Mahindra Ltd
+",Mar 2015,17.12,26.98,9.86,Formula discrepancy
+"Mahindra & Mahindra Ltd
+",Mar 2016,18.41,26.98,8.57,Formula discrepancy
+"Mahindra & Mahindra Ltd
+",Mar 2017,17.25,26.98,9.73,Formula discrepancy
+"Mahindra & Mahindra Ltd
+",Mar 2018,17.81,26.98,9.17,Formula discrepancy
+"Mahindra & Mahindra Ltd
+",Mar 2019,17.32,26.98,9.66,Formula discrepancy
+"Mahindra & Mahindra Ltd
+",Mar 2020,11.08,26.98,15.9,Version difference
+"Mahindra & Mahindra Ltd
+",Mar 2021,12.16,26.98,14.82,Version difference
+"Mahindra & Mahindra Ltd
+",Mar 2022,14.58,26.98,12.4,Version difference
+"Mahindra & Mahindra Ltd
+",Mar 2023,16.58,26.98,10.4,Version difference
+"Mahindra & Mahindra Ltd
+",Mar 2024,16.94,26.98,10.04,Version difference
+Maruti Suzuki India Ltd,Mar 2013,30.35,23.67,6.68,Formula discrepancy
+Maruti Suzuki India Ltd,Mar 2014,31.6,23.67,7.93,Formula discrepancy
+Maruti Suzuki India Ltd,Mar 2015,37.65,23.67,13.98,Version difference
+Maruti Suzuki India Ltd,Mar 2016,38.4,23.67,14.73,Version difference
+Maruti Suzuki India Ltd,Mar 2017,34.68,23.67,11.01,Version difference
+Maruti Suzuki India Ltd,Mar 2018,34.86,23.67,11.19,Version difference
+Maruti Suzuki India Ltd,Mar 2019,29.79,23.67,6.12,Formula discrepancy
+Maruti Suzuki India Ltd,Mar 2021,15.92,23.67,7.75,Formula discrepancy
+Maruti Suzuki India Ltd,Mar 2022,15.32,23.67,8.35,Formula discrepancy
+Samvardhana Motherson International Ltd,Mar 2013,30.5,13.7,16.8,Version difference
+Samvardhana Motherson International Ltd,Mar 2014,41.21,13.7,27.51,Data source issue
+Samvardhana Motherson International Ltd,Mar 2015,44.53,13.7,30.83,Data source issue
+Samvardhana Motherson International Ltd,Mar 2016,44.29,13.7,30.59,Data source issue
+Samvardhana Motherson International Ltd,Mar 2017,28.09,13.7,14.39,Version difference
+Samvardhana Motherson International Ltd,Mar 2018,33.09,13.7,19.39,Version difference
+Samvardhana Motherson International Ltd,Mar 2019,32.92,13.7,19.22,Version difference
+Samvardhana Motherson International Ltd,Mar 2020,30.23,13.7,16.53,Version difference
+Samvardhana Motherson International Ltd,Mar 2021,29.79,13.7,16.09,Version difference
+Samvardhana Motherson International Ltd,Mar 2022,22.1,13.7,8.4,Formula discrepancy
+Samvardhana Motherson International Ltd,Mar 2023,25.9,13.7,12.2,Version difference
+Samvardhana Motherson International Ltd,Mar 2024,28.5,13.7,14.8,Version difference
+Info Edge (India) Ltd,Mar 2013,21.84,3.65,18.19,Version difference
+Info Edge (India) Ltd,Mar 2014,17.53,3.65,13.88,Version difference
+Info Edge (India) Ltd,Mar 2018,12.17,3.65,8.52,Formula discrepancy
+Info Edge (India) Ltd,Mar 2020,-13.29,3.65,16.94,Version difference
+Nestle India Ltd,Dec 2013,64.04,185.43,121.39,Data source issue
+Nestle India Ltd,Dec 2014,83.2,185.43,102.23,Data source issue
+Nestle India Ltd,Dec 2015,67.09,185.43,118.34,Data source issue
+Nestle India Ltd,Dec 2016,66.49,185.43,118.94,Data source issue
+Nestle India Ltd,Dec 2017,70.59,185.43,114.84,Data source issue
+Nestle India Ltd,Dec 2018,79.67,185.43,105.76,Data source issue
+Nestle India Ltd,Dec 2019,156.43,185.43,29.0,Data source issue
+Nestle India Ltd,Dec 2020,164.91,185.43,20.52,Data source issue
+Nestle India Ltd,Dec 2021,178.71,185.43,6.72,Formula discrepancy
+Nestle India Ltd,Dec 2022,150.51,185.43,34.92,Data source issue
+Nestle India Ltd,Dec 2023,179.49,185.43,5.94,Formula discrepancy
+Nestle India Ltd,Mar 2024,172.35,185.43,13.08,Version difference
+"NHPC Ltd
+",Mar 2015,13.34,7.67,5.67,Formula discrepancy
+"NHPC Ltd
+",Mar 2017,13.15,7.67,5.48,Formula discrepancy
+"NHPC Ltd
+",Mar 2019,13.31,7.67,5.64,Formula discrepancy
+"NHPC Ltd
+",Mar 2020,12.93,7.67,5.26,Formula discrepancy
+NTPC Ltd,Mar 2022,15.65,10.58,5.07,Formula discrepancy
+NTPC Ltd,Mar 2023,16.86,10.58,6.28,Formula discrepancy
+NTPC Ltd,Mar 2024,17.01,10.58,6.43,Formula discrepancy
+Oil & Natural Gas Corpn Ltd,Mar 2013,31.91,19.71,12.2,Version difference
+Oil & Natural Gas Corpn Ltd,Mar 2014,29.55,19.71,9.84,Formula discrepancy
+Oil & Natural Gas Corpn Ltd,Mar 2015,25.74,19.71,6.03,Formula discrepancy
+Oil & Natural Gas Corpn Ltd,Mar 2017,26.57,19.71,6.86,Formula discrepancy
+Oil & Natural Gas Corpn Ltd,Mar 2018,25.76,19.71,6.05,Formula discrepancy
+Oil & Natural Gas Corpn Ltd,Mar 2019,30.35,19.71,10.64,Version difference
+Oil & Natural Gas Corpn Ltd,Mar 2022,27.98,19.71,8.27,Formula discrepancy
+Oil & Natural Gas Corpn Ltd,Mar 2024,26.84,19.71,7.13,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2013,3.67,9.96,6.29,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2014,4.08,9.96,5.88,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2015,3.83,9.96,6.13,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2016,3.88,9.96,6.08,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2017,2.22,9.96,7.74,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2018,2.45,9.96,7.51,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2019,3.03,9.96,6.93,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2020,2.17,9.96,7.79,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2021,2.76,9.96,7.2,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2022,3.19,9.96,6.77,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2023,3.18,9.96,6.78,Formula discrepancy
+Power Finance Corporation Ltd,Mar 2024,3.49,9.96,6.47,Formula discrepancy
+Pidilite Industries Ltd,Mar 2013,35.58,29.7,5.88,Formula discrepancy
+Pidilite Industries Ltd,Mar 2014,37.69,29.7,7.99,Formula discrepancy
+Pidilite Industries Ltd,Mar 2015,38.19,29.7,8.49,Formula discrepancy
+Pidilite Industries Ltd,Mar 2016,46.84,29.7,17.14,Version difference
+Pidilite Industries Ltd,Mar 2017,38.58,29.7,8.88,Formula discrepancy
+Pidilite Industries Ltd,Mar 2018,39.5,29.7,9.8,Formula discrepancy
+Pidilite Industries Ltd,Mar 2019,35.3,29.7,5.6,Formula discrepancy
+Pidilite Industries Ltd,Mar 2020,36.8,29.7,7.1,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2018,18.93,13.2,5.73,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2018,18.93,13.2,5.73,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2019,18.23,13.2,5.03,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2019,18.23,13.2,5.03,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2020,20.89,13.2,7.69,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2020,20.89,13.2,7.69,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2021,22.02,13.2,8.82,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2021,22.02,13.2,8.82,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2022,23.09,13.2,9.89,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2022,23.09,13.2,9.89,Formula discrepancy
+Power Grid Corporation of India Ltd,Mar 2023,25.0,13.2,11.8,Version difference
+Power Grid Corporation of India Ltd,Mar 2023,25.0,13.2,11.8,Version difference
+Power Grid Corporation of India Ltd,Mar 2024,25.12,13.2,11.92,Version difference
+Power Grid Corporation of India Ltd,Mar 2024,25.12,13.2,11.92,Version difference
+"Reliance Industries Ltd
+",Mar 2013,15.34,9.61,5.73,Formula discrepancy
+"Reliance Industries Ltd
+",Mar 2018,15.19,9.61,5.58,Formula discrepancy
+"Reliance Industries Ltd
+",Mar 2019,15.14,9.61,5.53,Formula discrepancy
+"Reliance Industries Ltd
+",Mar 2023,15.64,9.61,6.03,Formula discrepancy
+"Reliance Industries Ltd
+",Mar 2024,17.03,9.61,7.42,Formula discrepancy
+SBI Life Insurance Company Ltd,Mar 2015,20.41,13.2,7.21,Formula discrepancy
+SBI Life Insurance Company Ltd,Mar 2016,20.22,13.2,7.02,Formula discrepancy
+SBI Life Insurance Company Ltd,Mar 2017,20.1,13.2,6.9,Formula discrepancy
+SBI Life Insurance Company Ltd,Mar 2018,21.31,13.2,8.11,Formula discrepancy
+SBI Life Insurance Company Ltd,Mar 2019,20.67,13.2,7.47,Formula discrepancy
+SBI Life Insurance Company Ltd,Mar 2022,6.93,13.2,6.27,Formula discrepancy
+SBI Life Insurance Company Ltd,Mar 2023,1.46,13.2,11.74,Version difference
+SBI Life Insurance Company Ltd,Mar 2024,2.16,13.2,11.04,Version difference
+Shree Cement Ltd,Jun 2013,38.91,14.8,24.11,Data source issue
+Shree Cement Ltd,Jun 2014,32.82,14.8,18.02,Version difference
+Shree Cement Ltd,Jun 2015,36.64,14.8,21.84,Data source issue
+Shree Cement Ltd,Mar 2017,41.46,14.8,26.66,Data source issue
+Shree Cement Ltd,Mar 2018,27.41,14.8,12.61,Version difference
+Shree Cement Ltd,Mar 2019,34.22,14.8,19.42,Version difference
+Shree Cement Ltd,Mar 2020,34.2,14.8,19.4,Version difference
+Shree Cement Ltd,Mar 2021,30.37,14.8,15.57,Version difference
+Shree Cement Ltd,Mar 2022,24.79,14.8,9.99,Formula discrepancy
+Shree Cement Ltd,Mar 2023,21.63,14.8,6.83,Formula discrepancy
+Shree Cement Ltd,Mar 2024,28.69,14.8,13.89,Version difference
+"Shriram Finance Ltd
+",Mar 2013,5.41,11.3,5.89,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2014,4.31,11.3,6.99,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2015,3.1,11.3,8.2,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2016,3.11,11.3,8.19,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2017,3.12,11.3,8.18,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2018,4.01,11.3,7.29,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2019,3.7,11.3,7.6,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2020,3.28,11.3,8.02,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2021,2.76,11.3,8.54,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2022,2.7,11.3,8.6,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2023,4.53,11.3,6.77,Formula discrepancy
+"Shriram Finance Ltd
+",Mar 2024,4.55,11.3,6.75,Formula discrepancy
+Siemens Ltd,Sep 2011,34.72,25.6,9.12,Formula discrepancy
+Siemens Ltd,Sep 2014,7.95,25.6,17.65,Version difference
+Siemens Ltd,Sep 2016,18.29,25.6,7.31,Formula discrepancy
+Siemens Ltd,Sep 2017,16.31,25.6,9.29,Formula discrepancy
+Siemens Ltd,Sep 2018,18.38,25.6,7.22,Formula discrepancy
+Siemens Ltd,Sep 2019,18.67,25.6,6.93,Formula discrepancy
+Siemens Ltd,Sep 2020,13.22,25.6,12.38,Version difference
+Siemens Ltd,Sep 2021,16.9,25.6,8.7,Formula discrepancy
+Siemens Ltd,Sep 2022,18.46,25.6,7.14,Formula discrepancy
+Sun Pharmaceuticals Industries Ltd,Mar 2013,33.57,17.3,16.27,Version difference
+Sun Pharmaceuticals Industries Ltd,Mar 2014,35.15,17.3,17.85,Version difference
+Sun Pharmaceuticals Industries Ltd,Mar 2015,26.24,17.3,8.94,Formula discrepancy
+Sun Pharmaceuticals Industries Ltd,Mar 2017,24.46,17.3,7.16,Formula discrepancy
+Sun Pharmaceuticals Industries Ltd,Mar 2022,25.16,17.3,7.86,Formula discrepancy
+Sun Pharmaceuticals Industries Ltd,Mar 2023,22.55,17.3,5.25,Formula discrepancy
+Sun Pharmaceuticals Industries Ltd,Mar 2024,23.27,17.3,5.97,Formula discrepancy
+Tata Motors Ltd,Mar 2013,35.24,20.1,15.14,Version difference
+Tata Motors Ltd,Mar 2014,36.38,20.1,16.28,Version difference
+Tata Motors Ltd,Mar 2015,40.52,20.1,20.42,Data source issue
+Tata Motors Ltd,Mar 2016,37.16,20.1,17.06,Version difference
+Tata Motors Ltd,Mar 2017,34.75,20.1,14.65,Version difference
+Tata Motors Ltd,Mar 2018,28.75,20.1,8.65,Formula discrepancy
+Tata Motors Ltd,Mar 2019,29.01,20.1,8.91,Formula discrepancy
+Tata Motors Ltd,Mar 2021,28.29,20.1,8.19,Formula discrepancy
+Tata Motors Ltd,Mar 2022,25.94,20.1,5.84,Formula discrepancy
+Tata Motors Ltd,Mar 2023,31.59,20.1,11.49,Version difference
+Tata Motors Ltd,Mar 2024,45.17,20.1,25.07,Data source issue
+"Tata Power Company Ltd
+",Mar 2014,18.35,11.1,7.25,Formula discrepancy
+"Tata Power Company Ltd
+",Mar 2024,16.88,11.1,5.78,Formula discrepancy
+"Tata Steel Ltd
+",Mar 2014,18.03,7.02,11.01,Version difference
+"Tata Steel Ltd
+",Mar 2017,15.57,7.02,8.55,Formula discrepancy
+"Tata Steel Ltd
+",Mar 2018,17.76,7.02,10.74,Version difference
+"Tata Steel Ltd
+",Mar 2019,21.6,7.02,14.58,Version difference
+"Tata Steel Ltd
+",Mar 2020,13.64,7.02,6.62,Formula discrepancy
+"Tata Steel Ltd
+",Mar 2021,24.42,7.02,17.4,Version difference
+"Tata Steel Ltd
+",Mar 2022,38.2,7.02,31.18,Data source issue
+"Tata Steel Ltd
+",Mar 2023,22.15,7.02,15.13,Version difference
+"Tata Steel Ltd
+",Mar 2024,17.94,7.02,10.92,Version difference
+Tata Consultancy Services Ltd,Mar 2013,49.18,64.3,15.12,Version difference
+Tata Consultancy Services Ltd,Mar 2014,53.55,64.3,10.75,Version difference
+Tata Consultancy Services Ltd,Mar 2015,51.54,64.3,12.76,Version difference
+Tata Consultancy Services Ltd,Mar 2016,45.66,64.3,18.64,Version difference
+Tata Consultancy Services Ltd,Mar 2017,39.65,64.3,24.65,Data source issue
+Tata Consultancy Services Ltd,Mar 2018,40.45,64.3,23.85,Data source issue
+Tata Consultancy Services Ltd,Mar 2019,46.43,64.3,17.87,Version difference
+Tata Consultancy Services Ltd,Mar 2020,49.45,64.3,14.85,Version difference
+Tata Consultancy Services Ltd,Mar 2021,53.71,64.3,10.59,Version difference
+Tata Consultancy Services Ltd,Mar 2024,70.33,64.3,6.03,Formula discrepancy
+Tech Mahindra Ltd,Mar 2013,23.83,11.9,11.93,Version difference
+Tech Mahindra Ltd,Mar 2013,23.83,11.9,11.93,Version difference
+Tech Mahindra Ltd,Mar 2014,49.18,11.9,37.28,Data source issue
+Tech Mahindra Ltd,Mar 2014,49.18,11.9,37.28,Data source issue
+Tech Mahindra Ltd,Mar 2015,37.1,11.9,25.2,Data source issue
+Tech Mahindra Ltd,Mar 2015,37.1,11.9,25.2,Data source issue
+Tech Mahindra Ltd,Mar 2016,32.0,11.9,20.1,Data source issue
+Tech Mahindra Ltd,Mar 2016,32.0,11.9,20.1,Data source issue
+Tech Mahindra Ltd,Mar 2017,29.0,11.9,17.1,Version difference
+Tech Mahindra Ltd,Mar 2017,29.0,11.9,17.1,Version difference
+Tech Mahindra Ltd,Mar 2018,27.28,11.9,15.38,Version difference
+Tech Mahindra Ltd,Mar 2018,27.28,11.9,15.38,Version difference
+Tech Mahindra Ltd,Mar 2019,33.21,11.9,21.31,Data source issue
+Tech Mahindra Ltd,Mar 2019,33.21,11.9,21.31,Data source issue
+Tech Mahindra Ltd,Mar 2020,27.27,11.9,15.37,Version difference
+Tech Mahindra Ltd,Mar 2020,27.27,11.9,15.37,Version difference
+Tech Mahindra Ltd,Mar 2021,29.73,11.9,17.83,Version difference
+Tech Mahindra Ltd,Mar 2021,29.73,11.9,17.83,Version difference
+Tech Mahindra Ltd,Mar 2022,32.33,11.9,20.43,Data source issue
+Tech Mahindra Ltd,Mar 2022,32.33,11.9,20.43,Data source issue
+Tech Mahindra Ltd,Mar 2023,31.7,11.9,19.8,Version difference
+Tech Mahindra Ltd,Mar 2023,31.7,11.9,19.8,Version difference
+Tech Mahindra Ltd,Mar 2024,21.65,11.9,9.75,Formula discrepancy
+Tech Mahindra Ltd,Mar 2024,21.65,11.9,9.75,Formula discrepancy
+"Titan Company Ltd
+",Mar 2013,54.31,22.7,31.61,Data source issue
+"Titan Company Ltd
+",Mar 2014,33.48,22.7,10.78,Version difference
+"Titan Company Ltd
+",Mar 2015,39.04,22.7,16.34,Version difference
+"Titan Company Ltd
+",Mar 2016,28.65,22.7,5.95,Formula discrepancy
+"Titan Company Ltd
+",Mar 2021,15.99,22.7,6.71,Formula discrepancy
+Torrent Pharmaceuticals Ltd,Mar 2013,36.88,23.2,13.68,Version difference
+Torrent Pharmaceuticals Ltd,Mar 2014,34.33,23.2,11.13,Version difference
+Torrent Pharmaceuticals Ltd,Mar 2016,50.82,23.2,27.62,Data source issue
+Torrent Pharmaceuticals Ltd,Mar 2018,15.86,23.2,7.34,Formula discrepancy
+Torrent Pharmaceuticals Ltd,Mar 2021,29.29,23.2,6.09,Formula discrepancy
+Torrent Pharmaceuticals Ltd,Mar 2022,30.86,23.2,7.66,Formula discrepancy
+Torrent Pharmaceuticals Ltd,Mar 2023,30.68,23.2,7.48,Formula discrepancy
+Torrent Pharmaceuticals Ltd,Mar 2024,38.39,23.2,15.19,Version difference
+Trent Ltd,Mar 2013,3.18,23.8,20.62,Data source issue
+Trent Ltd,Mar 2014,3.33,23.8,20.47,Data source issue
+Trent Ltd,Mar 2015,9.65,23.8,14.15,Version difference
+Trent Ltd,Mar 2016,6.92,23.8,16.88,Version difference
+Trent Ltd,Mar 2017,9.03,23.8,14.77,Version difference
+Trent Ltd,Mar 2018,12.79,23.8,11.01,Version difference
+Trent Ltd,Mar 2019,13.69,23.8,10.11,Version difference
+Trent Ltd,Mar 2020,28.87,23.8,5.07,Formula discrepancy
+Trent Ltd,Mar 2021,14.2,23.8,9.6,Formula discrepancy
+Trent Ltd,Mar 2022,12.78,23.8,11.02,Version difference
+Trent Ltd,Mar 2024,45.39,23.8,21.59,Data source issue
+Interglobe Aviation Ltd,Mar 2013,54766.23,24.5,54741.73,Data source issue
+Interglobe Aviation Ltd,Mar 2014,59293.48,24.5,59268.98,Data source issue
+Interglobe Aviation Ltd,Mar 2015,40539.47,24.5,40514.97,Data source issue
+Interglobe Aviation Ltd,Mar 2016,9811.5,24.5,9787.0,Data source issue
+Interglobe Aviation Ltd,Mar 2017,11212.67,24.5,11188.17,Data source issue
+Interglobe Aviation Ltd,Mar 2018,13264.94,24.5,13240.44,Data source issue
+Interglobe Aviation Ltd,Mar 2019,13552.07,24.5,13527.57,Data source issue
+Interglobe Aviation Ltd,Mar 2020,14039.76,24.5,14015.26,Data source issue
+Interglobe Aviation Ltd,Mar 2021,3374.69,24.5,3350.19,Data source issue
+Interglobe Aviation Ltd,Mar 2022,4598.34,24.5,4573.84,Data source issue
+Interglobe Aviation Ltd,Mar 2023,6720.79,24.5,6696.29,Data source issue
+Interglobe Aviation Ltd,Mar 2024,6328.22,24.5,6303.72,Data source issue
