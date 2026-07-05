@@ -68,6 +68,16 @@ merged_df = merged_df.sort_values(
 # Create CAGR columns
 # -----------------------------
 
+
+merged_df["revenue_cagr_3yr"] = None
+merged_df["revenue_cagr_3yr_flag"] = None
+
+merged_df["pat_cagr_3yr"] = None
+merged_df["pat_cagr_3yr_flag"] = None
+
+merged_df["eps_cagr_3yr"] = None
+merged_df["eps_cagr_3yr_flag"] = None
+
 merged_df["revenue_cagr_5yr"] = None
 merged_df["revenue_cagr_5yr_flag"] = None
 
@@ -88,6 +98,63 @@ print(merged_df.columns.tolist())
 for company, group in merged_df.groupby("company_id"):
 
     group = group.sort_values("year").reset_index()
+
+    # ----------------------------------------
+# Calculate 3-Year CAGR
+# ----------------------------------------
+
+    for i in range(3, len(group)):
+
+        # Revenue CAGR
+        revenue_value, revenue_flag = revenue_cagr(
+            group.loc[i - 3, "sales"],
+            group.loc[i, "sales"],
+            3
+        )
+
+        merged_df.loc[
+            group.loc[i, "index"],
+            "revenue_cagr_3yr"
+        ] = revenue_value
+
+        merged_df.loc[
+            group.loc[i, "index"],
+            "revenue_cagr_3yr_flag"
+        ] = revenue_flag
+
+        # PAT CAGR
+        pat_value, pat_flag = pat_cagr(
+            group.loc[i - 3, "net_profit"],
+            group.loc[i, "net_profit"],
+            3
+        )
+
+        merged_df.loc[
+            group.loc[i, "index"],
+            "pat_cagr_3yr"
+        ] = pat_value
+
+        merged_df.loc[
+            group.loc[i, "index"],
+            "pat_cagr_3yr_flag"
+        ] = pat_flag
+
+        # EPS CAGR
+        eps_value, eps_flag = eps_cagr(
+            group.loc[i - 3, "eps"],
+            group.loc[i, "eps"],
+            3
+        )
+
+        merged_df.loc[
+            group.loc[i, "index"],
+            "eps_cagr_3yr"
+        ] = eps_value
+
+        merged_df.loc[
+            group.loc[i, "index"],
+            "eps_cagr_3yr_flag"
+        ] = eps_flag
 
     for i in range(5, len(group)):
 
@@ -226,6 +293,14 @@ for _, row in merged_df.iterrows():
     # -------------------------
     # CAGR (Already Calculated)
     # -------------------------
+    revenue_3yr = row["revenue_cagr_3yr"]
+    revenue_3yr_flag = row["revenue_cagr_3yr_flag"]
+
+    pat_3yr = row["pat_cagr_3yr"]
+    pat_3yr_flag = row["pat_cagr_3yr_flag"]
+
+    eps_3yr = row["eps_cagr_3yr"]
+    eps_3yr_flag = row["eps_cagr_3yr_flag"]
 
     revenue_5yr = row["revenue_cagr_5yr"]
     revenue_5yr_flag = row["revenue_cagr_5yr_flag"]
@@ -277,6 +352,17 @@ for _, row in merged_df.iterrows():
         "total_debt_cr": total_debt,
         "cash_from_operations_cr": cfo,
 
+        # 3-Year CAGR
+        "revenue_cagr_3yr": revenue_3yr,
+        "revenue_cagr_3yr_flag": revenue_3yr_flag,
+
+        "pat_cagr_3yr": pat_3yr,
+        "pat_cagr_3yr_flag": pat_3yr_flag,
+
+        "eps_cagr_3yr": eps_3yr,
+        "eps_cagr_3yr_flag": eps_3yr_flag,
+
+        # 5-Year CAGR
         "revenue_cagr_5yr": revenue_5yr,
         "revenue_cagr_5yr_flag": revenue_5yr_flag,
 
@@ -294,6 +380,9 @@ ratio_df = pd.DataFrame(rows)
 print(ratio_df.head())
 print("Generated KPI rows:", len(ratio_df))
 
+print(merged_df[
+    ["company_id", "year", "revenue_cagr_3yr"]
+].tail(20))
 
 
 
@@ -344,10 +433,21 @@ for _, row in ratio_df.iterrows():
 
         eps_cagr_5yr,
         eps_cagr_5yr_flag,
+        
+        revenue_cagr_3yr,
+        revenue_cagr_3yr_flag,
+
+        pat_cagr_3yr,
+        pat_cagr_3yr_flag,
+
+        eps_cagr_3yr,
+        eps_cagr_3yr_flag,
 
         composite_quality_score
     )
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    VALUES (
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+    )
     """, (
         row["company_id"],
         row["year"],
@@ -378,6 +478,15 @@ for _, row in ratio_df.iterrows():
 
         row["eps_cagr_5yr"],
         row["eps_cagr_5yr_flag"],
+
+        row["revenue_cagr_3yr"],
+        row["revenue_cagr_3yr_flag"],
+
+        row["pat_cagr_3yr"],
+        row["pat_cagr_3yr_flag"],
+
+        row["eps_cagr_3yr"],
+        row["eps_cagr_3yr_flag"],
 
         row["composite_quality_score"]
     ))
