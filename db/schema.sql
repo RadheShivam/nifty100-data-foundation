@@ -125,16 +125,6 @@ CREATE TABLE stockprices (
 );
 
 
-
-
-
-
-
-
-
-
-
-
 DROP TABLE IF EXISTS financial_ratios;
 
 CREATE TABLE financial_ratios (
@@ -181,5 +171,6 @@ CREATE TABLE financial_ratios (
     eps_cagr_10yr REAL,
     eps_cagr_10yr_flag TEXT,
 
-    composite_quality_score REAL
+    composite_quality_score REAL,
+    sector_relative_score REAL
 );

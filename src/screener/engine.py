@@ -78,8 +78,10 @@ class ScreenerEngine:
         df = pd.read_sql(query, conn)
 
         conn.close()
+        print(df.columns.tolist())
 
         return df
+    
 
     # -----------------------------------
     # Generic Minimum Filter

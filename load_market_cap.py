@@ -9,7 +9,7 @@ conn = sqlite3.connect("db/nifty100.db")
 
 # Save as table
 df.to_sql(
-    "market_cap",
+    "marketcap",
     conn,
     if_exists="replace",
     index=False

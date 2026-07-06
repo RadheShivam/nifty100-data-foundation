@@ -2,6 +2,7 @@ import sqlite3
 import pandas as pd
 
 from src.etl.loader import (
+    load_companies,
     load_profitandloss,
     load_balancesheet,
     load_cashflow
@@ -31,10 +32,13 @@ from src.analytics.cashflow_kpis import (
 # Load data
 # -----------------------------
 
-profit_df = load_profitandloss()
-balance_df = load_balancesheet()
-cashflow_df = load_cashflow()
+companies_df = load_companies()
 
+profit_df = load_profitandloss()
+
+balance_df = load_balancesheet()
+
+cashflow_df = load_cashflow()
 # -----------------------------
 # Merge Profit & Balance Sheet
 # -----------------------------
@@ -55,6 +59,42 @@ merged_df = merged_df.merge(
     on=["company_id", "year"],
     how="inner"
 )
+
+
+
+
+
+# -----------------------------
+# Merge Company Data
+# -----------------------------
+
+merged_df = merged_df.merge(
+    companies_df[
+        [
+            "id",
+            "roce_percentage",
+            "roe_percentage",
+            "book_value"
+        ]
+    ],
+    left_on="company_id",
+    right_on="id",
+    how="left",
+    suffixes=("", "_company")
+)
+
+merged_df.drop(columns=["id_company"], inplace=True)
+
+
+
+# -----------------------------
+# Sort data
+# -----------------------------
+
+merged_df = merged_df.sort_values(
+    ["company_id", "year"]
+).reset_index(drop=True)
+
 
 # -----------------------------
 # Sort data
@@ -209,6 +249,33 @@ for company, group in merged_df.groupby("company_id"):
             "eps_cagr_5yr_flag"
         ] = eps_flag
 
+    # -------------------------
+# Normalize Metric
+# -------------------------
+
+def normalize_metric(series, higher_is_better=True):
+    """
+    Normalize a metric to a 0–100 score using P10/P90 winsorisation.
+    """
+
+    p10 = series.quantile(0.10)
+    p90 = series.quantile(0.90)
+
+    clipped = series.clip(lower=p10, upper=p90)
+
+    score = (clipped - p10) / (p90 - p10)
+
+    if not higher_is_better:
+        score = 1 - score
+
+    return score.fillna(0) * 100
+
+
+# -------------------------
+# Main Processing
+# -------------------------
+
+
 
 rows = []
 
@@ -291,6 +358,15 @@ for _, row in merged_df.iterrows():
     cfo = row["operating_activity"]
 
     # -------------------------
+    # CFO / PAT Ratio
+    # -------------------------
+
+    if row["net_profit"] is not None and row["net_profit"] != 0:
+        cfo_pat_ratio = cfo / row["net_profit"]
+    else:
+        cfo_pat_ratio = None
+
+    # -------------------------
     # CAGR (Already Calculated)
     # -------------------------
     revenue_3yr = row["revenue_cagr_3yr"]
@@ -312,22 +388,16 @@ for _, row in merged_df.iterrows():
     eps_5yr_flag = row["eps_cagr_5yr_flag"]
 
     # -------------------------
-    # Composite Quality Score
+    # Composite Quality Score (Weighted)
     # -------------------------
 
-    quality_score = 0
 
-    if roe is not None and roe > 15:
-        quality_score += 1
 
-    if de is not None and de < 1:
-        quality_score += 1
 
-    if interest_cov is not None and interest_cov > 3:
-        quality_score += 1
+    
 
-    if npm is not None and npm > 10:
-        quality_score += 1
+
+
 
     rows.append({
 
@@ -337,6 +407,7 @@ for _, row in merged_df.iterrows():
         "net_profit_margin_pct": npm,
         "operating_profit_margin_pct": opm,
         "return_on_equity_pct": roe,
+        "roce_percentage": row["roce_percentage"],
 
         "debt_to_equity": de,
         "interest_coverage": interest_cov,
@@ -351,6 +422,7 @@ for _, row in merged_df.iterrows():
 
         "total_debt_cr": total_debt,
         "cash_from_operations_cr": cfo,
+        "cfo_pat_ratio": cfo_pat_ratio,
 
         # 3-Year CAGR
         "revenue_cagr_3yr": revenue_3yr,
@@ -372,10 +444,155 @@ for _, row in merged_df.iterrows():
         "eps_cagr_5yr": eps_5yr,
         "eps_cagr_5yr_flag": eps_5yr_flag,
 
-        "composite_quality_score": quality_score
+        # "composite_quality_score": None
+        "composite_quality_score": 0,
+        
     })
 
 ratio_df = pd.DataFrame(rows)
+
+print(ratio_df.columns.tolist())
+rows = ratio_df.to_dict("records")
+
+# -----------------------------
+# Merge Sector Information
+# -----------------------------
+
+sector_df = pd.read_excel("data/supplementry/sectors.xlsx")
+
+ratio_df = ratio_df.merge(
+    sector_df[
+        [
+            "company_id",
+            "broad_sector",
+            "sub_sector"
+        ]
+    ],
+    on="company_id",
+    how="left"
+)
+
+print(
+    ratio_df[
+        [
+            "company_id",
+            "broad_sector",
+            "sub_sector"
+        ]
+    ].head(10)
+)
+
+
+# -------------------------
+# Normalize Metrics
+# -------------------------
+
+# -------------------------
+# Normalize Metrics
+# -------------------------
+
+ratio_df["roe_score"] = normalize_metric(
+    ratio_df["return_on_equity_pct"]
+)
+
+ratio_df["roce_score"] = normalize_metric(
+    ratio_df["roce_percentage"]
+)
+
+ratio_df["npm_score"] = normalize_metric(
+    ratio_df["net_profit_margin_pct"]
+)
+
+ratio_df["de_score"] = normalize_metric(
+    ratio_df["debt_to_equity"],
+    higher_is_better=False
+)
+
+ratio_df["interest_score"] = normalize_metric(
+    ratio_df["interest_coverage"]
+)
+
+ratio_df["revenue_score"] = normalize_metric(
+    ratio_df["revenue_cagr_5yr"]
+)
+
+ratio_df["pat_score"] = normalize_metric(
+    ratio_df["pat_cagr_5yr"]
+)
+
+ratio_df["fcf_score"] = normalize_metric(
+    ratio_df["free_cash_flow_cr"]
+)
+
+ratio_df["cfo_pat_score"] = normalize_metric(
+    ratio_df["cfo_pat_ratio"]
+)
+
+# ==========================
+# PASTE THE COMPOSITE SCORE HERE
+# ==========================
+
+ratio_df["composite_quality_score"] = (
+    # Profitability (35%)
+    ratio_df["roe_score"] * 0.15 +
+    ratio_df["roce_score"] * 0.10 +
+    ratio_df["npm_score"] * 0.10 +
+
+    # Cash Quality (30%)
+    ratio_df["fcf_score"] * 0.15 +
+    ratio_df["cfo_pat_score"] * 0.10 +
+    (ratio_df["free_cash_flow_cr"] > 0).astype(int) * 100 * 0.05 +
+
+    # Growth (20%)
+    ratio_df["revenue_score"] * 0.10 +
+    ratio_df["pat_score"] * 0.10 +
+
+    # Leverage (15%)
+    ratio_df["de_score"] * 0.10 +
+    ratio_df["interest_score"] * 0.05
+).round(2)
+
+# -----------------------------
+# Sector Relative Composite Score
+# -----------------------------
+
+ratio_df["sector_relative_score"] = (
+    ratio_df.groupby("broad_sector")["composite_quality_score"]
+    .transform(
+        lambda x: (
+            (x - x.min()) /
+            (x.max() - x.min())
+        ) * 100
+        if x.max() != x.min()
+        else 50
+    )
+)
+
+ratio_df["sector_relative_score"] = (
+    ratio_df["sector_relative_score"].round(2)
+)
+
+
+print(
+    ratio_df[
+        [
+            "company_id",
+            "roe_score",
+            "npm_score",
+            "fcf_score",
+            "revenue_score",
+            "de_score",
+            "interest_score",
+            "composite_quality_score"
+        ]
+    ].head(10)
+)
+
+print(ratio_df[
+    [
+        "cfo_pat_ratio"
+    ]
+].describe())
 
 print(ratio_df.head())
 print("Generated KPI rows:", len(ratio_df))
@@ -443,10 +660,11 @@ for _, row in ratio_df.iterrows():
         eps_cagr_3yr,
         eps_cagr_3yr_flag,
 
-        composite_quality_score
+        composite_quality_score,
+        sector_relative_score
     )
     VALUES (
-    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
     )
     """, (
         row["company_id"],
@@ -488,7 +706,8 @@ for _, row in ratio_df.iterrows():
         row["eps_cagr_3yr"],
         row["eps_cagr_3yr_flag"],
 
-        row["composite_quality_score"]
+        row["composite_quality_score"],
+        row["sector_relative_score"]
     ))
 
 conn.commit()
