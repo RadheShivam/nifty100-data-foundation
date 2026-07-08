@@ -104,8 +104,7 @@ def load_market_cap():
 
 def load_peer_groups():
     return pd.read_excel(
-        "data/supplementry/peer_groups.xlsx",
-        skiprows=1
+        "data/supplementry/peer_groups.xlsx"
     )
 
 

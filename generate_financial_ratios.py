@@ -627,6 +627,7 @@ for _, row in ratio_df.iterrows():
         net_profit_margin_pct,
         operating_profit_margin_pct,
         return_on_equity_pct,
+        roce_percentage,
 
         debt_to_equity,
         interest_coverage,
@@ -641,7 +642,8 @@ for _, row in ratio_df.iterrows():
 
         total_debt_cr,
         cash_from_operations_cr,
-
+        cfo_pat_ratio,
+        
         revenue_cagr_5yr,
         revenue_cagr_5yr_flag,
 
@@ -664,7 +666,7 @@ for _, row in ratio_df.iterrows():
         sector_relative_score
     )
     VALUES (
-    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
     )
     """, (
         row["company_id"],
@@ -673,6 +675,7 @@ for _, row in ratio_df.iterrows():
         row["net_profit_margin_pct"],
         row["operating_profit_margin_pct"],
         row["return_on_equity_pct"],
+        row["roce_percentage"],
 
         row["debt_to_equity"],
         row["interest_coverage"],
@@ -687,6 +690,7 @@ for _, row in ratio_df.iterrows():
 
         row["total_debt_cr"],
         row["cash_from_operations_cr"],
+        row["cfo_pat_ratio"],
 
         row["revenue_cagr_5yr"],
         row["revenue_cagr_5yr_flag"],

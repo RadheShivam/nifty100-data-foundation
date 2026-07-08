@@ -136,6 +136,7 @@ CREATE TABLE financial_ratios (
     net_profit_margin_pct REAL,
     operating_profit_margin_pct REAL,
     return_on_equity_pct REAL,
+    roce_percentage REAL,
     debt_to_equity REAL,
     interest_coverage REAL,
     asset_turnover REAL,
@@ -149,6 +150,8 @@ CREATE TABLE financial_ratios (
 
     total_debt_cr REAL,
     cash_from_operations_cr REAL,
+    cfo_pat_ratio REAL,
+
 
     revenue_cagr_3yr REAL,
     revenue_cagr_3yr_flag TEXT,
