@@ -1,5 +1,13 @@
+import sqlite3
 import pandas as pd
 
-df = pd.read_csv("data/processed/balancesheet.csv")
+conn = sqlite3.connect("db/nifty100.db")
 
-print(df.columns.tolist())
+df = pd.read_sql(
+    "SELECT * FROM balancesheet LIMIT 5",
+    conn
+)
+
+conn.close()
+
+print(df.columns)

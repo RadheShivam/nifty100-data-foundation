@@ -1,8 +1,14 @@
-from src.etl.load_to_sqlite import *
-
-# or however balance_df is created in your code
+import sqlite3
 import pandas as pd
 
-balance_df = pd.read_csv("data/processed/balancesheet.csv")
+conn = sqlite3.connect("db/nifty100.db")
+
+balance_df = pd.read_sql(
+    "SELECT * FROM balancesheet LIMIT 5",
+    conn
+)
+
+conn.close()
 
 print(balance_df.columns.tolist())
+print(balance_df.head())

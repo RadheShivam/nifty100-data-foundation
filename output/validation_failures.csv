@@ -8,7 +8,7 @@ cashflow_invalid_fk.csv,96,High
 analysis_invalid_fk.csv,4,High
 documents_invalid_fk.csv,128,High
 prosandcons_invalid_fk.csv,2,High
-balance_sheet_equation_failures.csv,4,High
+balance_sheet_equation_failures.csv,3,High
 opm_consistency_failures.csv,234,High
 non_positive_sales.csv,1,High
 net_cash_flow_failures.csv,1,High
