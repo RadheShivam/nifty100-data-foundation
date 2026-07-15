@@ -43,10 +43,11 @@ cashflow_df = load_cashflow()
 # Merge Profit & Balance Sheet
 # -----------------------------
 
+
 merged_df = profit_df.merge(
     balance_df,
     on=["company_id", "year"],
-    how="inner",
+    how="left",
     suffixes=("_pl", "_bs")
 )
 
@@ -57,7 +58,7 @@ merged_df = profit_df.merge(
 merged_df = merged_df.merge(
     cashflow_df,
     on=["company_id", "year"],
-    how="inner"
+    how="left"
 )
 
 
@@ -453,6 +454,21 @@ ratio_df = pd.DataFrame(rows)
 
 print(ratio_df.columns.tolist())
 rows = ratio_df.to_dict("records")
+
+
+# -----------------------------
+# Keep only valid master companies
+# -----------------------------
+
+valid_companies = set(companies_df["id"])
+
+ratio_df = ratio_df[
+    ratio_df["company_id"].isin(valid_companies)
+].copy()
+
+print("Unique companies after filtering:",
+    ratio_df["company_id"].nunique())
+
 
 # -----------------------------
 # Merge Sector Information

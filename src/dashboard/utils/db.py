@@ -4,13 +4,13 @@ import streamlit as st
 
 DB_PATH = "db/nifty100.db"
 
-
 # --------------------------------------------------
 # Companies
 # --------------------------------------------------
 
 @st.cache_data(ttl=600)
 def get_companies():
+
     conn = sqlite3.connect(DB_PATH)
 
     df = pd.read_sql(
@@ -19,6 +19,7 @@ def get_companies():
     )
 
     conn.close()
+
     return df
 
 
@@ -33,34 +34,32 @@ def get_ratios(ticker, year=None):
 
     if year:
 
-        query = """
-        SELECT *
-        FROM financial_ratios
-        WHERE company_id = ?
-        AND year = ?
-        """
-
         df = pd.read_sql(
-            query,
+            """
+            SELECT *
+            FROM financial_ratios
+            WHERE company_id=?
+            AND year=?
+            """,
             conn,
             params=(ticker, year)
         )
 
     else:
 
-        query = """
-        SELECT *
-        FROM financial_ratios
-        WHERE company_id = ?
-        """
-
         df = pd.read_sql(
-            query,
+            """
+            SELECT *
+            FROM financial_ratios
+            WHERE company_id=?
+            ORDER BY year
+            """,
             conn,
             params=(ticker,)
         )
 
     conn.close()
+
     return df
 
 
@@ -73,19 +72,39 @@ def get_ratios_by_year(year):
 
     conn = sqlite3.connect(DB_PATH)
 
-    query = """
-    SELECT *
-    FROM financial_ratios
-    WHERE year = ?
-    """
+    if year == "Mar 2024":
 
-    df = pd.read_sql(
-        query,
-        conn,
-        params=(year,)
-    )
+        query = """
+        SELECT f.*
+        FROM financial_ratios f
+        INNER JOIN
+        (
+            SELECT
+                company_id,
+                MAX(year) AS latest_year
+            FROM financial_ratios
+            GROUP BY company_id
+        ) latest
+        ON f.company_id = latest.company_id
+        AND f.year = latest.latest_year
+        """
+
+        df = pd.read_sql(query, conn)
+
+    else:
+
+        df = pd.read_sql(
+            """
+            SELECT *
+            FROM financial_ratios
+            WHERE year=?
+            """,
+            conn,
+            params=(year,)
+        )
 
     conn.close()
+
     return df
 
 
@@ -102,15 +121,16 @@ def get_pl(ticker):
         """
         SELECT *
         FROM profitandloss
-        WHERE company_id = ?
+        WHERE company_id=?
+        ORDER BY year
         """,
         conn,
         params=(ticker,)
     )
 
     conn.close()
-    return df
 
+    return df
 
 # --------------------------------------------------
 # Balance Sheet
@@ -125,13 +145,15 @@ def get_bs(ticker):
         """
         SELECT *
         FROM balancesheet
-        WHERE company_id = ?
+        WHERE company_id=?
+        ORDER BY year
         """,
         conn,
         params=(ticker,)
     )
 
     conn.close()
+
     return df
 
 
@@ -148,13 +170,15 @@ def get_cf(ticker):
         """
         SELECT *
         FROM cashflow
-        WHERE company_id = ?
+        WHERE company_id=?
+        ORDER BY year
         """,
         conn,
         params=(ticker,)
     )
 
     conn.close()
+
     return df
 
 
@@ -168,11 +192,15 @@ def get_sectors():
     conn = sqlite3.connect(DB_PATH)
 
     df = pd.read_sql(
-        "SELECT * FROM sectors",
+        """
+        SELECT *
+        FROM sectors
+        """,
         conn
     )
 
     conn.close()
+
     return df
 
 
@@ -185,19 +213,18 @@ def get_peers(group_name):
 
     conn = sqlite3.connect(DB_PATH)
 
-    query = """
-    SELECT *
-    FROM peer_groups
-    WHERE peer_group_name = ?
-    """
-
     df = pd.read_sql(
-        query,
+        """
+        SELECT *
+        FROM peer_groups
+        WHERE peer_group_name=?
+        """,
         conn,
         params=(group_name,)
     )
 
     conn.close()
+
     return df
 
 # --------------------------------------------------
@@ -209,24 +236,23 @@ def get_valuation(ticker):
 
     conn = sqlite3.connect(DB_PATH)
 
-    query = """
-    SELECT
-        company_name,
-        face_value,
-        book_value,
-        roe_percentage,
-        roce_percentage
-    FROM companies
-    WHERE id = ?
-    """
-
     df = pd.read_sql(
-        query,
+        """
+        SELECT
+            company_name,
+            face_value,
+            book_value,
+            roe_percentage,
+            roce_percentage
+        FROM companies
+        WHERE id=?
+        """,
         conn,
         params=(ticker,)
     )
 
     conn.close()
+
     return df
 
 
@@ -239,22 +265,53 @@ def get_latest_ratio(ticker):
 
     conn = sqlite3.connect(DB_PATH)
 
-    query = """
-    SELECT *
-    FROM financial_ratios
-    WHERE company_id = ?
-    ORDER BY year DESC
-    LIMIT 1
-    """
-
     df = pd.read_sql(
-        query,
+        """
+        SELECT *
+        FROM financial_ratios
+        WHERE company_id=?
+        """,
         conn,
         params=(ticker,)
     )
 
     conn.close()
-    return df
+
+    if df.empty:
+        return df
+
+    # Extract numeric year (works for Mar 2024, Sep 2024, TTM, etc.)
+    df["sort_year"] = (
+        df["year"]
+        .astype(str)
+        .str.extract(r"(\d{4})")[0]
+        .fillna(0)
+        .astype(int)
+    )
+
+    # Priority of reporting month
+    month_priority = {
+        "TTM": 5,
+        "Sep": 4,
+        "Jun": 3,
+        "Mar": 2,
+        "Dec": 1
+    }
+
+    df["sort_month"] = (
+        df["year"]
+        .astype(str)
+        .str[:3]
+        .map(month_priority)
+        .fillna(0)
+    )
+
+    df = df.sort_values(
+        ["sort_year", "sort_month"],
+        ascending=False
+    )
+
+    return df.head(1)
 
 
 # --------------------------------------------------
@@ -266,21 +323,20 @@ def get_pros_cons(ticker):
 
     conn = sqlite3.connect(DB_PATH)
 
-    query = """
-    SELECT
-        pros,
-        cons
-    FROM prosandcons
-    WHERE company_id = ?
-    """
-
     df = pd.read_sql(
-        query,
+        """
+        SELECT
+            pros,
+            cons
+        FROM prosandcons
+        WHERE company_id=?
+        """,
         conn,
         params=(ticker,)
     )
 
     conn.close()
+
     return df
 
 
@@ -293,20 +349,19 @@ def get_sector_info(ticker):
 
     conn = sqlite3.connect(DB_PATH)
 
-    query = """
-    SELECT
-        broad_sector,
-        sub_sector,
-        market_cap_category
-    FROM sectors
-    WHERE company_id = ?
-    """
-
     df = pd.read_sql(
-        query,
+        """
+        SELECT
+            broad_sector,
+            sub_sector,
+            market_cap_category
+        FROM sectors
+        WHERE company_id=?
+        """,
         conn,
         params=(ticker,)
     )
 
     conn.close()
+
     return df
