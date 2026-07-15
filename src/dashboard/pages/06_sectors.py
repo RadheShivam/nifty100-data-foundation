@@ -1,9 +1,11 @@
+
+
+
 import os
 import sys
-import sqlite3
 
-import pandas as pd
 import streamlit as st
+import pandas as pd
 
 # -------------------------------------------------
 # Add Project Root
@@ -16,219 +18,231 @@ PROJECT_ROOT = os.path.abspath(
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+# -------------------------------------------------
+# Import Database Functions
+# -------------------------------------------------
+
 from src.dashboard.utils.db import (
-    get_companies,
     get_sectors,
     get_ratios_by_year,
 )
 
-DB_PATH = "db/nifty100.db"
-
 # -------------------------------------------------
-# Page Config
+# Page Title
 # -------------------------------------------------
 
-st.title("📊 Sector Analytics")
+st.title("📊 Sector Analysis")
 
 st.caption(
-    "Analyze Nifty 100 sectors using financial metrics."
+    "Compare companies across different sectors."
 )
 
 # -------------------------------------------------
 # Load Data
 # -------------------------------------------------
 
-companies_df = get_companies()
+sector_df = get_sectors()
 
-sectors_df = get_sectors()
+ratio_df = get_ratios_by_year("Mar 2024")
 
-ratios_df = get_ratios_by_year("Mar 2024")
-
-# -------------------------------------------------
-# Load Market Cap Data
-# -------------------------------------------------
-
-conn = sqlite3.connect(DB_PATH)
-
-market_df = pd.read_sql(
-    """
-    SELECT
-        company_id,
-        pe_ratio,
-        pb_ratio,
-        dividend_yield_pct
-    FROM marketcap
-    WHERE year = '2024'
-    """,
-    conn,
-)
-
-conn.close()
+if sector_df.empty or ratio_df.empty:
+    st.error("Sector data not found.")
+    st.stop()
 
 # -------------------------------------------------
 # Merge Data
 # -------------------------------------------------
 
-sector_df = ratios_df.merge(
-    companies_df[
-        [
-            "id",
-            "company_name",
-        ]
-    ],
-    left_on="company_id",
-    right_on="id",
-    how="left",
-)
-
-sector_df = sector_df.merge(
-    sectors_df[
-        [
-            "company_id",
-            "broad_sector",
-            "sub_sector",
-            "market_cap_category",
-        ]
-    ],
+df = ratio_df.merge(
+    sector_df,
     on="company_id",
-    how="left",
+    how="left"
 )
 
-sector_df = sector_df.merge(
+# -------------------------------------------------
+# Load Revenue from Profit & Loss
+# -------------------------------------------------
+
+import sqlite3
+
+conn = sqlite3.connect("db/nifty100.db")
+
+sales_df = pd.read_sql(
+    """
+    SELECT
+        company_id,
+        sales
+    FROM profitandloss
+    WHERE year='Mar 2024'
+    """,
+    conn
+)
+
+market_df = pd.read_sql(
+    """
+    SELECT
+        company_id,
+        market_cap_crore
+    FROM marketcap
+    WHERE year=2024
+    """,
+    conn
+)
+
+conn.close()
+
+df = df.merge(
+    sales_df,
+    on="company_id",
+    how="left"
+)
+
+df = df.merge(
     market_df,
     on="company_id",
-    how="left",
+    how="left"
 )
 
 # -------------------------------------------------
-# Preview
+# Sector Dropdown
 # -------------------------------------------------
-
-st.subheader("Merged Dataset")
-
-st.dataframe(
-    sector_df.head(10),
-    use_container_width=True,
-    hide_index=True,
-)
-
-st.success(
-    f"Loaded {len(sector_df)} companies successfully."
-)
-
-
-
-
-# -------------------------------------------------
-# Sector Selection
-# -------------------------------------------------
-
-st.markdown("---")
-
-st.subheader("🏢 Select Sector")
 
 sector_list = sorted(
-    sector_df["broad_sector"]
-    .dropna()
-    .unique()
+    df["broad_sector"].dropna().unique()
 )
 
 selected_sector = st.selectbox(
-    "Choose a Sector",
+    "🏢 Select Sector",
     sector_list
 )
 
-# -------------------------------------------------
-# Filter Selected Sector
-# -------------------------------------------------
-
-filtered_sector = sector_df[
-    sector_df["broad_sector"] == selected_sector
+sector_data = df[
+    df["broad_sector"] == selected_sector
 ]
 
 st.success(
-    f"{len(filtered_sector)} companies found in {selected_sector}"
+    f"{len(sector_data)} companies found in {selected_sector}"
+)
+
+import plotly.express as px
+
+st.markdown("---")
+
+st.subheader("🫧 Sector Bubble Chart")
+
+fig = px.scatter(
+
+    sector_data,
+
+    x="sales",
+
+    y="return_on_equity_pct",
+
+    size="market_cap_crore",
+
+    color="sub_sector",
+
+    hover_name="company_id",
+
+    size_max=60,
+
+    title=f"{selected_sector} Sector Analysis"
+)
+
+fig.update_layout(
+
+    xaxis_title="Revenue (Cr)",
+
+    yaxis_title="ROE (%)",
+
+    height=700,
+
+    legend_title="Sub Sector"
+)
+
+st.plotly_chart(
+    fig,
+    use_container_width=True
 )
 
 # -------------------------------------------------
-# Show Sector Companies
-# -------------------------------------------------
-
-display_columns = [
-    "company_id",
-    "company_name",
-    "broad_sector",
-    "sub_sector",
-    "return_on_equity_pct",
-    "roce_percentage",
-    "pe_ratio",
-    "pb_ratio",
-    "dividend_yield_pct",
-    "composite_quality_score",
-]
-
-available_columns = [
-    col
-    for col in display_columns
-    if col in filtered_sector.columns
-]
-
-filtered_sector = filtered_sector.sort_values(
-    "composite_quality_score",
-    ascending=False
-)
-
-st.dataframe(
-    filtered_sector[available_columns],
-    use_container_width=True,
-    hide_index=True,
-)
-
-# -------------------------------------------------
-# Sector Summary
+# Sector Median KPI Chart
 # -------------------------------------------------
 
 st.markdown("---")
 
-st.subheader("📈 Sector Summary")
+st.subheader("📊 Sector Median KPIs")
 
-col1, col2, col3 = st.columns(3)
+median_df = pd.DataFrame({
 
-with col1:
-    st.metric(
-        "Companies",
-        len(filtered_sector)
-    )
+    "KPI": [
 
-with col2:
-    st.metric(
-        "Average ROE",
-        f"{filtered_sector['return_on_equity_pct'].mean():.2f}%"
-    )
+        "ROE",
 
-with col3:
-    st.metric(
-        "Average ROCE",
-        f"{filtered_sector['roce_percentage'].mean():.2f}%"
-    )
+        "ROCE",
 
-col4, col5, col6 = st.columns(3)
+        "Debt/Equity",
 
-with col4:
-    st.metric(
-        "Average PE",
-        f"{filtered_sector['pe_ratio'].mean():.2f}"
-    )
+        "Revenue CAGR",
 
-with col5:
-    st.metric(
-        "Average PB",
-        f"{filtered_sector['pb_ratio'].mean():.2f}"
-    )
+        "PAT CAGR",
 
-with col6:
-    st.metric(
-        "Highest Quality Score",
-        f"{filtered_sector['composite_quality_score'].max():.2f}"
-    )
+        "Quality Score"
 
+    ],
+
+    "Median Value": [
+
+        sector_data["return_on_equity_pct"].median(),
+
+        sector_data["roce_percentage"].median(),
+
+        sector_data["debt_to_equity"].median(),
+
+        sector_data["revenue_cagr_5yr"].median(),
+
+        sector_data["pat_cagr_5yr"].median(),
+
+        sector_data["composite_quality_score"].median()
+
+    ]
+
+})
+
+fig = px.bar(
+
+    median_df,
+
+    x="KPI",
+
+    y="Median Value",
+
+    text="Median Value",
+
+    title=f"{selected_sector} Median Financial KPIs"
+)
+
+fig.update_traces(
+
+    texttemplate="%{text:.2f}",
+
+    textposition="outside"
+
+)
+
+fig.update_layout(
+
+    height=500,
+
+    xaxis_title="",
+
+    yaxis_title="Median Value"
+
+)
+
+st.plotly_chart(
+
+    fig,
+
+    use_container_width=True
+)
