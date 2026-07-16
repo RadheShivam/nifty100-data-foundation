@@ -72,41 +72,19 @@ def get_ratios_by_year(year):
 
     conn = sqlite3.connect(DB_PATH)
 
-    if year == "Mar 2024":
-
-        query = """
-        SELECT f.*
-        FROM financial_ratios f
-        INNER JOIN
-        (
-            SELECT
-                company_id,
-                MAX(year) AS latest_year
-            FROM financial_ratios
-            GROUP BY company_id
-        ) latest
-        ON f.company_id = latest.company_id
-        AND f.year = latest.latest_year
+    df = pd.read_sql(
         """
-
-        df = pd.read_sql(query, conn)
-
-    else:
-
-        df = pd.read_sql(
-            """
-            SELECT *
-            FROM financial_ratios
-            WHERE year=?
-            """,
-            conn,
-            params=(year,)
-        )
+        SELECT *
+        FROM financial_ratios
+        WHERE year=?
+        """,
+        conn,
+        params=(year,)
+    )
 
     conn.close()
 
     return df
-
 
 # --------------------------------------------------
 # Profit & Loss

@@ -283,3 +283,287 @@ GitHub: https://github.com/Shivam2523
 # ✅ Project Status
 
 **Completed Successfully 🚀**
+
+
+# Nifty 100 Analytics Dashboard
+
+
+A Streamlit-based analytics dashboard for the Nifty 100 companies.
+
+The project provides:
+
+- Company Profile
+- Stock Screener
+- Peer Comparison
+- Trend Analysis
+- Sector Analysis
+- Capital Allocation
+- Annual Reports
+- Valuation Module
+
+The backend uses SQLite and Pandas, while Plotly is used for interactive visualizations.
+
+## Features
+
+- Interactive Streamlit Dashboard
+- 92 Nifty Companies
+- Financial Ratio Analysis
+- Peer Comparison
+- Trend Analysis
+- Sector Analysis
+- Capital Allocation Map
+- Annual Report Viewer
+- Company Screener
+- Valuation Module
+
+src/
+│
+├── analytics/
+│   └── valuation.py
+│
+├── dashboard/
+│   ├── app.py
+│   ├── pages/
+│   └── utils/
+│
+db/
+│
+output/
+│
+README.md
+
+
+## Run Dashboard
+
+```bash
+streamlit run src/dashboard/app.py
+```
+
+
+## Generate Valuation Report
+
+```bash
+python src/analytics/valuation.py
+```
+
+## Technology Stack
+
+- Python
+- Streamlit
+- SQLite
+- Pandas
+- Plotly
+- OpenPyXL
+
+
+## Dataset
+
+- 92 Nifty Companies
+- Financial Ratios
+- Balance Sheet
+- Cash Flow
+- Market Capitalization
+- Sector Information
+- Annual Reports
+
+
+
+
+
+
+## Take Screenshots
+
+docs/
+└── screenshots/
+    ├── home.png
+    ├── profile.png
+    ├── screener.png
+    ├── peers.png
+    ├── trends.png
+    ├── sectors.png
+    ├── capital.png
+    └── reports.png
+
+# Dashboard Screens
+
+### 1. Home Dashboard
+
+Displays:
+
+- KPI Summary
+- Sector Distribution
+- Top Companies
+- Overall Market Overview
+
+![Home](docs/screenshots/Home/Home1.png)
+![Home](docs/screenshots/Home/Home2.png)
+![Home](docs/screenshots/Home/Home3.png)
+
+### 2. Company Profile
+
+Displays:
+
+- Company Information
+- KPIs
+- Revenue & Profit Charts
+- ROE / ROCE Trends
+- Pros & Cons
+
+![Profile](docs/screenshots/Profile/Profile1.png)
+![Profile](docs/screenshots/Profile/Profile2.png)
+![Profile](docs/screenshots/Profile/Profile3.png)
+![Profile](docs/screenshots/Profile/Profile4.png)
+![Profile](docs/screenshots/Profile/Profile5.png)
+![Profile](docs/screenshots/Profile/Profile6.png)
+![Profile](docs/screenshots/Profile/Profile7.png)
+![Profile](docs/screenshots/Profile/Profile8.png)
+
+
+
+### 3. Screener
+
+Allows filtering companies using:
+
+- ROE
+- Debt/Equity
+- Revenue CAGR
+- PAT CAGR
+- P/E
+- Dividend Yield
+- CSV Export
+
+![Screener](docs/screenshots/Screener/Screener1.png)
+![Screener](docs/screenshots/Screener/Screener2.png)
+![Screener](docs/screenshots/Screener/Screener3.png)
+
+
+### 4. Peer Comparison
+
+Shows:
+
+- Radar Chart
+- Peer KPI Comparison
+- Industry Benchmark
+
+![Peers](docs/screenshots/Peers/Peers1.png)
+![Peers](docs/screenshots/Peers/Peers2.png)
+![Peers](docs/screenshots/Peers/Peers3.png)
+![Peers](docs/screenshots/Peers/Peers4.png)
+![Peers](docs/screenshots/Peers/Peers5.png)
+
+
+### 5. Trend Analysis
+
+Displays:
+
+- Multi-metric Line Charts
+- Historical Trends
+- YoY Analysis
+
+![Trends](docs/screenshots/Trends/1.png)
+![Trends](docs/screenshots/Trends/2.png)
+![Trends](docs/screenshots/Trends/3.png)
+![Trends](docs/screenshots/Trends/4.png)
+
+### 6. Sector Analysis
+
+Displays:
+
+- Bubble Chart
+- Sector Median KPIs
+
+![Sectors](docs/screenshots/Sectors/1.png)
+![Sectors](docs/screenshots/Sectors/2.png)
+![Sectors](docs/screenshots/Sectors/3.png)
+
+
+
+### 7. Capital Allocation
+
+Displays:
+
+- Treemap
+- Capital Allocation Categories
+
+![Capital](docs/screenshots/Capital/1.png)
+![Capital](docs/screenshots/Capital/2.png)
+
+
+### 8. Annual Reports
+
+Displays:
+
+- Annual Report Links
+- PDF Access
+- Report Availability
+
+![Reports](docs/screenshots/Reports/1.png)
+![Reports](docs/screenshots/Reports/2.png)
+
+
+# Sprint 4 Retrospective
+
+## Dashboard Features Completed
+
+- Built an 8-page interactive Streamlit dashboard.
+- Added Company Profile with financial KPIs and charts.
+- Implemented an advanced Stock Screener with CSV export.
+- Developed Peer Comparison using Radar Charts.
+- Added Trend Analysis with multiple financial metrics.
+- Created Sector Analysis using Bubble Charts.
+- Built Capital Allocation Treemap visualization.
+- Integrated Annual Report viewer with BSE report links.
+
+---
+
+## Valuation Module
+
+Implemented a valuation engine that calculates:
+
+- Free Cash Flow Yield
+- Sector Median P/E
+- PE vs Sector Median
+- Fair / Discount / Caution valuation flags
+
+Generated:
+
+- valuation_summary.xlsx
+- valuation_flags.csv
+
+---
+
+## Data Quality Improvements
+
+Resolved several data issues during development:
+
+- Fixed market cap merge using company ID and year.
+- Corrected SIEMENS financial year mismatch (September reporting).
+- Cleaned sector mapping from 94 companies to 92 companies.
+- Removed obsolete companies from the sectors table.
+- Improved handling of missing financial values.
+
+---
+
+## Performance
+
+- Streamlit caching implemented using `@st.cache_data`.
+- Optimized SQLite queries.
+- Dashboard pages load within the required response time.
+- Plotly charts render interactively.
+
+---
+
+## Challenges Faced
+
+- Financial year mismatches across companies.
+- Market Cap integration.
+- Missing financial ratios.
+- Annual report availability.
+- Data consistency across multiple database tables.
+
+---
+
+## Outcome
+
+Sprint 4 successfully delivers a fully functional Nifty 100 Analytics Dashboard with valuation analytics and interactive visualizations.
+

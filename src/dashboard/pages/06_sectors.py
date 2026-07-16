@@ -1,11 +1,10 @@
-
-
-
 import os
 import sys
+import sqlite3
 
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
 # -------------------------------------------------
 # Add Project Root
@@ -45,12 +44,14 @@ sector_df = get_sectors()
 
 ratio_df = get_ratios_by_year("Mar 2024")
 
+
+
 if sector_df.empty or ratio_df.empty:
     st.error("Sector data not found.")
     st.stop()
 
 # -------------------------------------------------
-# Merge Data
+# Merge Sector + Ratios
 # -------------------------------------------------
 
 df = ratio_df.merge(
@@ -60,10 +61,8 @@ df = ratio_df.merge(
 )
 
 # -------------------------------------------------
-# Load Revenue from Profit & Loss
+# Load Revenue & Market Cap
 # -------------------------------------------------
-
-import sqlite3
 
 conn = sqlite3.connect("db/nifty100.db")
 
@@ -89,7 +88,21 @@ market_df = pd.read_sql(
     conn
 )
 
+companies_df = pd.read_sql(
+    """
+    SELECT
+        id AS company_id,
+        company_name
+    FROM companies
+    """,
+    conn
+)
+
 conn.close()
+
+# -------------------------------------------------
+# Merge All Data
+# -------------------------------------------------
 
 df = df.merge(
     sales_df,
@@ -102,6 +115,46 @@ df = df.merge(
     on="company_id",
     how="left"
 )
+
+df = df.merge(
+    companies_df,
+    on="company_id",
+    how="left"
+)
+
+# -------------------------------------------------
+# Convert Numeric Columns
+# -------------------------------------------------
+
+numeric_columns = [
+    "sales",
+    "return_on_equity_pct",
+    "market_cap_crore",
+    "roce_percentage",
+    "debt_to_equity",
+    "revenue_cagr_5yr",
+    "pat_cagr_5yr",
+    "composite_quality_score"
+]
+
+for col in numeric_columns:
+    if col in df.columns:
+        df[col] = pd.to_numeric(
+            df[col],
+            errors="coerce"
+        )
+
+# -------------------------------------------------
+# Remove Invalid Rows
+# -------------------------------------------------
+
+df = df.dropna(
+    subset=[
+        "broad_sector"
+    ]
+)
+
+
 
 # -------------------------------------------------
 # Sector Dropdown
@@ -118,52 +171,114 @@ selected_sector = st.selectbox(
 
 sector_data = df[
     df["broad_sector"] == selected_sector
-]
+].copy()
 
-st.success(
-    f"{len(sector_data)} companies found in {selected_sector}"
+# -------------------------------------------------
+# DEBUG THE MERGED DATA
+# -------------------------------------------------
+
+
+
+st.markdown("---")
+
+st.subheader("Companies in Selected Sector")
+
+
+
+st.dataframe(
+    sector_data[
+        [
+            "company_id",
+            "company_name",
+            "sub_sector"
+        ]
+    ].fillna("N/A"),
+    use_container_width=True,
+    hide_index=True
 )
 
-import plotly.express as px
+# -------------------------------------------------
+# Bubble Chart
+# -------------------------------------------------
 
 st.markdown("---")
 
 st.subheader("🫧 Sector Bubble Chart")
 
-fig = px.scatter(
-
-    sector_data,
-
-    x="sales",
-
-    y="return_on_equity_pct",
-
-    size="market_cap_crore",
-
-    color="sub_sector",
-
-    hover_name="company_id",
-
-    size_max=60,
-
-    title=f"{selected_sector} Sector Analysis"
+bubble_df = sector_data.dropna(
+    subset=[
+        "sales",
+        "return_on_equity_pct",
+        "market_cap_crore"
+    ]
 )
 
-fig.update_layout(
 
-    xaxis_title="Revenue (Cr)",
 
-    yaxis_title="ROE (%)",
+if bubble_df.empty:
 
-    height=700,
+    st.warning(
+        "No financial data available for this sector."
+    )
 
-    legend_title="Sub Sector"
-)
 
-st.plotly_chart(
-    fig,
-    use_container_width=True
-)
+else:
+
+    
+
+    fig = px.scatter(
+
+        bubble_df,
+
+        x="sales",
+
+        y="return_on_equity_pct",
+
+        size="market_cap_crore",
+
+        color="sub_sector",
+
+        hover_name="company_name",
+
+        hover_data={
+            "company_id": True,
+            "sales": ":,.0f",
+            "market_cap_crore": ":,.0f",
+            "return_on_equity_pct": ":.2f"
+        },
+
+        size_max=60,
+
+        title=f"{selected_sector} Sector Analysis"
+    )
+
+
+
+    
+
+
+    fig.update_layout(
+
+        xaxis_title="Revenue (₹ Cr)",
+
+        yaxis_title="ROE (%)",
+
+        height=650,
+
+        legend_title="Sub Sector",
+
+        margin=dict(
+            l=40,
+            r=40,
+            t=60,
+            b=40
+        )
+    )
+
+    st.plotly_chart(
+        fig,
+        use_container_width=True
+    )
 
 # -------------------------------------------------
 # Sector Median KPI Chart
@@ -209,6 +324,8 @@ median_df = pd.DataFrame({
 
 })
 
+median_df["Median Value"] = median_df["Median Value"].fillna(0)
+
 fig = px.bar(
 
     median_df,
@@ -219,7 +336,8 @@ fig = px.bar(
 
     text="Median Value",
 
-    title=f"{selected_sector} Median Financial KPIs"
+    title=f"{selected_sector} Sector Median Financial KPIs"
+
 )
 
 fig.update_traces(
@@ -236,7 +354,14 @@ fig.update_layout(
 
     xaxis_title="",
 
-    yaxis_title="Median Value"
+    yaxis_title="Median Value",
+
+    margin=dict(
+        l=40,
+        r=40,
+        t=60,
+        b=40
+    )
 
 )
 
@@ -245,4 +370,5 @@ st.plotly_chart(
     fig,
 
     use_container_width=True
+
 )

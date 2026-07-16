@@ -120,7 +120,7 @@ fig = px.treemap(
 )
 
 fig.update_layout(
-    height=750
+    height=650
 )
 
 st.plotly_chart(
