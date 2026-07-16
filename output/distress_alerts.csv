@@ -1,0 +1,17 @@
+company_id,company_name,sector,cfo_quality_score,cfo_quality_label,capex_intensity_pct,capex_label,fcf_cagr_5yr,fcf_conversion_pct,distress_flag,deleveraging_flag,capital_allocation_label
+AXISBANK,Axis Bank Ltd,Financials,4.97,High Quality,8.23,Capital Intensive,-8.68,-38.36,True,False,Growth Funded by Debt
+BAJAJFINSV,Bajaj Finserv Ltd,Financials,-2.99,Accrual Risk,9.93,Capital Intensive,24.34,-194.77,True,False,Growth Funded by Debt
+BAJFINANCE,Bajaj Finance Ltd,Financials,-3.76,Accrual Risk,13.04,Capital Intensive,24.59,-496.5,True,False,Growth Funded by Debt
+BANKBARODA,Bank of Baroda,Financials,3.47,High Quality,1.09,Asset Light,-19.93,-17.03,True,False,Growth Funded by Debt
+BHEL,"Bharat Heavy Electricals Limited
+",Industrials,-2.21,Accrual Risk,5.57,Moderate,23.77,-335.02,True,False,Distress Signal
+CHOLAFIN,Cholamandalam Investment & Finance Company Ltd,Financials,-6.2,Accrual Risk,14.9,Capital Intensive,106.27,-715.65,True,False,Growth Funded by Debt
+GRASIM,Grasim Industries Ltd,Industrials,0.61,Moderate,17.65,Capital Intensive,59.28,-124.41,True,False,Growth Funded by Debt
+M&M,"Mahindra & Mahindra Ltd
+",Consumer Discretionary,3.32,High Quality,4.04,Moderate,7.8,-45.18,True,False,Growth Funded by Debt
+PFC,Power Finance Corporation Ltd,Financials,-3.03,Accrual Risk,3.73,Moderate,24.44,-301.52,True,False,Growth Funded by Debt
+PNB,Punjab National Bank,Financials,-1.22,Accrual Risk,1.38,Asset Light,22.37,,True,False,Growth Funded by Debt
+RECLTD,REC Ltd,Financials,-3.86,Accrual Risk,3.85,Moderate,16.27,-124.37,True,False,Growth Funded by Debt
+SHRIRAMFIN,"Shriram Finance Ltd
+",Financials,-2.61,Accrual Risk,0.71,Asset Light,87.84,-298.0,True,False,Growth Funded by Debt
+TVSMOTOR,TVS Motor Company Ltd,Consumer Discretionary,-0.75,Accrual Risk,2.56,Asset Light,33.16,-40.98,True,False,Growth Funded by Debt

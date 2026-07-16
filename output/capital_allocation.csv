@@ -125,13 +125,13 @@ ASIANPAINT,Mar 2021,+,-,-,Reinvestor
 ASIANPAINT,Mar 2022,+,-,-,Reinvestor
 ASIANPAINT,Mar 2023,+,-,-,Reinvestor
 ASIANPAINT,Mar 2024,+,-,-,Reinvestor
-AGTL,Mar 2018,+,-,+,Mixed
-AGTL,Mar 2019,+,+,-,Liquidating Assets
-AGTL,Mar 2020,+,-,-,Reinvestor
-AGTL,Mar 2021,+,-,+,Mixed
-AGTL,Mar 2022,+,-,+,Mixed
-AGTL,Mar 2023,+,-,+,Mixed
-AGTL,Mar 2024,+,-,-,Reinvestor
+ATGL,Mar 2018,+,-,+,Mixed
+ATGL,Mar 2019,+,+,-,Liquidating Assets
+ATGL,Mar 2020,+,-,-,Reinvestor
+ATGL,Mar 2021,+,-,+,Mixed
+ATGL,Mar 2022,+,-,+,Mixed
+ATGL,Mar 2023,+,-,+,Mixed
+ATGL,Mar 2024,+,-,-,Reinvestor
 AXISBANK,Mar 2013,+,-,+,Mixed
 AXISBANK,Mar 2014,+,-,+,Mixed
 AXISBANK,Mar 2015,-,-,+,Growth Funded by Debt
@@ -1097,92 +1097,3 @@ TVSMOTOR,Mar 2021,+,-,+,Mixed
 TVSMOTOR,Mar 2022,-,-,+,Growth Funded by Debt
 TVSMOTOR,Mar 2023,-,-,+,Growth Funded by Debt
 TVSMOTOR,Mar 2024,-,-,+,Growth Funded by Debt
-ULTRACEMCO,Mar 2013,+,-,+,Mixed
-ULTRACEMCO,Mar 2014,+,-,-,Reinvestor
-ULTRACEMCO,Mar 2015,+,-,-,Reinvestor
-ULTRACEMCO,Mar 2016,+,-,-,Reinvestor
-ULTRACEMCO,Mar 2017,+,-,-,Reinvestor
-ULTRACEMCO,Mar 2018,+,+,-,Liquidating Assets
-ULTRACEMCO,Mar 2019,+,+,-,Liquidating Assets
-ULTRACEMCO,Mar 2020,+,-,-,Reinvestor
-ULTRACEMCO,Mar 2021,+,-,-,Reinvestor
-ULTRACEMCO,Mar 2022,+,+,-,Liquidating Assets
-ULTRACEMCO,Mar 2023,+,-,-,Reinvestor
-ULTRACEMCO,Mar 2024,+,-,-,Reinvestor
-UNIONBANK,Mar 2013,-,-,+,Growth Funded by Debt
-UNIONBANK,Mar 2014,+,-,+,Mixed
-UNIONBANK,Mar 2015,-,-,+,Growth Funded by Debt
-UNIONBANK,Mar 2016,+,-,-,Reinvestor
-UNIONBANK,Mar 2017,-,-,+,Growth Funded by Debt
-UNIONBANK,Mar 2018,+,-,+,Mixed
-UNIONBANK,Mar 2019,-,-,+,Growth Funded by Debt
-UNIONBANK,Mar 2020,-,-,+,Growth Funded by Debt
-UNIONBANK,Mar 2021,+,-,-,Reinvestor
-UNIONBANK,Mar 2022,+,-,-,Reinvestor
-UNIONBANK,Mar 2023,+,-,-,Reinvestor
-UNIONBANK,Mar 2024,+,-,-,Reinvestor
-UNITDSPR,Mar 2013,+,-,-,Reinvestor
-UNITDSPR,Mar 2014,-,-,+,Growth Funded by Debt
-UNITDSPR,Mar 2015,-,+,-,Other
-UNITDSPR,Mar 2016,+,+,-,Liquidating Assets
-UNITDSPR,Mar 2017,+,-,-,Reinvestor
-UNITDSPR,Mar 2018,+,+,-,Liquidating Assets
-UNITDSPR,Mar 2019,+,-,-,Reinvestor
-UNITDSPR,Mar 2020,+,-,-,Reinvestor
-UNITDSPR,Mar 2021,+,-,-,Reinvestor
-UNITDSPR,Mar 2022,+,-,-,Reinvestor
-UNITDSPR,Mar 2023,+,-,-,Reinvestor
-UNITDSPR,Mar 2024,+,+,-,Liquidating Assets
-VBL,Dec 2012,+,-,+,Mixed
-VBL,Dec 2013,+,-,+,Mixed
-VBL,Dec 2014,+,-,+,Mixed
-VBL,Dec 2015,+,-,-,Reinvestor
-VBL,Dec 2016,+,-,+,Mixed
-VBL,Dec 2017,+,-,+,Mixed
-VBL,Dec 2018,+,-,-,Reinvestor
-VBL,Dec 2019,+,-,+,Mixed
-VBL,Dec 2020,+,-,-,Reinvestor
-VBL,Dec 2021,+,-,-,Reinvestor
-VBL,Dec 2022,+,-,-,Reinvestor
-VBL,Dec 2023,+,-,+,Mixed
-VEDL,Mar 2013,+,-,+,Mixed
-VEDL,Mar 2014,+,-,-,Reinvestor
-VEDL,Mar 2015,+,-,-,Reinvestor
-VEDL,Mar 2016,+,-,-,Reinvestor
-VEDL,Mar 2017,+,+,-,Liquidating Assets
-VEDL,Mar 2018,+,+,-,Liquidating Assets
-VEDL,Mar 2019,+,-,-,Reinvestor
-VEDL,Mar 2020,+,-,-,Reinvestor
-VEDL,Mar 2021,+,-,-,Reinvestor
-VEDL,Mar 2022,+,-,-,Reinvestor
-VEDL,Mar 2023,+,-,-,Reinvestor
-VEDL,Mar 2024,+,-,-,Reinvestor
-WIPRO,Mar 2013,+,-,-,Reinvestor
-WIPRO,Mar 2014,+,-,-,Reinvestor
-WIPRO,Mar 2015,+,-,-,Reinvestor
-WIPRO,Mar 2016,+,-,-,Reinvestor
-WIPRO,Mar 2017,+,-,-,Reinvestor
-WIPRO,Mar 2018,+,+,-,Liquidating Assets
-WIPRO,Mar 2019,+,+,-,Liquidating Assets
-WIPRO,Mar 2020,+,+,-,Liquidating Assets
-WIPRO,Mar 2021,+,+,-,Liquidating Assets
-WIPRO,Mar 2022,+,-,+,Mixed
-WIPRO,Mar 2023,+,-,-,Reinvestor
-WIPRO,Mar 2024,+,+,-,Liquidating Assets
-ZOMATO,Mar 2020,-,+,+,Distress Signal
-ZOMATO,Mar 2021,-,-,+,Growth Funded by Debt
-ZOMATO,Mar 2022,-,-,+,Growth Funded by Debt
-ZOMATO,Mar 2023,-,+,-,Other
-ZOMATO,Mar 2024,+,-,-,Reinvestor
-ZYDUSLIFE,Mar 2013,+,-,+,Mixed
-ZYDUSLIFE,Mar 2014,+,-,-,Reinvestor
-ZYDUSLIFE,Mar 2015,+,-,-,Reinvestor
-ZYDUSLIFE,Mar 2016,+,-,-,Reinvestor
-ZYDUSLIFE,Mar 2017,+,-,+,Mixed
-ZYDUSLIFE,Mar 2018,+,-,+,Mixed
-ZYDUSLIFE,Mar 2019,+,-,+,Mixed
-ZYDUSLIFE,Mar 2020,+,-,-,Reinvestor
-ZYDUSLIFE,Mar 2021,+,-,-,Reinvestor
-ZYDUSLIFE,Mar 2022,+,-,-,Reinvestor
-ZYDUSLIFE,Mar 2023,+,+,-,Liquidating Assets
-ZYDUSLIFE,Mar 2024,+,-,-,Reinvestor
