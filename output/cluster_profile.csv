@@ -1,0 +1,6 @@
+cluster,cluster_name,company_count,dominant_sector,return_on_equity_pct_mean,debt_to_equity_mean,revenue_cagr_5yr_mean,free_cash_flow_cr_mean,operating_profit_margin_pct_mean,return_on_equity_pct_median,debt_to_equity_median,revenue_cagr_5yr_median,free_cash_flow_cr_median,operating_profit_margin_pct_median
+0,High Margin Businesses,15,Financials,17.68,0.66,13.94,7283.87,73.39,15.35,0.06,13.17,6766.0,77.31
+1,Value Cyclicals,60,Consumer Discretionary,19.97,0.61,11.27,4831.47,19.44,17.0,0.24,10.65,1131.5,19.09
+2,High Margin Businesses,2,Industrials,47.22,0.56,9.73,274.5,28.51,47.22,0.56,9.73,274.5,28.51
+3,High Leverage,8,Financials,15.09,4.02,19.33,705.12,53.87,15.05,4.02,17.83,173.5,51.58
+4,High Leverage,7,Financials,24.44,3.94,18.02,-16191.0,39.64,20.4,4.02,18.56,-16191.0,36.69
