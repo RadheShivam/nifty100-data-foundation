@@ -2,18 +2,9 @@ import sqlite3
 import os
 
 # Project root
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        ".."
-    )
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
-DB_PATH = os.path.join(
-    PROJECT_ROOT,
-    "db",
-    "nifty100.db"
-)
+DB_PATH = os.path.join(PROJECT_ROOT, "db", "nifty100.db")
 
 
 def create_tables():

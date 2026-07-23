@@ -83,5 +83,3 @@ def test_stockprices_table_exists():
     assert cursor.fetchone() is not None
 
     conn.close()
-
-    

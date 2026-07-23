@@ -26,7 +26,7 @@ analysis_df = pd.read_sql(
     SELECT *
     FROM analysis
     """,
-    conn
+    conn,
 )
 
 conn.close()
@@ -38,9 +38,7 @@ conn.close()
 import re
 
 pattern = re.compile(
-    r"(TTM|Last Year|\d+\s*Years?|\d+\s*Year)"
-    r"\s*:?\s*(-?[\d.]+)%",
-    re.IGNORECASE
+    r"(TTM|Last Year|\d+\s*Years?|\d+\s*Year)" r"\s*:?\s*(-?[\d.]+)%", re.IGNORECASE
 )
 
 parsed_rows = []
@@ -51,7 +49,7 @@ target_columns = [
     "compounded_sales_growth",
     "compounded_profit_growth",
     "stock_price_cagr",
-    "roe"
+    "roe",
 ]
 
 for _, row in analysis_df.iterrows():
@@ -75,33 +73,22 @@ for _, row in analysis_df.iterrows():
                 period_years = 1
 
             else:
-                period_years = int(
-                    re.search(r"\d+", period).group()
-                )
+                period_years = int(re.search(r"\d+", period).group())
 
-            parsed_rows.append({
-
-                "company_id": company,
-
-                "metric_type": column,
-
-                "period_years": period_years,
-
-                "value_pct": float(match.group(2))
-
-            })
+            parsed_rows.append(
+                {
+                    "company_id": company,
+                    "metric_type": column,
+                    "period_years": period_years,
+                    "value_pct": float(match.group(2)),
+                }
+            )
 
         else:
 
-            failed_rows.append({
-
-                "company_id": company,
-
-                "metric_type": column,
-
-                "raw_text": text
-
-            })
+            failed_rows.append(
+                {"company_id": company, "metric_type": column, "raw_text": text}
+            )
 
 # --------------------------------------------------
 # Save Outputs
@@ -111,27 +98,9 @@ parsed_df = pd.DataFrame(parsed_rows)
 
 failed_df = pd.DataFrame(failed_rows)
 
-parsed_df.to_csv(
+parsed_df.to_csv(os.path.join(OUTPUT_DIR, "analysis_parsed.csv"), index=False)
 
-    os.path.join(
-        OUTPUT_DIR,
-        "analysis_parsed.csv"
-    ),
-
-    index=False
-
-)
-
-failed_df.to_csv(
-
-    os.path.join(
-        OUTPUT_DIR,
-        "parse_failures.csv"
-    ),
-
-    index=False
-
-)
+failed_df.to_csv(os.path.join(OUTPUT_DIR, "parse_failures.csv"), index=False)
 
 print("\n===============================")
 print("Parsing Completed")
@@ -167,7 +136,7 @@ ratio_df = pd.read_sql(
         pat_cagr_10yr
     FROM financial_ratios
     """,
-    conn
+    conn,
 )
 
 conn.close()
@@ -181,9 +150,7 @@ for _, row in parsed_df.iterrows():
     period = row["period_years"]
     parsed_value = row["value_pct"]
 
-    ratio = ratio_df[
-        ratio_df["company_id"] == company
-    ]
+    ratio = ratio_df[ratio_df["company_id"] == company]
 
     if ratio.empty:
         continue
@@ -223,31 +190,20 @@ for _, row in parsed_df.iterrows():
 
     if difference > 5:
 
-        review_rows.append({
-
-            "company_id": company,
-
-            "metric": metric,
-
-            "period": period,
-
-            "parsed_value": parsed_value,
-
-            "ratio_engine_value": round(db_value, 2),
-
-            "difference": round(difference, 2)
-
-        })
+        review_rows.append(
+            {
+                "company_id": company,
+                "metric": metric,
+                "period": period,
+                "parsed_value": parsed_value,
+                "ratio_engine_value": round(db_value, 2),
+                "difference": round(difference, 2),
+            }
+        )
 
 manual_review_df = pd.DataFrame(review_rows)
 
-manual_review_df.to_csv(
-    os.path.join(
-        OUTPUT_DIR,
-        "manual_review.csv"
-    ),
-    index=False
-)
+manual_review_df.to_csv(os.path.join(OUTPUT_DIR, "manual_review.csv"), index=False)
 
 print("\n===============================")
 print("Cross Validation Completed")

@@ -20,9 +20,8 @@ df = pd.read_sql(query, conn)
 
 conn.close()
 
-df["high_leverage_flag"] = (
-    (df["debt_to_equity"] > 5) &
-    (df["broad_sector"] != "Financials")
+df["high_leverage_flag"] = (df["debt_to_equity"] > 5) & (
+    df["broad_sector"] != "Financials"
 )
 
 print(df.head(20))

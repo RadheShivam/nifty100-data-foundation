@@ -3,29 +3,17 @@ from pydantic import BaseModel
 import sqlite3
 import os
 
-router = APIRouter(
-    prefix="/watchlist",
-    tags=["Watchlist"]
-)
+router = APIRouter(prefix="/watchlist", tags=["Watchlist"])
 
 # ==========================================================
 # DATABASE CONFIGURATION
 # ==========================================================
 
 PROJECT_ROOT = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        "..",
-        ".."
-    )
+    os.path.join(os.path.dirname(__file__), "..", "..", "..")
 )
 
-DB_PATH = os.path.join(
-    PROJECT_ROOT,
-    "db",
-    "nifty100.db"
-)
+DB_PATH = os.path.join(PROJECT_ROOT, "db", "nifty100.db")
 
 
 def get_connection():
@@ -38,6 +26,7 @@ def get_connection():
 # REQUEST MODEL
 # ==========================================================
 
+
 class WatchlistCreate(BaseModel):
     name: str
 
@@ -45,6 +34,7 @@ class WatchlistCreate(BaseModel):
 # ==========================================================
 # CREATE WATCHLIST
 # ==========================================================
+
 
 @router.post("/")
 def create_watchlist(data: WatchlistCreate):
@@ -58,7 +48,7 @@ def create_watchlist(data: WatchlistCreate):
         INSERT INTO watchlists(name)
         VALUES(?)
         """,
-        (data.name,)
+        (data.name,),
     )
 
     conn.commit()
@@ -70,28 +60,28 @@ def create_watchlist(data: WatchlistCreate):
     return {
         "message": "Watchlist created successfully",
         "watchlist_id": watchlist_id,
-        "name": data.name
+        "name": data.name,
     }
+
 
 # ==========================================================
 # GET ALL WATCHLISTS
 # ==========================================================
+
 
 @router.get("/")
 def get_watchlists():
 
     conn = get_connection()
 
-    rows = conn.execute(
-        """
+    rows = conn.execute("""
         SELECT
             id,
             name,
             created_at
         FROM watchlists
         ORDER BY id
-        """
-    ).fetchall()
+        """).fetchall()
 
     conn.close()
 
@@ -102,18 +92,18 @@ def get_watchlists():
 # REQUEST MODEL - WATCHLIST ITEM
 # ==========================================================
 
+
 class WatchlistItemCreate(BaseModel):
     company_id: str
+
 
 # ==========================================================
 # ADD STOCK TO WATCHLIST
 # ==========================================================
 
+
 @router.post("/{watchlist_id}/stocks")
-def add_stock(
-    watchlist_id: int,
-    item: WatchlistItemCreate
-):
+def add_stock(watchlist_id: int, item: WatchlistItemCreate):
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -125,15 +115,12 @@ def add_stock(
         FROM watchlists
         WHERE id = ?
         """,
-        (watchlist_id,)
+        (watchlist_id,),
     ).fetchone()
 
     if watchlist is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Watchlist not found"
-        )
+        raise HTTPException(status_code=404, detail="Watchlist not found")
 
     # Check company exists
     company = cursor.execute(
@@ -142,15 +129,12 @@ def add_stock(
         FROM companies
         WHERE UPPER(id)=UPPER(?)
         """,
-        (item.company_id,)
+        (item.company_id,),
     ).fetchone()
 
     if company is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Company not found"
-        )
+        raise HTTPException(status_code=404, detail="Company not found")
 
     # Prevent duplicate entries
     existing = cursor.execute(
@@ -160,17 +144,13 @@ def add_stock(
         WHERE watchlist_id = ?
         AND company_id = ?
         """,
-        (
-            watchlist_id,
-            item.company_id.upper()
-        )
+        (watchlist_id, item.company_id.upper()),
     ).fetchone()
 
     if existing:
         conn.close()
         raise HTTPException(
-            status_code=400,
-            detail="Company already exists in watchlist"
+            status_code=400, detail="Company already exists in watchlist"
         )
 
     cursor.execute(
@@ -182,10 +162,7 @@ def add_stock(
         )
         VALUES (?, ?)
         """,
-        (
-            watchlist_id,
-            item.company_id.upper()
-        )
+        (watchlist_id, item.company_id.upper()),
     )
 
     conn.commit()
@@ -198,12 +175,14 @@ def add_stock(
         "message": "Stock added successfully",
         "item_id": item_id,
         "watchlist_id": watchlist_id,
-        "company_id": item.company_id.upper()
+        "company_id": item.company_id.upper(),
     }
+
 
 # ==========================================================
 # GET WATCHLIST DETAILS
 # ==========================================================
+
 
 @router.get("/{watchlist_id}")
 def get_watchlist(watchlist_id: int):
@@ -217,15 +196,12 @@ def get_watchlist(watchlist_id: int):
         FROM watchlists
         WHERE id = ?
         """,
-        (watchlist_id,)
+        (watchlist_id,),
     ).fetchone()
 
     if watchlist is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Watchlist not found"
-        )
+        raise HTTPException(status_code=404, detail="Watchlist not found")
 
     stocks = conn.execute(
         """
@@ -242,26 +218,21 @@ def get_watchlist(watchlist_id: int):
         WHERE wi.watchlist_id = ?
         ORDER BY c.company_name
         """,
-        (watchlist_id,)
+        (watchlist_id,),
     ).fetchall()
 
     conn.close()
 
-    return {
-        "watchlist": dict(watchlist),
-        "stocks": [dict(stock) for stock in stocks]
-    }
+    return {"watchlist": dict(watchlist), "stocks": [dict(stock) for stock in stocks]}
 
 
 # ==========================================================
 # REMOVE STOCK FROM WATCHLIST
 # ==========================================================
 
+
 @router.delete("/{watchlist_id}/stocks/{company_id}")
-def remove_stock(
-    watchlist_id: int,
-    company_id: str
-):
+def remove_stock(watchlist_id: int, company_id: str):
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -273,15 +244,12 @@ def remove_stock(
         FROM watchlists
         WHERE id = ?
         """,
-        (watchlist_id,)
+        (watchlist_id,),
     ).fetchone()
 
     if watchlist is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Watchlist not found"
-        )
+        raise HTTPException(status_code=404, detail="Watchlist not found")
 
     # Check stock exists in watchlist
     stock = cursor.execute(
@@ -291,18 +259,12 @@ def remove_stock(
         WHERE watchlist_id = ?
         AND company_id = ?
         """,
-        (
-            watchlist_id,
-            company_id.upper()
-        )
+        (watchlist_id, company_id.upper()),
     ).fetchone()
 
     if stock is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Stock not found in watchlist"
-        )
+        raise HTTPException(status_code=404, detail="Stock not found in watchlist")
 
     cursor.execute(
         """
@@ -310,10 +272,7 @@ def remove_stock(
         WHERE watchlist_id = ?
         AND company_id = ?
         """,
-        (
-            watchlist_id,
-            company_id.upper()
-        )
+        (watchlist_id, company_id.upper()),
     )
 
     conn.commit()
@@ -323,5 +282,5 @@ def remove_stock(
     return {
         "message": "Stock removed successfully",
         "watchlist_id": watchlist_id,
-        "company_id": company_id.upper()
+        "company_id": company_id.upper(),
     }

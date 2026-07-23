@@ -3,29 +3,17 @@ from pydantic import BaseModel
 import sqlite3
 import os
 
-router = APIRouter(
-    prefix="/portfolio",
-    tags=["Portfolio"]
-)
+router = APIRouter(prefix="/portfolio", tags=["Portfolio"])
 
 # ==========================================================
 # DATABASE CONFIGURATION
 # ==========================================================
 
 PROJECT_ROOT = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        "..",
-        ".."
-    )
+    os.path.join(os.path.dirname(__file__), "..", "..", "..")
 )
 
-DB_PATH = os.path.join(
-    PROJECT_ROOT,
-    "db",
-    "nifty100.db"
-)
+DB_PATH = os.path.join(PROJECT_ROOT, "db", "nifty100.db")
 
 
 def get_connection():
@@ -38,6 +26,7 @@ def get_connection():
 # REQUEST MODEL
 # ==========================================================
 
+
 class PortfolioCreate(BaseModel):
     name: str
 
@@ -45,6 +34,7 @@ class PortfolioCreate(BaseModel):
 # ==========================================================
 # CREATE PORTFOLIO
 # ==========================================================
+
 
 @router.post("/")
 def create_portfolio(data: PortfolioCreate):
@@ -57,7 +47,7 @@ def create_portfolio(data: PortfolioCreate):
         INSERT INTO portfolios(name)
         VALUES(?)
         """,
-        (data.name,)
+        (data.name,),
     )
 
     conn.commit()
@@ -69,7 +59,7 @@ def create_portfolio(data: PortfolioCreate):
     return {
         "message": "Portfolio created successfully",
         "portfolio_id": portfolio_id,
-        "name": data.name
+        "name": data.name,
     }
 
 
@@ -77,21 +67,20 @@ def create_portfolio(data: PortfolioCreate):
 # GET ALL PORTFOLIOS
 # ==========================================================
 
+
 @router.get("/")
 def get_portfolios():
 
     conn = get_connection()
 
-    rows = conn.execute(
-        """
+    rows = conn.execute("""
         SELECT
             id,
             name,
             created_at
         FROM portfolios
         ORDER BY id
-        """
-    ).fetchall()
+        """).fetchall()
 
     conn.close()
 
@@ -102,20 +91,20 @@ def get_portfolios():
 # REQUEST MODEL - HOLDINGS
 # ==========================================================
 
+
 class HoldingCreate(BaseModel):
     company_id: str
     quantity: float
     average_price: float
 
+
 # ==========================================================
 # ADD HOLDING TO PORTFOLIO
 # ==========================================================
 
+
 @router.post("/{portfolio_id}/holdings")
-def add_holding(
-    portfolio_id: int,
-    holding: HoldingCreate
-):
+def add_holding(portfolio_id: int, holding: HoldingCreate):
 
     conn = get_connection()
     cursor = conn.cursor()
@@ -127,15 +116,12 @@ def add_holding(
         FROM portfolios
         WHERE id = ?
         """,
-        (portfolio_id,)
+        (portfolio_id,),
     ).fetchone()
 
     if portfolio is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Portfolio not found"
-        )
+        raise HTTPException(status_code=404, detail="Portfolio not found")
 
     # Check company exists
     company = cursor.execute(
@@ -144,15 +130,12 @@ def add_holding(
         FROM companies
         WHERE UPPER(id)=UPPER(?)
         """,
-        (holding.company_id,)
+        (holding.company_id,),
     ).fetchone()
 
     if company is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Company not found"
-        )
+        raise HTTPException(status_code=404, detail="Company not found")
 
     cursor.execute(
         """
@@ -169,8 +152,8 @@ def add_holding(
             portfolio_id,
             holding.company_id.upper(),
             holding.quantity,
-            holding.average_price
-        )
+            holding.average_price,
+        ),
     )
 
     conn.commit()
@@ -185,12 +168,14 @@ def add_holding(
         "portfolio_id": portfolio_id,
         "company_id": holding.company_id.upper(),
         "quantity": holding.quantity,
-        "average_price": holding.average_price
+        "average_price": holding.average_price,
     }
+
 
 # ==========================================================
 # GET PORTFOLIO DETAILS
 # ==========================================================
+
 
 @router.get("/{portfolio_id}")
 def get_portfolio(portfolio_id: int):
@@ -204,15 +189,12 @@ def get_portfolio(portfolio_id: int):
         FROM portfolios
         WHERE id = ?
         """,
-        (portfolio_id,)
+        (portfolio_id,),
     ).fetchone()
 
     if portfolio is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Portfolio not found"
-        )
+        raise HTTPException(status_code=404, detail="Portfolio not found")
 
     # Get all holdings
     holdings = conn.execute(
@@ -229,20 +211,18 @@ def get_portfolio(portfolio_id: int):
         WHERE ph.portfolio_id = ?
         ORDER BY c.company_name
         """,
-        (portfolio_id,)
+        (portfolio_id,),
     ).fetchall()
 
     conn.close()
 
-    return {
-        "portfolio": dict(portfolio),
-        "holdings": [dict(row) for row in holdings]
-    }
+    return {"portfolio": dict(portfolio), "holdings": [dict(row) for row in holdings]}
 
 
 # ==========================================================
 # PORTFOLIO SUMMARY
 # ==========================================================
+
 
 @router.get("/{portfolio_id}/summary")
 def get_portfolio_summary(portfolio_id: int):
@@ -256,15 +236,12 @@ def get_portfolio_summary(portfolio_id: int):
         FROM portfolios
         WHERE id = ?
         """,
-        (portfolio_id,)
+        (portfolio_id,),
     ).fetchone()
 
     if portfolio is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Portfolio not found"
-        )
+        raise HTTPException(status_code=404, detail="Portfolio not found")
 
     holdings = conn.execute(
         """
@@ -278,7 +255,7 @@ def get_portfolio_summary(portfolio_id: int):
             ON ph.company_id = sp.company_id
         WHERE ph.portfolio_id = ?
         """,
-        (portfolio_id,)
+        (portfolio_id,),
     ).fetchall()
 
     total_investment = 0
@@ -300,9 +277,7 @@ def get_portfolio_summary(portfolio_id: int):
     return_percent = 0
 
     if total_investment > 0:
-        return_percent = (
-            profit_loss / total_investment
-        ) * 100
+        return_percent = (profit_loss / total_investment) * 100
 
     conn.close()
 
@@ -311,13 +286,14 @@ def get_portfolio_summary(portfolio_id: int):
         "total_investment": round(total_investment, 2),
         "current_value": round(current_value, 2),
         "profit_loss": round(profit_loss, 2),
-        "return_percentage": round(return_percent, 2)
+        "return_percentage": round(return_percent, 2),
     }
 
 
 # ==========================================================
 # PORTFOLIO ALLOCATION
 # ==========================================================
+
 
 @router.get("/{portfolio_id}/allocation")
 def get_portfolio_allocation(portfolio_id: int):
@@ -330,15 +306,12 @@ def get_portfolio_allocation(portfolio_id: int):
         FROM portfolios
         WHERE id = ?
         """,
-        (portfolio_id,)
+        (portfolio_id,),
     ).fetchone()
 
     if portfolio is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Portfolio not found"
-        )
+        raise HTTPException(status_code=404, detail="Portfolio not found")
 
     rows = conn.execute(
         """
@@ -354,7 +327,7 @@ def get_portfolio_allocation(portfolio_id: int):
         WHERE ph.portfolio_id = ?
         ORDER BY investment DESC
         """,
-        (portfolio_id,)
+        (portfolio_id,),
     ).fetchall()
 
     total = sum(row["investment"] for row in rows)
@@ -368,27 +341,29 @@ def get_portfolio_allocation(portfolio_id: int):
         if total > 0:
             percent = (row["investment"] / total) * 100
 
-        allocation.append({
-            "company_id": row["company_id"],
-            "company_name": row["company_name"],
-            "investment": round(row["investment"], 2),
-            "allocation_percentage": round(percent, 2)
-        })
+        allocation.append(
+            {
+                "company_id": row["company_id"],
+                "company_name": row["company_name"],
+                "investment": round(row["investment"], 2),
+                "allocation_percentage": round(percent, 2),
+            }
+        )
 
     conn.close()
 
     return {
         "portfolio_id": portfolio_id,
         "total_investment": round(total, 2),
-        "allocation": allocation
+        "allocation": allocation,
     }
+
 
 # ==========================================================
 # TEST ROUTE
 # ==========================================================
 
+
 @router.get("/")
 def get_portfolios():
-    return {
-        "message": "Portfolio API is working"
-    }
+    return {"message": "Portfolio API is working"}

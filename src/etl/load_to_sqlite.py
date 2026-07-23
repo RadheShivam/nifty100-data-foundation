@@ -31,13 +31,9 @@ def load_data_to_sqlite():
     sectors_df = load_sectors()
 
     # Supplementary tables
-    marketcap_df = pd.read_excel(
-        "data/supplementry/market_cap.xlsx"
-    )
+    marketcap_df = pd.read_excel("data/supplementry/market_cap.xlsx")
 
-    stockprices_df = pd.read_excel(
-        "data/supplementry/stock_prices.xlsx"
-    )
+    stockprices_df = pd.read_excel("data/supplementry/stock_prices.xlsx")
 
     # Debug columns
     print("\nCompanies columns:")
@@ -62,76 +58,26 @@ def load_data_to_sqlite():
     print(stockprices_df.columns.tolist())
 
     # Load core tables
-    companies_df.to_sql(
-        "companies",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    companies_df.to_sql("companies", conn, if_exists="append", index=False)
 
-    profit_df.to_sql(
-        "profitandloss",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    profit_df.to_sql("profitandloss", conn, if_exists="append", index=False)
 
-    balance_df.to_sql(
-        "balancesheet",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    balance_df.to_sql("balancesheet", conn, if_exists="append", index=False)
 
-    cashflow_df.to_sql(
-        "cashflow",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    cashflow_df.to_sql("cashflow", conn, if_exists="append", index=False)
 
-    analysis_df.to_sql(
-        "analysis",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    analysis_df.to_sql("analysis", conn, if_exists="append", index=False)
 
-    documents_df.to_sql(
-        "documents",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    documents_df.to_sql("documents", conn, if_exists="append", index=False)
 
-    pros_df.to_sql(
-        "prosandcons",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    pros_df.to_sql("prosandcons", conn, if_exists="append", index=False)
 
-    sectors_df.to_sql(
-        "sectors",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    sectors_df.to_sql("sectors", conn, if_exists="append", index=False)
 
     # Load supplementary tables
-    marketcap_df.to_sql(
-        "marketcap",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    marketcap_df.to_sql("marketcap", conn, if_exists="append", index=False)
 
-    stockprices_df.to_sql(
-        "stockprices",
-        conn,
-        if_exists="append",
-        index=False
-    )
+    stockprices_df.to_sql("stockprices", conn, if_exists="append", index=False)
 
     conn.commit()
     conn.close()

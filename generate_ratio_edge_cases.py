@@ -8,16 +8,20 @@ os.makedirs("output", exist_ok=True)
 
 conn = sqlite3.connect("db/nifty100.db")
 
-profit = pd.read_sql("""
+profit = pd.read_sql(
+    """
 SELECT
     company_id,
     year,
     operating_profit,
     depreciation
 FROM profitandloss
-""", conn)
+""",
+    conn,
+)
 
-balance = pd.read_sql("""
+balance = pd.read_sql(
+    """
 SELECT
     company_id,
     year,
@@ -25,28 +29,26 @@ SELECT
     reserves,
     borrowings
 FROM balancesheet
-""", conn)
+""",
+    conn,
+)
 
-companies = pd.read_sql("""
+companies = pd.read_sql(
+    """
 SELECT
     id,
     company_name,
     roce_percentage
 FROM companies
-""", conn)
+""",
+    conn,
+)
 
 conn.close()
 
-df = profit.merge(
-    balance,
-    on=["company_id", "year"]
-)
+df = profit.merge(balance, on=["company_id", "year"])
 
-df = df.merge(
-    companies,
-    left_on="company_id",
-    right_on="id"
-)
+df = df.merge(companies, left_on="company_id", right_on="id")
 
 log = []
 
@@ -55,10 +57,7 @@ for _, row in df.iterrows():
     ebit = row["operating_profit"] + row["depreciation"]
 
     roce, _ = return_on_capital_employed(
-        ebit,
-        row["equity_capital"],
-        row["reserves"],
-        row["borrowings"]
+        ebit, row["equity_capital"], row["reserves"], row["borrowings"]
     )
 
     if roce is None:
@@ -80,14 +79,16 @@ for _, row in df.iterrows():
         else:
             category = "Formula discrepancy"
 
-        log.append([
-            row["company_name"],
-            row["year"],
-            round(roce, 2),
-            source,
-            round(difference, 2),
-            category
-        ])
+        log.append(
+            [
+                row["company_name"],
+                row["year"],
+                round(roce, 2),
+                source,
+                round(difference, 2),
+                category,
+            ]
+        )
 
 log_df = pd.DataFrame(
     log,
@@ -97,14 +98,11 @@ log_df = pd.DataFrame(
         "Computed ROCE",
         "Source ROCE",
         "Difference",
-        "Category"
-    ]
+        "Category",
+    ],
 )
 
-log_df.to_csv(
-    "output/ratio_edge_cases.log",
-    index=False
-)
+log_df.to_csv("output/ratio_edge_cases.log", index=False)
 
 print(log_df.head())
 print()

@@ -35,4 +35,4 @@ def clean_nulls(df):
     """
     Replace blank strings with None.
     """
-    return df.replace(r'^\s*$', None, regex=True)
+    return df.replace(r"^\s*$", None, regex=True)

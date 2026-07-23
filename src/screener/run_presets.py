@@ -45,21 +45,11 @@ def main():
             filtered = engine.apply_filters()
 
             filtered = filtered.sort_values(
-                by=[
-                    "sector_relative_score",
-                    "composite_quality_score"
-                ],
-                ascending=[False, False]
+                by=["sector_relative_score", "composite_quality_score"],
+                ascending=[False, False],
             )
-            
 
-            
-
-            filtered.to_excel(
-                writer,
-                sheet_name=sheet_name[:31],
-                index=False
-            )
+            filtered.to_excel(writer, sheet_name=sheet_name[:31], index=False)
 
             print(
                 filtered[
@@ -70,7 +60,7 @@ def main():
                         "sector_relative_score",
                         "composite_quality_score",
                         "revenue_cagr_3yr",
-                        "free_cash_flow_cr"
+                        "free_cash_flow_cr",
                     ]
                 ]
             )
@@ -84,16 +74,10 @@ def main():
     # -----------------------------
 
     green_fill = PatternFill(
-        start_color="C6EFCE",
-        end_color="C6EFCE",
-        fill_type="solid"
+        start_color="C6EFCE", end_color="C6EFCE", fill_type="solid"
     )
 
-    red_fill = PatternFill(
-        start_color="FFC7CE",
-        end_color="FFC7CE",
-        fill_type="solid"
-    )
+    red_fill = PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid")
 
     wb = load_workbook(output_file)
 
@@ -110,64 +94,43 @@ def main():
 
             # ROE
             if "return_on_equity_pct" in headers:
-                cell = ws.cell(
-                    row=row,
-                    column=headers["return_on_equity_pct"]
-                )
+                cell = ws.cell(row=row, column=headers["return_on_equity_pct"])
                 if cell.value is not None:
                     cell.fill = green_fill if cell.value >= 15 else red_fill
 
             # Debt to Equity
             if "debt_to_equity" in headers:
-                cell = ws.cell(
-                    row=row,
-                    column=headers["debt_to_equity"]
-                )
+                cell = ws.cell(row=row, column=headers["debt_to_equity"])
                 if cell.value is not None:
                     cell.fill = green_fill if cell.value <= 2 else red_fill
 
             # Free Cash Flow
             if "free_cash_flow_cr" in headers:
-                cell = ws.cell(
-                    row=row,
-                    column=headers["free_cash_flow_cr"]
-                )
+                cell = ws.cell(row=row, column=headers["free_cash_flow_cr"])
                 if cell.value is not None:
                     cell.fill = green_fill if cell.value > 0 else red_fill
 
             # Revenue CAGR 5yr
             if "revenue_cagr_5yr" in headers:
-                cell = ws.cell(
-                    row=row,
-                    column=headers["revenue_cagr_5yr"]
-                )
+                cell = ws.cell(row=row, column=headers["revenue_cagr_5yr"])
                 if cell.value is not None:
                     cell.fill = green_fill if cell.value >= 10 else red_fill
 
             # PAT CAGR 5yr
             if "pat_cagr_5yr" in headers:
-                cell = ws.cell(
-                    row=row,
-                    column=headers["pat_cagr_5yr"]
-                )
+                cell = ws.cell(row=row, column=headers["pat_cagr_5yr"])
                 if cell.value is not None:
                     cell.fill = green_fill if cell.value >= 20 else red_fill
 
             # Dividend Payout
             if "dividend_payout_ratio_pct" in headers:
-                cell = ws.cell(
-                    row=row,
-                    column=headers["dividend_payout_ratio_pct"]
-                )
+                cell = ws.cell(row=row, column=headers["dividend_payout_ratio_pct"])
                 if cell.value is not None:
                     cell.fill = green_fill if cell.value <= 80 else red_fill
 
             # Revenue CAGR 3yr
             if "revenue_cagr_3yr" in headers:
-                cell = ws.cell(
-                    row=row,
-                    column=headers["revenue_cagr_3yr"]
-                )
+                cell = ws.cell(row=row, column=headers["revenue_cagr_3yr"])
                 if cell.value is not None:
                     cell.fill = green_fill if cell.value >= 10 else red_fill
 

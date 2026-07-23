@@ -1,6 +1,5 @@
-
-
 from src.etl.loader import *
+
 
 def test_companies_columns():
     df = load_companies()
@@ -17,7 +16,7 @@ def test_companies_columns():
         "face_value",
         "book_value",
         "roce_percentage",
-        "roe_percentage"
+        "roe_percentage",
     ]
 
     assert list(df.columns) == expected_columns

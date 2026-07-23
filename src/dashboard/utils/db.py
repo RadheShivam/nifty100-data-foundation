@@ -8,15 +8,13 @@ DB_PATH = "db/nifty100.db"
 # Companies
 # --------------------------------------------------
 
+
 @st.cache_data(ttl=600)
 def get_companies():
 
     conn = sqlite3.connect(DB_PATH)
 
-    df = pd.read_sql(
-        "SELECT * FROM companies",
-        conn
-    )
+    df = pd.read_sql("SELECT * FROM companies", conn)
 
     conn.close()
 
@@ -26,6 +24,7 @@ def get_companies():
 # --------------------------------------------------
 # Financial Ratios (Single Company)
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_ratios(ticker, year=None):
@@ -42,7 +41,7 @@ def get_ratios(ticker, year=None):
             AND year=?
             """,
             conn,
-            params=(ticker, year)
+            params=(ticker, year),
         )
 
     else:
@@ -55,7 +54,7 @@ def get_ratios(ticker, year=None):
             ORDER BY year
             """,
             conn,
-            params=(ticker,)
+            params=(ticker,),
         )
 
     conn.close()
@@ -66,6 +65,7 @@ def get_ratios(ticker, year=None):
 # --------------------------------------------------
 # Financial Ratios (All Companies)
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_ratios_by_year(year):
@@ -79,16 +79,18 @@ def get_ratios_by_year(year):
         WHERE year=?
         """,
         conn,
-        params=(year,)
+        params=(year,),
     )
 
     conn.close()
 
     return df
 
+
 # --------------------------------------------------
 # Profit & Loss
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_pl(ticker):
@@ -103,16 +105,18 @@ def get_pl(ticker):
         ORDER BY year
         """,
         conn,
-        params=(ticker,)
+        params=(ticker,),
     )
 
     conn.close()
 
     return df
 
+
 # --------------------------------------------------
 # Balance Sheet
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_bs(ticker):
@@ -127,7 +131,7 @@ def get_bs(ticker):
         ORDER BY year
         """,
         conn,
-        params=(ticker,)
+        params=(ticker,),
     )
 
     conn.close()
@@ -138,6 +142,7 @@ def get_bs(ticker):
 # --------------------------------------------------
 # Cash Flow
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_cf(ticker):
@@ -152,7 +157,7 @@ def get_cf(ticker):
         ORDER BY year
         """,
         conn,
-        params=(ticker,)
+        params=(ticker,),
     )
 
     conn.close()
@@ -164,6 +169,7 @@ def get_cf(ticker):
 # Sector Information
 # --------------------------------------------------
 
+
 @st.cache_data(ttl=600)
 def get_sectors():
 
@@ -174,7 +180,7 @@ def get_sectors():
         SELECT *
         FROM sectors
         """,
-        conn
+        conn,
     )
 
     conn.close()
@@ -185,6 +191,7 @@ def get_sectors():
 # --------------------------------------------------
 # Peer Groups
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_peers(group_name):
@@ -198,16 +205,18 @@ def get_peers(group_name):
         WHERE peer_group_name=?
         """,
         conn,
-        params=(group_name,)
+        params=(group_name,),
     )
 
     conn.close()
 
     return df
 
+
 # --------------------------------------------------
 # Valuation
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_valuation(ticker):
@@ -226,7 +235,7 @@ def get_valuation(ticker):
         WHERE id=?
         """,
         conn,
-        params=(ticker,)
+        params=(ticker,),
     )
 
     conn.close()
@@ -237,6 +246,7 @@ def get_valuation(ticker):
 # --------------------------------------------------
 # Latest Financial Ratio
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_latest_ratio(ticker):
@@ -250,7 +260,7 @@ def get_latest_ratio(ticker):
         WHERE company_id=?
         """,
         conn,
-        params=(ticker,)
+        params=(ticker,),
     )
 
     conn.close()
@@ -260,34 +270,15 @@ def get_latest_ratio(ticker):
 
     # Extract numeric year (works for Mar 2024, Sep 2024, TTM, etc.)
     df["sort_year"] = (
-        df["year"]
-        .astype(str)
-        .str.extract(r"(\d{4})")[0]
-        .fillna(0)
-        .astype(int)
+        df["year"].astype(str).str.extract(r"(\d{4})")[0].fillna(0).astype(int)
     )
 
     # Priority of reporting month
-    month_priority = {
-        "TTM": 5,
-        "Sep": 4,
-        "Jun": 3,
-        "Mar": 2,
-        "Dec": 1
-    }
+    month_priority = {"TTM": 5, "Sep": 4, "Jun": 3, "Mar": 2, "Dec": 1}
 
-    df["sort_month"] = (
-        df["year"]
-        .astype(str)
-        .str[:3]
-        .map(month_priority)
-        .fillna(0)
-    )
+    df["sort_month"] = df["year"].astype(str).str[:3].map(month_priority).fillna(0)
 
-    df = df.sort_values(
-        ["sort_year", "sort_month"],
-        ascending=False
-    )
+    df = df.sort_values(["sort_year", "sort_month"], ascending=False)
 
     return df.head(1)
 
@@ -295,6 +286,7 @@ def get_latest_ratio(ticker):
 # --------------------------------------------------
 # Pros & Cons
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_pros_cons(ticker):
@@ -310,7 +302,7 @@ def get_pros_cons(ticker):
         WHERE company_id=?
         """,
         conn,
-        params=(ticker,)
+        params=(ticker,),
     )
 
     conn.close()
@@ -321,6 +313,7 @@ def get_pros_cons(ticker):
 # --------------------------------------------------
 # Sector Information
 # --------------------------------------------------
+
 
 @st.cache_data(ttl=600)
 def get_sector_info(ticker):
@@ -337,7 +330,7 @@ def get_sector_info(ticker):
         WHERE company_id=?
         """,
         conn,
-        params=(ticker,)
+        params=(ticker,),
     )
 
     conn.close()

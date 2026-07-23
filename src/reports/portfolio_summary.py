@@ -25,35 +25,15 @@ warnings.filterwarnings("ignore")
 # PATHS
 # =====================================================
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        ".."
-    )
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
-DB_PATH = os.path.join(
-    PROJECT_ROOT,
-    "db",
-    "nifty100.db"
-)
+DB_PATH = os.path.join(PROJECT_ROOT, "db", "nifty100.db")
 
-OUTPUT_DIR = os.path.join(
-    PROJECT_ROOT,
-    "reports",
-    "portfolio"
-)
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, "reports", "portfolio")
 
-os.makedirs(
-    OUTPUT_DIR,
-    exist_ok=True
-)
+os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-PDF_PATH = os.path.join(
-    OUTPUT_DIR,
-    "portfolio_summary.pdf"
-)
+PDF_PATH = os.path.join(OUTPUT_DIR, "portfolio_summary.pdf")
 
 # =====================================================
 # DATABASE
@@ -61,15 +41,9 @@ PDF_PATH = os.path.join(
 
 conn = sqlite3.connect(DB_PATH)
 
-companies_df = pd.read_sql(
-    "SELECT * FROM companies",
-    conn
-)
+companies_df = pd.read_sql("SELECT * FROM companies", conn)
 
-ratios_df = pd.read_sql(
-    "SELECT * FROM financial_ratios",
-    conn
-)
+ratios_df = pd.read_sql("SELECT * FROM financial_ratios", conn)
 
 conn.close()
 
@@ -78,15 +52,10 @@ conn.close()
 # =====================================================
 
 ratios_df["year_num"] = (
-    ratios_df["year"]
-    .astype(str)
-    .str.extract(r"(\d{4})")[0]
-    .astype(float)
+    ratios_df["year"].astype(str).str.extract(r"(\d{4})")[0].astype(float)
 )
 
-companies_df = companies_df.sort_values(
-    "id"
-)
+companies_df = companies_df.sort_values("id")
 
 # =====================================================
 # STYLES
@@ -125,6 +94,7 @@ small_style = ParagraphStyle(
 # HELPERS
 # =====================================================
 
+
 def safe(v):
 
     if pd.isna(v):
@@ -134,6 +104,7 @@ def safe(v):
         return f"{v:.2f}"
 
     return str(v)
+
 
 print("=" * 50)
 print("Portfolio Summary Generator")
@@ -146,17 +117,13 @@ print(f"Ratios    : {len(ratios_df)}")
 # HELPER FUNCTIONS
 # =====================================================
 
+
 def latest_record(company_id):
     """
     Return latest financial ratio record for a company.
     """
 
-    df = (
-        ratios_df[
-            ratios_df["company_id"] == company_id
-        ]
-        .sort_values("year_num")
-    )
+    df = ratios_df[ratios_df["company_id"] == company_id].sort_values("year_num")
 
     if df.empty:
         return None
@@ -172,12 +139,7 @@ def trend_arrow(company_id, column):
     → Flat (within 2%)
     """
 
-    df = (
-        ratios_df[
-            ratios_df["company_id"] == company_id
-        ]
-        .sort_values("year_num")
-    )
+    df = ratios_df[ratios_df["company_id"] == company_id].sort_values("year_num")
 
     if len(df) < 2:
         return "→"
@@ -222,6 +184,7 @@ elements = []
 # GENERATOR
 # =====================================================
 
+
 def generate_portfolio_summary():
 
     global elements
@@ -241,145 +204,75 @@ def generate_portfolio_summary():
         # Header
 
         header = Table(
-            [[
-                Paragraph(
-                    f"<b>{company_name}</b><br/>{company_id}",
-                    title_style
-                )
-            ]],
-            colWidths=[18 * cm]
+            [[Paragraph(f"<b>{company_name}</b><br/>{company_id}", title_style)]],
+            colWidths=[18 * cm],
         )
 
         header.setStyle(
-            TableStyle([
-                ("BACKGROUND", (0, 0), (-1, -1), HexColor("#123A6D")),
-                ("TEXTCOLOR", (0, 0), (-1, -1), colors.white),
-                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
-                ("TOPPADDING", (0, 0), (-1, -1), 12),
-            ])
+            TableStyle(
+                [
+                    ("BACKGROUND", (0, 0), (-1, -1), HexColor("#123A6D")),
+                    ("TEXTCOLOR", (0, 0), (-1, -1), colors.white),
+                    ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
+                    ("TOPPADDING", (0, 0), (-1, -1), 12),
+                ]
+            )
         )
 
         elements.append(header)
 
-        elements.append(
-            Spacer(
-                1,
-                0.4 * cm
-            )
-        )
+        elements.append(Spacer(1, 0.4 * cm))
 
-        elements.append(
-            Paragraph(
-                f"<b>Sector:</b> {sector}",
-                normal_style
-            )
-        )
+        elements.append(Paragraph(f"<b>Sector:</b> {sector}", normal_style))
 
-        elements.append(
-            Spacer(
-                1,
-                0.4 * cm
-            )
-        )
+        elements.append(Spacer(1, 0.4 * cm))
 
         # =====================================================
         # TOP 6 KPIs
         # =====================================================
 
-        elements.append(
-            Paragraph(
-                "<b>Top 6 KPIs</b>",
-                heading_style
-            )
-        )
+        elements.append(Paragraph("<b>Top 6 KPIs</b>", heading_style))
 
-        elements.append(
-            Spacer(1, 0.2 * cm)
-        )
+        elements.append(Spacer(1, 0.2 * cm))
 
         kpi_table = [
-
             ["Metric", "Value"],
-
-            [
-                "ROE",
-                safe(ratio.get("return_on_equity_pct"))
-            ],
-
-            [
-                "ROCE",
-                safe(ratio.get("roce_percentage"))
-            ],
-
-            [
-                "Debt / Equity",
-                safe(ratio.get("debt_to_equity"))
-            ],
-
-            [
-                "EPS",
-                safe(ratio.get("earnings_per_share"))
-            ],
-
-            [
-                "P/E Ratio",
-                safe(ratio.get("price_to_earnings"))
-            ],
-
-            [
-                "Free Cash Flow",
-                safe(ratio.get("free_cash_flow_cr"))
-            ]
-
+            ["ROE", safe(ratio.get("return_on_equity_pct"))],
+            ["ROCE", safe(ratio.get("roce_percentage"))],
+            ["Debt / Equity", safe(ratio.get("debt_to_equity"))],
+            ["EPS", safe(ratio.get("earnings_per_share"))],
+            ["P/E Ratio", safe(ratio.get("price_to_earnings"))],
+            ["Free Cash Flow", safe(ratio.get("free_cash_flow_cr"))],
         ]
 
-        table = Table(
-            kpi_table,
-            colWidths=[8 * cm, 8 * cm]
-        )
+        table = Table(kpi_table, colWidths=[8 * cm, 8 * cm])
 
         table.setStyle(
-            TableStyle([
-
-                ("BACKGROUND", (0, 0), (-1, 0), HexColor("#123A6D")),
-                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-
-                ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
-
-                ("BACKGROUND", (0, 1), (-1, -1), colors.whitesmoke),
-
-                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
-                ("TOPPADDING", (0, 0), (-1, -1), 8),
-
-            ])
+            TableStyle(
+                [
+                    ("BACKGROUND", (0, 0), (-1, 0), HexColor("#123A6D")),
+                    ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                    ("GRID", (0, 0), (-1, -1), 0.5, colors.grey),
+                    ("BACKGROUND", (0, 1), (-1, -1), colors.whitesmoke),
+                    ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+                    ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ]
+            )
         )
 
         elements.append(table)
 
-        elements.append(
-            Spacer(
-                1,
-                0.5 * cm
-            )
-        )
+        elements.append(Spacer(1, 0.5 * cm))
 
         # =====================================================
         # KPI Trends
         # =====================================================
 
-        elements.append(
-            Paragraph(
-                "<b>KPI Trends</b>",
-                heading_style
-            )
-        )
+        elements.append(Paragraph("<b>KPI Trends</b>", heading_style))
 
-        elements.append(
-            Spacer(1, 0.2 * cm)
-        )
+        elements.append(Spacer(1, 0.2 * cm))
 
         trend_data = [
             ["Metric", "Trend"],
@@ -388,30 +281,30 @@ def generate_portfolio_summary():
             ["Debt / Equity", trend_arrow(company_id, "debt_to_equity")],
             ["EPS", trend_arrow(company_id, "earnings_per_share")],
             ["P/E Ratio", trend_arrow(company_id, "price_to_earnings")],
-            ["Free Cash Flow", trend_arrow(company_id, "free_cash_flow_cr")]
+            ["Free Cash Flow", trend_arrow(company_id, "free_cash_flow_cr")],
         ]
 
-        trend_table = Table(
-            trend_data,
-            colWidths=[8 * cm, 8 * cm]
-        )
+        trend_table = Table(trend_data, colWidths=[8 * cm, 8 * cm])
 
         trend_table.setStyle(
-            TableStyle([
-                ("BACKGROUND", (0, 0), (-1, 0), HexColor("#0A2E5C")),
-                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-                ("GRID", (0, 0), (-1, -1), 0.4, colors.grey),
-                ("BACKGROUND", (0, 1), (-1, -1), colors.beige),
-                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-                ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
-                ("TOPPADDING", (0, 0), (-1, -1), 8),
-            ])
+            TableStyle(
+                [
+                    ("BACKGROUND", (0, 0), (-1, 0), HexColor("#0A2E5C")),
+                    ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                    ("GRID", (0, 0), (-1, -1), 0.4, colors.grey),
+                    ("BACKGROUND", (0, 1), (-1, -1), colors.beige),
+                    ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                    ("BOTTOMPADDING", (0, 0), (-1, -1), 8),
+                    ("TOPPADDING", (0, 0), (-1, -1), 8),
+                ]
+            )
         )
 
         elements.append(trend_table)
 
         # New page for next company
         elements.append(PageBreak())
+
 
 # =====================================================
 # MAIN

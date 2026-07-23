@@ -23,7 +23,7 @@ def create_validation_summary():
         "documents_invalid_urls.csv",
         "profitandloss_year_coverage_failures.csv",
         "balancesheet_year_coverage_failures.csv",
-        "cashflow_year_coverage_failures.csv"
+        "cashflow_year_coverage_failures.csv",
     ]
 
     data = []
@@ -34,15 +34,8 @@ def create_validation_summary():
         if os.path.exists(path):
             df = pd.read_csv(path)
 
-            data.append({
-                "file_name": file,
-                "records": len(df),
-                "severity": "High"
-            })
+            data.append({"file_name": file, "records": len(df), "severity": "High"})
 
-    pd.DataFrame(data).to_csv(
-        "output/validation_failures.csv",
-        index=False
-    )
+    pd.DataFrame(data).to_csv("output/validation_failures.csv", index=False)
 
     print("✅ validation_failures.csv created")

@@ -11,9 +11,7 @@ import plotly.graph_objects as go
 # Add Project Root
 # -------------------------------------------------
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../..")
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -42,9 +40,7 @@ st.set_page_config(
 
 st.title("📊 Peer Comparison")
 
-st.caption(
-    "Compare a company with other companies in the same peer group."
-)
+st.caption("Compare a company with other companies in the same peer group.")
 
 # -------------------------------------------------
 # Load Data
@@ -123,9 +119,7 @@ peer_df[numeric_cols] = peer_df[numeric_cols].fillna(0)
 # Preview
 # -------------------------------------------------
 
-st.success(
-    f"{len(peer_df)} companies loaded successfully."
-)
+st.success(f"{len(peer_df)} companies loaded successfully.")
 
 st.dataframe(
     peer_df.head(),
@@ -141,49 +135,29 @@ st.markdown("---")
 
 st.subheader("🏢 Select Peer Group")
 
-peer_groups = sorted(
-    peer_df["broad_sector"]
-    .dropna()
-    .unique()
-)
+peer_groups = sorted(peer_df["broad_sector"].dropna().unique())
 
-selected_group = st.selectbox(
-    "Choose Peer Group",
-    peer_groups
-)
+selected_group = st.selectbox("Choose Peer Group", peer_groups)
 
 # -------------------------------------------------
 # Filter Companies in Selected Group
 # -------------------------------------------------
 
-group_df = peer_df[
-    peer_df["broad_sector"] == selected_group
-]
+group_df = peer_df[peer_df["broad_sector"] == selected_group]
 
-st.success(
-    f"{len(group_df)} companies found in {selected_group}"
-)
+st.success(f"{len(group_df)} companies found in {selected_group}")
 
 # -------------------------------------------------
 # Select Company
 # -------------------------------------------------
 
-company_options = (
-    group_df["company_id"]
-    + " - "
-    + group_df["company_name"]
-).tolist()
+company_options = (group_df["company_id"] + " - " + group_df["company_name"]).tolist()
 
-selected_company = st.selectbox(
-    "Choose Company",
-    company_options
-)
+selected_company = st.selectbox("Choose Company", company_options)
 
 selected_ticker = selected_company.split(" - ")[0]
 
-company_data = group_df[
-    group_df["company_id"] == selected_ticker
-].iloc[0]
+company_data = group_df[group_df["company_id"] == selected_ticker].iloc[0]
 
 # -------------------------------------------------
 # Company Card
@@ -202,26 +176,13 @@ with col1:
     st.write(f"**Sub Sector:** {company_data['sub_sector']}")
 
 with col2:
-    st.metric(
-        "ROE",
-        f"{company_data['return_on_equity_pct']:.2f}%"
-    )
+    st.metric("ROE", f"{company_data['return_on_equity_pct']:.2f}%")
 
-    st.metric(
-        "ROCE",
-        f"{company_data['roce_percentage']:.2f}%"
-    )
+    st.metric("ROCE", f"{company_data['roce_percentage']:.2f}%")
 
-    st.metric(
-        "PE",
-        f"{company_data['pe_ratio']:.2f}"
-    )
+    st.metric("PE", f"{company_data['pe_ratio']:.2f}")
 
-    st.metric(
-        "PB",
-        f"{company_data['pb_ratio']:.2f}"
-    )
-
+    st.metric("PB", f"{company_data['pb_ratio']:.2f}")
 
 
 # -------------------------------------------------
@@ -254,15 +215,9 @@ labels = [
     "ICR",
 ]
 
-company_values = [
-    float(company_data[m])
-    for m in metrics
-]
+company_values = [float(company_data[m]) for m in metrics]
 
-peer_values = [
-    float(group_df[m].mean())
-    for m in metrics
-]
+peer_values = [float(group_df[m].mean()) for m in metrics]
 
 # Close the radar chart
 company_values.append(company_values[0])
@@ -328,15 +283,9 @@ comparison_columns = [
     "pb_ratio",
 ]
 
-available_columns = [
-    col
-    for col in comparison_columns
-    if col in group_df.columns
-]
+available_columns = [col for col in comparison_columns if col in group_df.columns]
 
-comparison_df = group_df[
-    available_columns
-].copy()
+comparison_df = group_df[available_columns].copy()
 
 comparison_df = comparison_df.sort_values(
     "return_on_equity_pct",
@@ -349,12 +298,11 @@ comparison_df = comparison_df.round(2)
 # Highlight Selected Company
 # -------------------------------------------------
 
+
 def highlight_company(row):
 
     if row["company_id"] == selected_ticker:
-        return [
-            "background-color:#0f766e;color:white;font-weight:bold"
-        ] * len(row)
+        return ["background-color:#0f766e;color:white;font-weight:bold"] * len(row)
 
     return [""] * len(row)
 
@@ -387,28 +335,16 @@ avg_pb = group_df["pb_ratio"].mean()
 c1, c2, c3, c4 = st.columns(4)
 
 with c1:
-    st.metric(
-        "Peer Avg ROE",
-        f"{avg_roe:.2f}%"
-    )
+    st.metric("Peer Avg ROE", f"{avg_roe:.2f}%")
 
 with c2:
-    st.metric(
-        "Peer Avg ROCE",
-        f"{avg_roce:.2f}%"
-    )
+    st.metric("Peer Avg ROCE", f"{avg_roce:.2f}%")
 
 with c3:
-    st.metric(
-        "Peer Avg PE",
-        f"{avg_pe:.2f}"
-    )
+    st.metric("Peer Avg PE", f"{avg_pe:.2f}")
 
 with c4:
-    st.metric(
-        "Peer Avg PB",
-        f"{avg_pb:.2f}"
-    )
+    st.metric("Peer Avg PB", f"{avg_pb:.2f}")
 
 # -------------------------------------------------
 # Best Company in Peer Group
@@ -418,17 +354,13 @@ st.markdown("---")
 
 st.subheader("🏆 Best Company in Peer Group")
 
-best_company = group_df.sort_values(
-    "composite_quality_score",
-    ascending=False
-).iloc[0]
+best_company = group_df.sort_values("composite_quality_score", ascending=False).iloc[0]
 
 col1, col2 = st.columns([3, 2])
 
 with col1:
 
-    st.success(
-        f"""
+    st.success(f"""
 ### {best_company['company_name']}
 
 **Ticker:** {best_company['company_id']}
@@ -436,29 +368,18 @@ with col1:
 **Sector:** {best_company['broad_sector']}
 
 **Sub Sector:** {best_company['sub_sector']}
-"""
-    )
+""")
 
 with col2:
 
-    st.metric(
-        "Quality Score",
-        f"{best_company['composite_quality_score']:.2f}"
-    )
+    st.metric("Quality Score", f"{best_company['composite_quality_score']:.2f}")
 
-    st.metric(
-        "ROE",
-        f"{best_company['return_on_equity_pct']:.2f}%"
-    )
+    st.metric("ROE", f"{best_company['return_on_equity_pct']:.2f}%")
 
-    st.metric(
-        "ROCE",
-        f"{best_company['roce_percentage']:.2f}%"
-    )
+    st.metric("ROCE", f"{best_company['roce_percentage']:.2f}%")
 
 # -------------------------------------------------
 # Footer
 # -------------------------------------------------
 
 st.markdown("---")
-

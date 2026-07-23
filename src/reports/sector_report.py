@@ -23,32 +23,13 @@ warnings.filterwarnings("ignore")
 # PATHS
 # ======================================================
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        ".."
-    )
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
-DB_PATH = os.path.join(
-    PROJECT_ROOT,
-    "db",
-    "nifty100.db"
-)
+DB_PATH = os.path.join(PROJECT_ROOT, "db", "nifty100.db")
 
-SECTOR_FILE = os.path.join(
-    PROJECT_ROOT,
-    "data",
-    "supplementry",
-    "sectors.xlsx"
-)
+SECTOR_FILE = os.path.join(PROJECT_ROOT, "data", "supplementry", "sectors.xlsx")
 
-OUTPUT_DIR = os.path.join(
-    PROJECT_ROOT,
-    "reports",
-    "sector"
-)
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, "reports", "sector")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -58,15 +39,9 @@ os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 conn = sqlite3.connect(DB_PATH)
 
-companies_df = pd.read_sql(
-    "SELECT * FROM companies",
-    conn
-)
+companies_df = pd.read_sql("SELECT * FROM companies", conn)
 
-ratios_df = pd.read_sql(
-    "SELECT * FROM financial_ratios",
-    conn
-)
+ratios_df = pd.read_sql("SELECT * FROM financial_ratios", conn)
 
 conn.close()
 
@@ -81,45 +56,26 @@ sectors_df = pd.read_excel(SECTOR_FILE)
 # ======================================================
 
 ratios_df["year_num"] = (
-    ratios_df["year"]
-    .astype(str)
-    .str.extract(r"(\d{4})")[0]
-    .astype(float)
+    ratios_df["year"].astype(str).str.extract(r"(\d{4})")[0].astype(float)
 )
 
-latest_ratios = (
-    ratios_df
-    .sort_values("year_num")
-    .groupby("company_id")
-    .tail(1)
-)
+latest_ratios = ratios_df.sort_values("year_num").groupby("company_id").tail(1)
 
 # ======================================================
 # MERGE DATA
 # ======================================================
 
-sector_df = (
-    companies_df
-    .merge(
-        sectors_df[
-            [
-                "company_id",
-                "broad_sector",
-                "sub_sector",
-                "market_cap_category"
-            ]
-        ],
-        left_on="id",
-        right_on="company_id",
-        how="left"
-    )
-    .merge(
-        latest_ratios,
-        left_on="id",
-        right_on="company_id",
-        how="left",
-        suffixes=("_company", "")
-    )
+sector_df = companies_df.merge(
+    sectors_df[["company_id", "broad_sector", "sub_sector", "market_cap_category"]],
+    left_on="id",
+    right_on="company_id",
+    how="left",
+).merge(
+    latest_ratios,
+    left_on="id",
+    right_on="company_id",
+    how="left",
+    suffixes=("_company", ""),
 )
 
 # Remove duplicate company_id column
@@ -136,14 +92,11 @@ title_style = ParagraphStyle(
     parent=styles["Heading1"],
     alignment=TA_CENTER,
     textColor=colors.white,
-    fontSize=18
+    fontSize=18,
 )
 
 heading_style = ParagraphStyle(
-    "Heading",
-    parent=styles["Heading2"],
-    textColor=HexColor("#123A6D"),
-    fontSize=14
+    "Heading", parent=styles["Heading2"], textColor=HexColor("#123A6D"), fontSize=14
 )
 
 normal_style = styles["BodyText"]
@@ -170,6 +123,7 @@ print(sector_df.columns.tolist())
 # HELPER FUNCTIONS
 # ======================================================
 
+
 def safe(value):
     if pd.isna(value):
         return "N/A"
@@ -182,17 +136,12 @@ def safe(value):
 
 def build_sector_report(sector_name):
 
-    df = sector_df[
-        sector_df["broad_sector"] == sector_name
-    ].copy()
+    df = sector_df[sector_df["broad_sector"] == sector_name].copy()
 
     if df.empty:
         return
 
-    pdf_path = os.path.join(
-        OUTPUT_DIR,
-        f"{sector_name.replace(' ', '_')}_report.pdf"
-    )
+    pdf_path = os.path.join(OUTPUT_DIR, f"{sector_name.replace(' ', '_')}_report.pdf")
 
     doc = SimpleDocTemplate(
         pdf_path,
@@ -215,13 +164,15 @@ def build_sector_report(sector_name):
     )
 
     header.setStyle(
-        TableStyle([
-            ("BACKGROUND", (0, 0), (-1, -1), HexColor("#123A6D")),
-            ("TEXTCOLOR", (0, 0), (-1, -1), colors.white),
-            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-            ("TOPPADDING", (0, 0), (-1, -1), 12),
-            ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
-        ])
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, -1), HexColor("#123A6D")),
+                ("TEXTCOLOR", (0, 0), (-1, -1), colors.white),
+                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                ("TOPPADDING", (0, 0), (-1, -1), 12),
+                ("BOTTOMPADDING", (0, 0), (-1, -1), 12),
+            ]
+        )
     )
 
     elements.append(header)
@@ -231,12 +182,7 @@ def build_sector_report(sector_name):
     # SUMMARY
     # ======================================================
 
-    elements.append(
-        Paragraph(
-            "<b>Sector Summary</b>",
-            heading_style
-        )
-    )
+    elements.append(Paragraph("<b>Sector Summary</b>", heading_style))
 
     summary_data = [
         ["Metric", "Value"],
@@ -254,14 +200,16 @@ def build_sector_report(sector_name):
     )
 
     summary_table.setStyle(
-        TableStyle([
-            ("BACKGROUND", (0, 0), (-1, 0), HexColor("#123A6D")),
-            ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-            ("GRID", (0, 0), (-1, -1), 0.3, colors.grey),
-            ("BACKGROUND", (0, 1), (-1, -1), colors.whitesmoke),
-            ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-        ])
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), HexColor("#123A6D")),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("GRID", (0, 0), (-1, -1), 0.3, colors.grey),
+                ("BACKGROUND", (0, 1), (-1, -1), colors.whitesmoke),
+                ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ]
+        )
     )
 
     elements.append(summary_table)
@@ -271,38 +219,27 @@ def build_sector_report(sector_name):
     # COMPANY TABLE
     # ======================================================
 
-    elements.append(
-        Paragraph(
-            "<b>Company Metrics</b>",
-            heading_style
-        )
-    )
+    elements.append(Paragraph("<b>Company Metrics</b>", heading_style))
 
     elements.append(Spacer(1, 0.2 * cm))
 
-    company_data = [[
-        "Company",
-        "ROE",
-        "ROCE",
-        "D/E",
-        "EPS",
-        "FCF",
-        "Quality"
-    ]]
+    company_data = [["Company", "ROE", "ROCE", "D/E", "EPS", "FCF", "Quality"]]
 
     df = df.sort_values("company_name")
 
     for _, row in df.iterrows():
 
-        company_data.append([
-            row["company_name"],
-            safe(row["return_on_equity_pct"]),
-            safe(row["roce_percentage"]),
-            safe(row["debt_to_equity"]),
-            safe(row["earnings_per_share"]),
-            safe(row["free_cash_flow_cr"]),
-            safe(row["composite_quality_score"]),
-        ])
+        company_data.append(
+            [
+                row["company_name"],
+                safe(row["return_on_equity_pct"]),
+                safe(row["roce_percentage"]),
+                safe(row["debt_to_equity"]),
+                safe(row["earnings_per_share"]),
+                safe(row["free_cash_flow_cr"]),
+                safe(row["composite_quality_score"]),
+            ]
+        )
 
     company_table = Table(
         company_data,
@@ -319,15 +256,17 @@ def build_sector_report(sector_name):
     )
 
     company_table.setStyle(
-        TableStyle([
-            ("BACKGROUND", (0, 0), (-1, 0), HexColor("#123A6D")),
-            ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
-            ("GRID", (0, 0), (-1, -1), 0.3, colors.grey),
-            ("BACKGROUND", (0, 1), (-1, -1), colors.whitesmoke),
-            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
-            ("FONTSIZE", (0, 0), (-1, -1), 8),
-            ("ALIGN", (1, 1), (-1, -1), "CENTER"),
-        ])
+        TableStyle(
+            [
+                ("BACKGROUND", (0, 0), (-1, 0), HexColor("#123A6D")),
+                ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+                ("GRID", (0, 0), (-1, -1), 0.3, colors.grey),
+                ("BACKGROUND", (0, 1), (-1, -1), colors.whitesmoke),
+                ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+                ("FONTSIZE", (0, 0), (-1, -1), 8),
+                ("ALIGN", (1, 1), (-1, -1), "CENTER"),
+            ]
+        )
     )
 
     elements.append(company_table)
@@ -345,11 +284,7 @@ if __name__ == "__main__":
 
     print("\nGenerating Sector Reports...\n")
 
-    sectors = sorted(
-        sector_df["broad_sector"]
-        .dropna()
-        .unique()
-    )
+    sectors = sorted(sector_df["broad_sector"].dropna().unique())
 
     for sector in sectors:
         build_sector_report(sector)

@@ -20,10 +20,7 @@ print("Peer Groups:", peer_df.shape)
 
 conn = sqlite3.connect("db/nifty100.db")
 
-ratio_df = pd.read_sql(
-    "SELECT * FROM financial_ratios",
-    conn
-)
+ratio_df = pd.read_sql("SELECT * FROM financial_ratios", conn)
 
 conn.close()
 
@@ -35,10 +32,7 @@ print("Financial Ratios:", ratio_df.shape)
 
 conn = sqlite3.connect("db/nifty100.db")
 
-percentile_df = pd.read_sql(
-    "SELECT * FROM peer_percentiles",
-    conn
-)
+percentile_df = pd.read_sql("SELECT * FROM peer_percentiles", conn)
 
 conn.close()
 
@@ -49,27 +43,13 @@ print("Peer Percentiles:", percentile_df.shape)
 # -----------------------------
 
 report_df = ratio_df.merge(
-
-    peer_df[
-        [
-            "company_id",
-            "peer_group_name",
-            "is_benchmark"
-        ]
-    ],
-
+    peer_df[["company_id", "peer_group_name", "is_benchmark"]],
     on="company_id",
-
-    how="left"
-
+    how="left",
 )
 
-report_df["peer_group_name"] = (
-
-    report_df["peer_group_name"]
-
-    .fillna("No peer group assigned")
-
+report_df["peer_group_name"] = report_df["peer_group_name"].fillna(
+    "No peer group assigned"
 )
 
 print(report_df.head())
@@ -87,11 +67,9 @@ wb.remove(wb.active)
 # -----------------------------
 
 peer_groups = sorted(
-
-    report_df[
-        report_df["peer_group_name"] != "No peer group assigned"
-    ]["peer_group_name"].unique()
-
+    report_df[report_df["peer_group_name"] != "No peer group assigned"][
+        "peer_group_name"
+    ].unique()
 )
 
 print("\nPeer Groups Found:")
@@ -103,9 +81,7 @@ print("\nTotal Peer Groups:", len(peer_groups))
 
 for group in peer_groups:
 
-    wb.create_sheet(
-        title=group[:31]
-    )
+    wb.create_sheet(title=group[:31])
 
 print("\nWorkbook Sheets:")
 
@@ -116,33 +92,25 @@ print(wb.sheetnames)
 # -----------------------------
 
 report_columns = [
-
     "company_id",
     "year",
-
     "return_on_equity_pct",
     "roce_percentage",
     "net_profit_margin_pct",
     "debt_to_equity",
     "interest_coverage",
     "asset_turnover",
-
     "free_cash_flow_cr",
     "cash_from_operations_cr",
-
     "earnings_per_share",
     "book_value_per_share",
     "dividend_payout_ratio_pct",
-
     "revenue_cagr_5yr",
     "pat_cagr_5yr",
     "eps_cagr_5yr",
-
     "composite_quality_score",
     "sector_relative_score",
-
     # Percentile Columns
-
     "ROE",
     "ROCE",
     "Net Profit Margin",
@@ -151,31 +119,16 @@ report_columns = [
     "Asset Turnover",
     "Revenue CAGR 5Y",
     "PAT CAGR 5Y",
-    "EPS CAGR 5Y"
-
+    "EPS CAGR 5Y",
 ]
 
 # -----------------------------
 # Pivot Percentile Table
 # -----------------------------
 
-percentile_pivot = (
-
-    percentile_df
-
-    .pivot_table(
-
-        index=["company_id", "year"],
-
-        columns="metric",
-
-        values="percentile_rank"
-
-    )
-
-    .reset_index()
-
-)
+percentile_pivot = percentile_df.pivot_table(
+    index=["company_id", "year"], columns="metric", values="percentile_rank"
+).reset_index()
 
 print("\nPercentile Pivot Shape:")
 
@@ -187,18 +140,7 @@ print(percentile_pivot.head())
 # Merge Percentiles
 # -----------------------------
 
-report_df = report_df.merge(
-
-    percentile_pivot,
-
-    on=[
-        "company_id",
-        "year"
-    ],
-
-    how="left"
-
-)
+report_df = report_df.merge(percentile_pivot, on=["company_id", "year"], how="left")
 
 print("\nReport Shape After Merge:")
 
@@ -213,9 +155,7 @@ for group in peer_groups:
 
     ws = wb[group[:31]]
 
-    group_df = report_df[
-        report_df["peer_group_name"] == group
-    ].copy()
+    group_df = report_df[report_df["peer_group_name"] == group].copy()
 
     headers = report_columns + ["Benchmark"]
 
@@ -223,10 +163,7 @@ for group in peer_groups:
 
     for col_num, header in enumerate(headers, start=1):
 
-        cell = ws.cell(
-            row=1,
-            column=col_num
-        )
+        cell = ws.cell(row=1, column=col_num)
 
         cell.value = header
         cell.font = Font(bold=True)
@@ -239,15 +176,9 @@ for group in peer_groups:
 
             if column in row.index:
 
-                ws.cell(
-                    row=row_num,
-                    column=col_num
-                ).value = row[column]
+                ws.cell(row=row_num, column=col_num).value = row[column]
 
-        ws.cell(
-            row=row_num,
-            column=len(report_columns) + 1
-        ).value = row["is_benchmark"]
+        ws.cell(row=row_num, column=len(report_columns) + 1).value = row["is_benchmark"]
 
 print("✅ Worksheets populated.")
 
@@ -255,32 +186,19 @@ print("✅ Worksheets populated.")
 # Cell Colors
 # -----------------------------
 
-green_fill = PatternFill(
-    fill_type="solid",
-    start_color="90EE90"
-)
+green_fill = PatternFill(fill_type="solid", start_color="90EE90")
 
-yellow_fill = PatternFill(
-    fill_type="solid",
-    start_color="FFF59D"
-)
+yellow_fill = PatternFill(fill_type="solid", start_color="FFF59D")
 
-red_fill = PatternFill(
-    fill_type="solid",
-    start_color="FF9999"
-)
+red_fill = PatternFill(fill_type="solid", start_color="FF9999")
 
-gold_fill = PatternFill(
-    fill_type="solid",
-    start_color="FFD966"
-)
+gold_fill = PatternFill(fill_type="solid", start_color="FFD966")
 
 # -----------------------------
 # Percentile Columns
 # -----------------------------
 
 percentile_columns = [
-
     "ROE",
     "ROCE",
     "Net Profit Margin",
@@ -289,8 +207,7 @@ percentile_columns = [
     "Asset Turnover",
     "Revenue CAGR 5Y",
     "PAT CAGR 5Y",
-    "EPS CAGR 5Y"
-
+    "EPS CAGR 5Y",
 ]
 
 # -----------------------------
@@ -299,10 +216,7 @@ percentile_columns = [
 
 for ws in wb.worksheets:
 
-    header = [
-        cell.value
-        for cell in ws[1]
-    ]
+    header = [cell.value for cell in ws[1]]
 
     benchmark_col = header.index("Benchmark") + 1
 
@@ -312,9 +226,7 @@ for ws in wb.worksheets:
 
         if col in header:
 
-            percentile_indexes.append(
-                header.index(col) + 1
-            )
+            percentile_indexes.append(header.index(col) + 1)
 
     for row in range(2, ws.max_row + 1):
 
@@ -324,43 +236,28 @@ for ws in wb.worksheets:
 
             for col in range(1, ws.max_column + 1):
 
-                ws.cell(
-                    row,
-                    col
-                ).fill = gold_fill
+                ws.cell(row, col).fill = gold_fill
 
         # Percentile Colors
 
         for col in percentile_indexes:
 
-            value = ws.cell(
-                row,
-                col
-            ).value
+            value = ws.cell(row, col).value
 
             if value is None:
                 continue
 
             if value >= 75:
 
-                ws.cell(
-                    row,
-                    col
-                ).fill = green_fill
+                ws.cell(row, col).fill = green_fill
 
             elif value <= 25:
 
-                ws.cell(
-                    row,
-                    col
-                ).fill = red_fill
+                ws.cell(row, col).fill = red_fill
 
             else:
 
-                ws.cell(
-                    row,
-                    col
-                ).fill = yellow_fill
+                ws.cell(row, col).fill = yellow_fill
 
 # -----------------------------
 # Median Row
@@ -370,20 +267,11 @@ for ws in wb.worksheets:
 
     median_row = ws.max_row + 2
 
-    ws.cell(
-        median_row,
-        1
-    ).value = "Median"
+    ws.cell(median_row, 1).value = "Median"
 
-    ws.cell(
-        median_row,
-        1
-    ).font = Font(bold=True)
+    ws.cell(median_row, 1).font = Font(bold=True)
 
-    headers = [
-        cell.value
-        for cell in ws[1]
-    ]
+    headers = [cell.value for cell in ws[1]]
 
     for col in range(2, ws.max_column):
 
@@ -391,10 +279,7 @@ for ws in wb.worksheets:
 
         for row in range(2, median_row - 1):
 
-            value = ws.cell(
-                row,
-                col
-            ).value
+            value = ws.cell(row, col).value
 
             if isinstance(value, (int, float)):
 
@@ -402,13 +287,7 @@ for ws in wb.worksheets:
 
         if values:
 
-            ws.cell(
-                median_row,
-                col
-            ).value = round(
-                pd.Series(values).median(),
-                2
-            )
+            ws.cell(median_row, col).value = round(pd.Series(values).median(), 2)
 
 print("✅ Median rows added.")
 
@@ -418,15 +297,9 @@ print("✅ Median rows added.")
 
 import os
 
-os.makedirs(
-    "output",
-    exist_ok=True
-)
+os.makedirs("output", exist_ok=True)
 
-output_file = os.path.join(
-    "output",
-    "peer_comparison.xlsx"
-)
+output_file = os.path.join("output", "peer_comparison.xlsx")
 
 wb.save(output_file)
 

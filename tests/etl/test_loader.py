@@ -13,10 +13,10 @@ from src.etl.loader import (
     load_stock_prices,
 )
 
-
 # ======================================
 # Companies
 # ======================================
+
 
 def test_load_companies():
     df = load_companies()
@@ -29,6 +29,7 @@ def test_load_companies():
 # ======================================
 # Profit & Loss
 # ======================================
+
 
 def test_load_profitandloss():
     df = load_profitandloss()
@@ -44,6 +45,7 @@ def test_load_profitandloss():
 # Balance Sheet
 # ======================================
 
+
 def test_load_balancesheet():
     df = load_balancesheet()
 
@@ -54,6 +56,7 @@ def test_load_balancesheet():
 # ======================================
 # Cash Flow
 # ======================================
+
 
 def test_load_cashflow():
     df = load_cashflow()
@@ -66,6 +69,7 @@ def test_load_cashflow():
 # Analysis
 # ======================================
 
+
 def test_load_analysis():
     df = load_analysis()
 
@@ -76,6 +80,7 @@ def test_load_analysis():
 # ======================================
 # Documents
 # ======================================
+
 
 def test_load_documents():
     df = load_documents()
@@ -88,6 +93,7 @@ def test_load_documents():
 # Pros & Cons
 # ======================================
 
+
 def test_load_prosandcons():
     df = load_prosandcons()
 
@@ -95,12 +101,10 @@ def test_load_prosandcons():
     assert len(df) > 0
 
 
-
-
-
 # ======================================
 # Peer Groups
 # ======================================
+
 
 def test_load_peer_groups():
     df = load_peer_groups()
@@ -113,6 +117,7 @@ def test_load_peer_groups():
 # Sectors
 # ======================================
 
+
 def test_load_sectors():
     df = load_sectors()
 
@@ -123,6 +128,7 @@ def test_load_sectors():
 # ======================================
 # Stock Prices
 # ======================================
+
 
 def test_load_stock_prices():
     df = load_stock_prices()

@@ -10,9 +10,7 @@ import pandas as pd
 # Add Project Root
 # -------------------------------------------------
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../..")
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -31,9 +29,7 @@ import sqlite3
 
 st.title("📑 Annual Reports")
 
-st.caption(
-    "Browse annual reports for every company."
-)
+st.caption("Browse annual reports for every company.")
 
 # -------------------------------------------------
 # Load Companies
@@ -41,18 +37,9 @@ st.caption(
 
 companies = get_companies()
 
-company_options = (
-    companies["id"]
-    + " - "
-    + companies["company_name"]
-)
+company_options = companies["id"] + " - " + companies["company_name"]
 
-selected = st.selectbox(
-
-    "🔍 Select Company",
-
-    company_options
-)
+selected = st.selectbox("🔍 Select Company", company_options)
 
 ticker = selected.split(" - ")[0]
 
@@ -63,17 +50,14 @@ ticker = selected.split(" - ")[0]
 conn = sqlite3.connect("db/nifty100.db")
 
 reports = pd.read_sql(
-
     """
     SELECT *
     FROM documents
     WHERE company_id=?
     ORDER BY year DESC
     """,
-
     conn,
-
-    params=(ticker,)
+    params=(ticker,),
 )
 
 conn.close()
@@ -84,9 +68,7 @@ if reports.empty:
 
     st.stop()
 
-st.success(
-    f"{len(reports)} reports found."
-)
+st.success(f"{len(reports)} reports found.")
 
 
 # -------------------------------------------------
@@ -121,18 +103,11 @@ for _, row in reports.iterrows():
         try:
 
             response = requests.get(
-                url,
-                headers=headers,
-                timeout=8,
-                allow_redirects=True,
-                stream=True
+                url, headers=headers, timeout=8, allow_redirects=True, stream=True
             )
 
             if response.status_code == 200:
-                st.link_button(
-                    "📥 Open Report",
-                    url
-                )
+                st.link_button("📥 Open Report", url)
             else:
                 st.error("🔴 Report Unavailable")
 

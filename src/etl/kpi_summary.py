@@ -14,7 +14,7 @@ def generate_kpi_summary():
         "Total Analysis Records": "analysis",
         "Total Documents": "documents",
         "Total Pros & Cons Records": "prosandcons",
-        "Total Sectors": "sectors"
+        "Total Sectors": "sectors",
     }
 
     data = []
@@ -23,17 +23,11 @@ def generate_kpi_summary():
         cursor.execute(f"SELECT COUNT(*) FROM {table}")
         count = cursor.fetchone()[0]
 
-        data.append({
-            "KPI": kpi,
-            "Value": count
-        })
+        data.append({"KPI": kpi, "Value": count})
 
     kpi_df = pd.DataFrame(data)
 
-    kpi_df.to_csv(
-        "output/kpi_summary.csv",
-        index=False
-    )
+    kpi_df.to_csv("output/kpi_summary.csv", index=False)
 
     conn.close()
 

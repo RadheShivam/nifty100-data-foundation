@@ -2,29 +2,17 @@ from fastapi import APIRouter, Query, HTTPException
 import sqlite3
 import os
 
-router = APIRouter(
-    prefix="/companies",
-    tags=["Companies"]
-)
+router = APIRouter(prefix="/companies", tags=["Companies"])
 
 # ==========================================================
 # DATABASE CONFIGURATION
 # ==========================================================
 
 PROJECT_ROOT = os.path.abspath(
-    os.path.join(
-        os.path.dirname(__file__),
-        "..",
-        "..",
-        ".."
-    )
+    os.path.join(os.path.dirname(__file__), "..", "..", "..")
 )
 
-DB_PATH = os.path.join(
-    PROJECT_ROOT,
-    "db",
-    "nifty100.db"
-)
+DB_PATH = os.path.join(PROJECT_ROOT, "db", "nifty100.db")
 
 
 def get_connection():
@@ -37,10 +25,9 @@ def get_connection():
 # GET ALL COMPANIES
 # ==========================================================
 
+
 @router.get("/")
-def get_companies(
-    search: str | None = Query(default=None)
-):
+def get_companies(search: str | None = Query(default=None)):
 
     conn = get_connection()
 
@@ -65,10 +52,7 @@ def get_companies(
             OR id LIKE ?
         )
         """
-        params.extend([
-            f"%{search}%",
-            f"%{search}%"
-        ])
+        params.extend([f"%{search}%", f"%{search}%"])
 
     query += """
     ORDER BY company_name
@@ -84,6 +68,7 @@ def get_companies(
 # ==========================================================
 # GET PROFIT & LOSS HISTORY
 # ==========================================================
+
 
 @router.get("/{ticker}/pl")
 def get_profit_loss(
@@ -105,10 +90,7 @@ def get_profit_loss(
 
     if company is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Company not found"
-        )
+        raise HTTPException(status_code=404, detail="Company not found")
 
     query = """
     SELECT *
@@ -155,6 +137,7 @@ def get_profit_loss(
 # GET BALANCE SHEET HISTORY
 # ==========================================================
 
+
 @router.get("/{ticker}/bs")
 def get_balance_sheet(
     ticker: str,
@@ -175,10 +158,7 @@ def get_balance_sheet(
 
     if company is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Company not found"
-        )
+        raise HTTPException(status_code=404, detail="Company not found")
 
     query = """
     SELECT *
@@ -225,6 +205,7 @@ def get_balance_sheet(
 # GET CASH FLOW HISTORY
 # ==========================================================
 
+
 @router.get("/{ticker}/cashflow")
 def get_cashflow(
     ticker: str,
@@ -245,10 +226,7 @@ def get_cashflow(
 
     if company is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Company not found"
-        )
+        raise HTTPException(status_code=404, detail="Company not found")
 
     query = """
     SELECT *
@@ -295,6 +273,7 @@ def get_cashflow(
 # GET FINANCIAL RATIOS
 # ==========================================================
 
+
 @router.get("/{ticker}/ratios")
 def get_financial_ratios(
     ticker: str,
@@ -314,10 +293,7 @@ def get_financial_ratios(
 
     if company is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Company not found"
-        )
+        raise HTTPException(status_code=404, detail="Company not found")
 
     query = """
     SELECT *
@@ -352,6 +328,7 @@ def get_financial_ratios(
 # GET COMPANY TEARSHEET
 # ==========================================================
 
+
 @router.get("/{ticker}/tearsheet")
 def get_tearsheet(ticker: str):
 
@@ -368,10 +345,7 @@ def get_tearsheet(ticker: str):
 
     if company is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Company not found"
-        )
+        raise HTTPException(status_code=404, detail="Company not found")
 
     company = dict(company)
 
@@ -451,6 +425,7 @@ def get_tearsheet(ticker: str):
 # (KEEP THIS ROUTE LAST)
 # ==========================================================
 
+
 @router.get("/{ticker}")
 def get_company(ticker: str):
 
@@ -467,10 +442,7 @@ def get_company(ticker: str):
 
     if company is None:
         conn.close()
-        raise HTTPException(
-            status_code=404,
-            detail="Company not found"
-        )
+        raise HTTPException(status_code=404, detail="Company not found")
 
     company = dict(company)
 
@@ -491,12 +463,6 @@ def get_company(ticker: str):
 
     conn.close()
 
-    company["latest_ratios"] = (
-        dict(latest_ratio)
-        if latest_ratio
-        else None
-    )
+    company["latest_ratios"] = dict(latest_ratio) if latest_ratio else None
 
     return company
-
-

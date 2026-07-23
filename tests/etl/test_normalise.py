@@ -4,10 +4,10 @@ import numpy as np
 
 from src.etl.normaliser import normalize_year
 
-
 # ==========================
 # Valid integer years
 # ==========================
+
 
 def test_integer_year():
     assert normalize_year(2024) == 2024
@@ -33,6 +33,7 @@ def test_zero_year():
 # Missing values
 # ==========================
 
+
 def test_none():
     assert normalize_year(None) is None
 
@@ -53,6 +54,7 @@ def test_numpy_nan():
 # Negative values
 # ==========================
 
+
 def test_negative_year():
     assert normalize_year(-2024) == -2024
 
@@ -60,6 +62,7 @@ def test_negative_year():
 # ==========================
 # Float values
 # ==========================
+
 
 def test_float_decimal():
     assert normalize_year(2024.9) == 2024
@@ -73,6 +76,7 @@ def test_small_float():
 # String values
 # ==========================
 
+
 def test_spaces():
     assert normalize_year(" 2024 ") == 2024
 
@@ -84,6 +88,7 @@ def test_leading_zero():
 # ==========================
 # Invalid values
 # ==========================
+
 
 def test_invalid_string():
     with pytest.raises(ValueError):

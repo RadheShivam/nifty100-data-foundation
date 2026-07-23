@@ -1,5 +1,6 @@
 # Net Profit Margin
 
+
 def net_profit_margin(net_profit, sales):
     """
     Net Profit Margin (NPM)
@@ -19,6 +20,7 @@ def net_profit_margin(net_profit, sales):
 
 
 # Operating Profit Margin
+
 
 def operating_profit_margin(operating_profit, sales, opm_percentage=None):
     """
@@ -50,6 +52,7 @@ def operating_profit_margin(operating_profit, sales, opm_percentage=None):
 
 # Return on Equity
 
+
 def return_on_equity(net_profit, equity_capital, reserves):
     """
     Return on Equity (ROE)
@@ -72,12 +75,9 @@ def return_on_equity(net_profit, equity_capital, reserves):
 
 # Return on Capital Employed
 
+
 def return_on_capital_employed(
-    ebit,
-    equity_capital,
-    reserves,
-    borrowings,
-    broad_sector=None
+    ebit, equity_capital, reserves, borrowings, broad_sector=None
 ):
     """
     Return on Capital Employed (ROCE)
@@ -94,18 +94,12 @@ def return_on_capital_employed(
         (roce, benchmark_type)
     """
 
-    capital_employed = (
-        equity_capital
-        + reserves
-        + borrowings
-    )
+    capital_employed = equity_capital + reserves + borrowings
 
     if capital_employed <= 0:
         return None, None
 
-    roce = (
-        ebit / capital_employed
-    ) * 100
+    roce = (ebit / capital_employed) * 100
 
     if broad_sector == "Financials":
         return roce, "sector-relative"
@@ -114,6 +108,7 @@ def return_on_capital_employed(
 
 
 # Return on Assets
+
 
 def return_on_assets(net_profit, total_assets):
     """
@@ -162,6 +157,7 @@ def debt_to_equity(borrowings, equity_capital, reserves):
 
 # High Leverage Flag
 
+
 def high_leverage_flag(debt_to_equity_ratio, broad_sector):
     """
     High Leverage Flag
@@ -180,13 +176,11 @@ def high_leverage_flag(debt_to_equity_ratio, broad_sector):
 
     return debt_to_equity_ratio > 5
 
+
 # Interest Coverage Ratio (ICR)
 
-def interest_coverage_ratio(
-    operating_profit,
-    other_income,
-    interest
-):
+
+def interest_coverage_ratio(operating_profit, other_income, interest):
     """
     Interest Coverage Ratio (ICR)
 
@@ -211,9 +205,7 @@ def interest_coverage_ratio(
     if interest == 0:
         return None, "Debt Free", False
 
-    icr = (
-        operating_profit + other_income
-    ) / interest
+    icr = (operating_profit + other_income) / interest
 
     warning_flag = icr < 1.5
 
@@ -238,6 +230,7 @@ def net_debt(borrowings, investments):
 
 
 # Asset Turnover
+
 
 def asset_turnover(sales, total_assets):
     """

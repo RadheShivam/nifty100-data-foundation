@@ -5,16 +5,20 @@ from src.analytics.ratios import return_on_capital_employed
 
 conn = sqlite3.connect("db/nifty100.db")
 
-profit = pd.read_sql("""
+profit = pd.read_sql(
+    """
 SELECT
     company_id,
     year,
     operating_profit,
     depreciation
 FROM profitandloss
-""", conn)
+""",
+    conn,
+)
 
-balance = pd.read_sql("""
+balance = pd.read_sql(
+    """
 SELECT
     company_id,
     year,
@@ -22,28 +26,26 @@ SELECT
     reserves,
     borrowings
 FROM balancesheet
-""", conn)
+""",
+    conn,
+)
 
-companies = pd.read_sql("""
+companies = pd.read_sql(
+    """
 SELECT
     id,
     company_name,
     roce_percentage
 FROM companies
-""", conn)
+""",
+    conn,
+)
 
 conn.close()
 
-df = profit.merge(
-    balance,
-    on=["company_id", "year"]
-)
+df = profit.merge(balance, on=["company_id", "year"])
 
-df = df.merge(
-    companies,
-    left_on="company_id",
-    right_on="id"
-)
+df = df.merge(companies, left_on="company_id", right_on="id")
 
 print(df.head())
 print()

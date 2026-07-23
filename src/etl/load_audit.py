@@ -19,7 +19,7 @@ def generate_load_audit():
         "marketcap",
         "stockprices",
         "financial_ratios",
-        "peer_percentiles"
+        "peer_percentiles",
     ]
 
     audit = []
@@ -28,35 +28,21 @@ def generate_load_audit():
 
         try:
 
-            count = conn.execute(
-                f"SELECT COUNT(*) FROM {table}"
-            ).fetchone()[0]
+            count = conn.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
 
-            audit.append({
-                "table_name": table,
-                "row_count": count
-            })
+            audit.append({"table_name": table, "row_count": count})
 
         except Exception:
 
-            audit.append({
-                "table_name": table,
-                "row_count": 0
-            })
+            audit.append({"table_name": table, "row_count": 0})
 
     conn.close()
 
     audit_df = pd.DataFrame(audit)
 
-    os.makedirs(
-        "output",
-        exist_ok=True
-    )
+    os.makedirs("output", exist_ok=True)
 
-    audit_df.to_csv(
-        "output/load_audit.csv",
-        index=False
-    )
+    audit_df.to_csv("output/load_audit.csv", index=False)
 
     print("✅ load_audit.csv created")
 

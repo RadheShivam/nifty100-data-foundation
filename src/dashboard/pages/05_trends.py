@@ -9,9 +9,7 @@ import plotly.express as px
 # Add Project Root
 # -------------------------------------------------
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../..")
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -31,9 +29,7 @@ from src.dashboard.utils.db import (
 
 st.title("📈 Trend Analysis")
 
-st.caption(
-    "Analyze financial performance over time."
-)
+st.caption("Analyze financial performance over time.")
 
 # -------------------------------------------------
 # Load Companies
@@ -50,9 +46,7 @@ if companies.empty:
 # -------------------------------------------------
 
 company_options = (
-    companies["id"].astype(str)
-    + " - "
-    + companies["company_name"].astype(str)
+    companies["id"].astype(str) + " - " + companies["company_name"].astype(str)
 )
 
 selected_company = st.selectbox(
@@ -111,18 +105,13 @@ if len(selected_metrics) == 0:
     st.warning("Please select at least one metric.")
     st.stop()
 
-selected_columns = [
-    available_metrics[m]
-    for m in selected_metrics
-]
+selected_columns = [available_metrics[m] for m in selected_metrics]
 
 # -------------------------------------------------
 # Prepare Chart Data
 # -------------------------------------------------
 
-chart_df = ratio_df[
-    ["year"] + selected_columns
-].copy()
+chart_df = ratio_df[["year"] + selected_columns].copy()
 
 chart_df = chart_df.sort_values("year")
 
@@ -135,17 +124,11 @@ st.markdown("---")
 st.subheader("📈 Financial Trend")
 
 plot_df = chart_df.melt(
-    id_vars="year",
-    value_vars=selected_columns,
-    var_name="Metric",
-    value_name="Value"
+    id_vars="year", value_vars=selected_columns, var_name="Metric", value_name="Value"
 )
 
 # Replace column names with readable names
-reverse_metrics = {
-    v: k
-    for k, v in available_metrics.items()
-}
+reverse_metrics = {v: k for k, v in available_metrics.items()}
 
 plot_df["Metric"] = plot_df["Metric"].map(reverse_metrics)
 
@@ -156,10 +139,7 @@ plot_df["Metric"] = plot_df["Metric"].map(reverse_metrics)
 plot_df = chart_df.copy()
 
 for col in selected_columns:
-    plot_df[col + "_YoY"] = (
-        plot_df[col]
-        .pct_change() * 100
-    ).round(2)
+    plot_df[col + "_YoY"] = (plot_df[col].pct_change() * 100).round(2)
 
 # -------------------------------------------------
 # Create Line Chart
@@ -170,14 +150,11 @@ fig = px.line(
     x="year",
     y=selected_columns,
     markers=True,
-    title="Financial Trend Analysis"
+    title="Financial Trend Analysis",
 )
 
 # Rename legend labels
-reverse_metrics = {
-    v: k
-    for k, v in available_metrics.items()
-}
+reverse_metrics = {v: k for k, v in available_metrics.items()}
 
 for trace in fig.data:
 
@@ -186,9 +163,7 @@ for trace in fig.data:
     trace.name = reverse_metrics[column]
 
     trace.hovertemplate = (
-        "<b>%{x}</b><br>"
-        + reverse_metrics[column]
-        + ": %{y:.2f}<extra></extra>"
+        "<b>%{x}</b><br>" + reverse_metrics[column] + ": %{y:.2f}<extra></extra>"
     )
 
 # -------------------------------------------------
@@ -204,21 +179,12 @@ for column in selected_columns:
         if pd.notna(row[yoy_col]):
 
             fig.add_annotation(
-
                 x=row["year"],
-
                 y=row[column],
-
                 text=f"{row[yoy_col]:.1f}%",
-
                 showarrow=False,
-
                 yshift=15,
-
-                font=dict(
-                    size=9
-                )
-
+                font=dict(size=9),
             )
 
 # -------------------------------------------------
@@ -226,19 +192,11 @@ for column in selected_columns:
 # -------------------------------------------------
 
 fig.update_layout(
-
     height=650,
-
     hovermode="x unified",
-
     legend_title="Metrics",
-
     xaxis_title="Financial Year",
-
-    yaxis_title="Metric Value"
+    yaxis_title="Metric Value",
 )
 
-st.plotly_chart(
-    fig,
-    use_container_width=True
-)
+st.plotly_chart(fig, use_container_width=True)

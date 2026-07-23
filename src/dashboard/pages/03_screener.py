@@ -9,9 +9,7 @@ import streamlit as st
 # Add Project Root
 # -------------------------------------------------
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../..")
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -71,8 +69,7 @@ conn.close()
 # -------------------------------------------------
 
 screen_df = (
-    ratios_df
-    .merge(
+    ratios_df.merge(
         companies_df[
             [
                 "id",
@@ -103,15 +100,7 @@ screen_df = (
 
 st.write(market_df.head())
 
-st.write(
-    screen_df[
-        [
-            "company_id",
-            "pe_ratio",
-            "pb_ratio"
-        ]
-    ].head()
-)
+st.write(screen_df[["company_id", "pe_ratio", "pb_ratio"]].head())
 # -------------------------------------------------
 # Replace Missing Values
 # -------------------------------------------------
@@ -123,6 +112,7 @@ screen_df[numeric_cols] = screen_df[numeric_cols].fillna(0)
 # -------------------------------------------------
 # Safe Slider Function
 # -------------------------------------------------
+
 
 def safe_slider(label, series, default_value, is_max=False):
     """
@@ -255,54 +245,34 @@ filtered_df = screen_df.copy()
 
 st.write("Initial:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["return_on_equity_pct"] >= roe_min
-]
+filtered_df = filtered_df[filtered_df["return_on_equity_pct"] >= roe_min]
 st.write("After ROE:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["debt_to_equity"] <= de_max
-]
+filtered_df = filtered_df[filtered_df["debt_to_equity"] <= de_max]
 st.write("After D/E:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["free_cash_flow_cr"] >= fcf_min
-]
+filtered_df = filtered_df[filtered_df["free_cash_flow_cr"] >= fcf_min]
 st.write("After FCF:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["revenue_cagr_5yr"] >= revenue_min
-]
+filtered_df = filtered_df[filtered_df["revenue_cagr_5yr"] >= revenue_min]
 st.write("After Revenue CAGR:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["pat_cagr_5yr"] >= pat_min
-]
+filtered_df = filtered_df[filtered_df["pat_cagr_5yr"] >= pat_min]
 st.write("After PAT CAGR:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["operating_profit_margin_pct"] >= opm_min
-]
+filtered_df = filtered_df[filtered_df["operating_profit_margin_pct"] >= opm_min]
 st.write("After OPM:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["pe_ratio"] <= pe_max
-]
+filtered_df = filtered_df[filtered_df["pe_ratio"] <= pe_max]
 st.write("After PE:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["pb_ratio"] <= pb_max
-]
+filtered_df = filtered_df[filtered_df["pb_ratio"] <= pb_max]
 st.write("After PB:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["dividend_yield_pct"] >= dividend_min
-]
+filtered_df = filtered_df[filtered_df["dividend_yield_pct"] >= dividend_min]
 st.write("After Dividend:", len(filtered_df))
 
-filtered_df = filtered_df[
-    filtered_df["interest_coverage"] >= icr_min
-]
+filtered_df = filtered_df[filtered_df["interest_coverage"] >= icr_min]
 st.write("After Interest Coverage:", len(filtered_df))
 
 # -------------------------------------------------
@@ -322,9 +292,7 @@ st.markdown("---")
 
 st.subheader("📊 Screening Results")
 
-st.success(
-    f"{len(filtered_df)} Companies match your filters."
-)
+st.success(f"{len(filtered_df)} Companies match your filters.")
 
 # -------------------------------------------------
 # Columns to Display
@@ -349,11 +317,7 @@ display_columns = [
     "composite_quality_score",
 ]
 
-available_columns = [
-    col
-    for col in display_columns
-    if col in filtered_df.columns
-]
+available_columns = [col for col in display_columns if col in filtered_df.columns]
 
 # -------------------------------------------------
 # Display Data
@@ -371,9 +335,7 @@ st.dataframe(
 
 st.markdown("---")
 
-csv = filtered_df[available_columns].to_csv(
-    index=False
-).encode("utf-8")
+csv = filtered_df[available_columns].to_csv(index=False).encode("utf-8")
 
 st.download_button(
     label="📥 Download Results as CSV",
@@ -403,34 +365,22 @@ preset = st.sidebar.radio(
 )
 
 if preset == "Quality Compounder":
-    st.sidebar.success(
-        "High ROE • High ROCE • Low Debt • Strong Growth"
-    )
+    st.sidebar.success("High ROE • High ROCE • Low Debt • Strong Growth")
 
 elif preset == "Value Pick":
-    st.sidebar.success(
-        "Low PE • Low PB • Reasonable ROE"
-    )
+    st.sidebar.success("Low PE • Low PB • Reasonable ROE")
 
 elif preset == "Growth Accelerator":
-    st.sidebar.success(
-        "High Revenue CAGR • High PAT CAGR"
-    )
+    st.sidebar.success("High Revenue CAGR • High PAT CAGR")
 
 elif preset == "Dividend Champion":
-    st.sidebar.success(
-        "High Dividend Yield"
-    )
+    st.sidebar.success("High Dividend Yield")
 
 elif preset == "Debt-Free Blue Chip":
-    st.sidebar.success(
-        "Very Low Debt • Stable Business"
-    )
+    st.sidebar.success("Very Low Debt • Stable Business")
 
 elif preset == "Turnaround Watch":
-    st.sidebar.success(
-        "Improving Fundamentals"
-    )
+    st.sidebar.success("Improving Fundamentals")
 
 # -------------------------------------------------
 # Summary Dashboard
@@ -519,4 +469,3 @@ if len(filtered_df):
 # -------------------------------------------------
 
 st.markdown("---")
-

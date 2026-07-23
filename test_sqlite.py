@@ -27,7 +27,6 @@
 # load_data_to_sqlite()
 
 
-
 # # import sqlite3
 
 # # conn = sqlite3.connect("db/nifty100.db")
@@ -53,7 +52,6 @@
 # # conn.close()
 
 
-
 # import sqlite3
 
 # conn = sqlite3.connect("db/nifty100.db")
@@ -77,9 +75,3 @@ load_data_to_sqlite()
 
 print("✅ Database and tables created successfully")
 print("✅ Data loaded successfully")
-
-
-
-
-
-

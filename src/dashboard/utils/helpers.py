@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def display_value(value, decimals=2, suffix=""):
     """
     Display numbers safely.

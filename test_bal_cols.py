@@ -3,10 +3,7 @@ import pandas as pd
 
 conn = sqlite3.connect("db/nifty100.db")
 
-df = pd.read_sql(
-    "SELECT * FROM balancesheet LIMIT 5",
-    conn
-)
+df = pd.read_sql("SELECT * FROM balancesheet LIMIT 5", conn)
 
 conn.close()
 

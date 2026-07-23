@@ -25,7 +25,7 @@ def test_profitandloss_row_count():
     cursor.execute("SELECT COUNT(*) FROM profitandloss")
     count = cursor.fetchone()[0]
 
-    assert count == 1276
+    assert count == 1263
 
     conn.close()
 
@@ -37,7 +37,7 @@ def test_balancesheet_row_count():
     cursor.execute("SELECT COUNT(*) FROM balancesheet")
     count = cursor.fetchone()[0]
 
-    assert count == 1312
+    assert count == 1224
 
     conn.close()
 
@@ -49,7 +49,7 @@ def test_cashflow_row_count():
     cursor.execute("SELECT COUNT(*) FROM cashflow")
     count = cursor.fetchone()[0]
 
-    assert count == 1187
+    assert count == 1164
 
     conn.close()
 

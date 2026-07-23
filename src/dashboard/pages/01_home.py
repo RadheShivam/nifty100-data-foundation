@@ -9,9 +9,7 @@ import pandas as pd
 # Add project root to Python path
 # -------------------------------------------------
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "../../..")
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../.."))
 
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
@@ -26,11 +24,7 @@ from src.dashboard.utils.db import (
 # Page Configuration
 # -------------------------------------------------
 
-st.set_page_config(
-    page_title="Nifty 100 Analytics",
-    page_icon="📈",
-    layout="wide"
-)
+st.set_page_config(page_title="Nifty 100 Analytics", page_icon="📈", layout="wide")
 
 # -------------------------------------------------
 # Page Title
@@ -81,9 +75,7 @@ st.markdown(f"### Financial Year : **{selected_year}**")
 st.subheader("📊 Key Performance Indicators")
 
 valid_roe = ratios[
-    (ratios["return_on_equity_pct"] >= -100)
-    &
-    (ratios["return_on_equity_pct"] <= 100)
+    (ratios["return_on_equity_pct"] >= -100) & (ratios["return_on_equity_pct"] <= 100)
 ]
 
 avg_roe = valid_roe["return_on_equity_pct"].mean()
@@ -102,35 +94,17 @@ median_pe = "N/A"
 col1, col2, col3 = st.columns(3)
 col4, col5, col6 = st.columns(3)
 
-col1.metric(
-    "Average ROE",
-    f"{avg_roe:.2f}%"
-)
+col1.metric("Average ROE", f"{avg_roe:.2f}%")
 
-col2.metric(
-    "Median D/E",
-    f"{median_de:.2f}"
-)
+col2.metric("Median D/E", f"{median_de:.2f}")
 
-col3.metric(
-    "Total Companies",
-    total_companies
-)
+col3.metric("Total Companies", total_companies)
 
-col4.metric(
-    "Median Revenue CAGR (5Y)",
-    f"{median_revenue_cagr:.2f}%"
-)
+col4.metric("Median Revenue CAGR (5Y)", f"{median_revenue_cagr:.2f}%")
 
-col5.metric(
-    "Debt-Free Companies",
-    debt_free
-)
+col5.metric("Debt-Free Companies", debt_free)
 
-col6.metric(
-    "Median P/E",
-    median_pe
-)
+col6.metric("Median P/E", median_pe)
 
 st.divider()
 
@@ -140,11 +114,7 @@ st.divider()
 
 st.subheader("📊 Sector Distribution")
 
-sector_count = (
-    sectors.groupby("broad_sector")
-    .size()
-    .reset_index(name="Companies")
-)
+sector_count = sectors.groupby("broad_sector").size().reset_index(name="Companies")
 
 fig = px.pie(
     sector_count,
@@ -154,19 +124,11 @@ fig = px.pie(
     title="Companies by Broad Sector",
 )
 
-fig.update_traces(
-    textinfo="percent+label"
-)
+fig.update_traces(textinfo="percent+label")
 
-fig.update_layout(
-    height=550,
-    legend_title="Sector"
-)
+fig.update_layout(height=550, legend_title="Sector")
 
-st.plotly_chart(
-    fig,
-    use_container_width=True
-)
+st.plotly_chart(fig, use_container_width=True)
 
 st.divider()
 
@@ -185,10 +147,7 @@ top5 = (
             "roce_percentage",
         ]
     ]
-    .sort_values(
-        by="composite_quality_score",
-        ascending=False
-    )
+    .sort_values(by="composite_quality_score", ascending=False)
     .head(5)
 )
 

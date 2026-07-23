@@ -15,29 +15,21 @@ def create_load_audit():
         "prosandcons",
         "sectors",
         "marketcap",
-        "stockprices"
+        "stockprices",
     ]
 
     rows = []
 
     for table in tables:
-        cursor = conn.execute(
-            f"SELECT COUNT(*) FROM {table}"
-        )
+        cursor = conn.execute(f"SELECT COUNT(*) FROM {table}")
 
         count = cursor.fetchone()[0]
 
-        rows.append({
-            "table_name": table,
-            "row_count": count
-        })
+        rows.append({"table_name": table, "row_count": count})
 
     audit_df = pd.DataFrame(rows)
 
-    audit_df.to_csv(
-        "output/load_audit.csv",
-        index=False
-    )
+    audit_df.to_csv("output/load_audit.csv", index=False)
 
     conn.close()
 

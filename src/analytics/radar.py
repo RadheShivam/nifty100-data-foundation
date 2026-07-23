@@ -19,10 +19,7 @@ peer_df = load_peer_groups()
 
 conn = sqlite3.connect("db/nifty100.db")
 
-ratio_df = pd.read_sql(
-    "SELECT * FROM financial_ratios",
-    conn
-)
+ratio_df = pd.read_sql("SELECT * FROM financial_ratios", conn)
 
 conn.close()
 
@@ -34,33 +31,18 @@ print("Financial Ratios:", ratio_df.shape)
 # -----------------------------
 
 radar_df = ratio_df.merge(
-    peer_df[
-        [
-            "company_id",
-            "peer_group_name",
-            "is_benchmark"
-        ]
-    ],
+    peer_df[["company_id", "peer_group_name", "is_benchmark"]],
     on="company_id",
-    how="left"
+    how="left",
 )
 
-radar_df["peer_group_name"] = (
-    radar_df["peer_group_name"]
-    .fillna("No peer group assigned")
+radar_df["peer_group_name"] = radar_df["peer_group_name"].fillna(
+    "No peer group assigned"
 )
 
 print("\nMerged Shape:", radar_df.shape)
 
-print(
-    radar_df[
-        [
-            "company_id",
-            "peer_group_name",
-            "year"
-        ]
-    ].head(20)
-)
+print(radar_df[["company_id", "peer_group_name", "year"]].head(20))
 
 # -----------------------------
 # Radar Metrics
@@ -74,7 +56,7 @@ radar_metrics = [
     "free_cash_flow_cr",
     "pat_cagr_5yr",
     "revenue_cagr_5yr",
-    "composite_quality_score"
+    "composite_quality_score",
 ]
 
 print("\nRadar Metrics:")
@@ -84,9 +66,7 @@ print(radar_metrics)
 # Companies List
 # -----------------------------
 
-companies = sorted(
-    radar_df["company_id"].unique()
-)
+companies = sorted(radar_df["company_id"].unique())
 
 print("\nTotal Companies:", len(companies))
 
@@ -94,10 +74,7 @@ print("\nTotal Companies:", len(companies))
 # Create Output Folder
 # -----------------------------
 
-os.makedirs(
-    "reports/radar_charts",
-    exist_ok=True
-)
+os.makedirs("reports/radar_charts", exist_ok=True)
 
 # -----------------------------
 # Generate Radar Chart For Every Company
@@ -105,9 +82,7 @@ os.makedirs(
 
 for test_company in companies:
 
-    company_df = radar_df[
-        radar_df["company_id"] == test_company
-    ].sort_values("year")
+    company_df = radar_df[radar_df["company_id"] == test_company].sort_values("year")
 
     if company_df.empty:
         continue
@@ -122,35 +97,22 @@ for test_company in companies:
 
     if peer_group == "No peer group assigned":
 
-        peer_latest = radar_df[
-            radar_df["year"] == latest_company["year"]
-        ]
+        peer_latest = radar_df[radar_df["year"] == latest_company["year"]]
 
     else:
 
         peer_latest = radar_df[
             (radar_df["peer_group_name"] == peer_group)
-            &
-            (radar_df["year"] == latest_company["year"])
+            & (radar_df["year"] == latest_company["year"])
         ]
 
-    company_values = (
-        latest_company[radar_metrics]
-        .fillna(0)
-        .astype(float)
-        .tolist()
-    )
+    company_values = latest_company[radar_metrics].fillna(0).astype(float).tolist()
 
-    peer_average = (
-        peer_latest[radar_metrics]
-        .mean()
-        .fillna(0)
-        .tolist()
-    )
+    peer_average = peer_latest[radar_metrics].mean().fillna(0).tolist()
 
     print(f"\nGenerating radar for {test_company}")
 
-        # -----------------------------
+    # -----------------------------
     # Radar Labels
     # -----------------------------
 
@@ -162,7 +124,7 @@ for test_company in companies:
         "FCF",
         "PAT CAGR",
         "Revenue CAGR",
-        "Composite"
+        "Composite",
     ]
 
     # -----------------------------
@@ -171,12 +133,7 @@ for test_company in companies:
 
     num_vars = len(labels)
 
-    angles = np.linspace(
-        0,
-        2 * np.pi,
-        num_vars,
-        endpoint=False
-    ).tolist()
+    angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
 
     angles += angles[:1]
 
@@ -193,78 +150,42 @@ for test_company in companies:
 
     fig = plt.figure(figsize=(8, 8))
 
-    ax = plt.subplot(
-        111,
-        polar=True
-    )
+    ax = plt.subplot(111, polar=True)
 
     ax.set_theta_offset(np.pi / 2)
     ax.set_theta_direction(-1)
 
-    plt.xticks(
-        angles[:-1],
-        labels,
-        fontsize=10
-    )
+    plt.xticks(angles[:-1], labels, fontsize=10)
 
     # -----------------------------
     # Plot Company
     # -----------------------------
 
-    ax.plot(
-        angles,
-        company_plot,
-        linewidth=2,
-        label=test_company
-    )
+    ax.plot(angles, company_plot, linewidth=2, label=test_company)
 
-    ax.fill(
-        angles,
-        company_plot,
-        alpha=0.25
-    )
+    ax.fill(angles, company_plot, alpha=0.25)
 
     # -----------------------------
     # Plot Peer Average
     # -----------------------------
 
-    ax.plot(
-        angles,
-        peer_plot,
-        linestyle="--",
-        linewidth=2,
-        label="Peer Average"
-    )
+    ax.plot(angles, peer_plot, linestyle="--", linewidth=2, label="Peer Average")
 
     # -----------------------------
     # Title
     # -----------------------------
 
-    plt.title(
-        f"{test_company} Radar Chart ({peer_group})",
-        pad=20
-    )
+    plt.title(f"{test_company} Radar Chart ({peer_group})", pad=20)
 
-    plt.legend(
-        loc="upper right",
-        bbox_to_anchor=(1.3, 1.1)
-    )
+    plt.legend(loc="upper right", bbox_to_anchor=(1.3, 1.1))
 
     # -----------------------------
     # Save Chart
     # -----------------------------
 
-    output_file = os.path.join(
-        "reports",
-        "radar_charts",
-        f"{test_company}_radar.png"
-    )
+    output_file = os.path.join("reports", "radar_charts", f"{test_company}_radar.png")
 
-    plt.savefig(
-        output_file,
-        dpi=300,
-        bbox_inches="tight"
-    )
+    plt.savefig(output_file, dpi=300, bbox_inches="tight")
 
     plt.close()
 

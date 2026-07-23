@@ -5,10 +5,10 @@ from src.analytics.cagr import (
     eps_cagr,
 )
 
-
 # ----------------------------
 # Generic CAGR Tests
 # ----------------------------
+
 
 def test_cagr_normal():
     value, flag = calculate_cagr(100, 200, 5)
@@ -50,6 +50,7 @@ def test_cagr_insufficient():
 # Wrapper Tests
 # ----------------------------
 
+
 def test_revenue_cagr():
     value, flag = revenue_cagr(100, 200, 5)
     assert round(value, 2) == 14.87
@@ -71,6 +72,7 @@ def test_eps_cagr():
 # ----------------------------
 # Extra Edge Case
 # ----------------------------
+
 
 def test_cagr_one_year():
     value, flag = calculate_cagr(100, 120, 1)

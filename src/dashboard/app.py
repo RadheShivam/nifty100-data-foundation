@@ -9,8 +9,7 @@ st.set_page_config(
 
 st.title("📈 Nifty 100 Analytics")
 
-st.markdown(
-    """
+st.markdown("""
 Welcome to the **Nifty 100 Analytics Dashboard**.
 
 Use the **left sidebar** to navigate between the dashboard pages.
@@ -25,5 +24,4 @@ Available modules:
 - 🏭 Sector Analysis
 - 💰 Capital Allocation
 - 📄 Annual Reports
-"""
-)
+""")

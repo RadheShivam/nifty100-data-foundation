@@ -2,6 +2,10 @@
 
 import math
 
+"""
+Functions for calculating Compound Annual Growth Rate (CAGR).
+"""
+
 
 def calculate_cagr(start_value, end_value, years):
     """
@@ -36,9 +40,7 @@ def calculate_cagr(start_value, end_value, years):
     if start_value < 0 and end_value < 0:
         return None, "BOTH_NEGATIVE"
 
-    cagr = (
-        (end_value / start_value) ** (1 / years) - 1
-    ) * 100
+    cagr = ((end_value / start_value) ** (1 / years) - 1) * 100
 
     return cagr, None
 
