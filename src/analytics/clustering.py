@@ -3,7 +3,6 @@ import sqlite3
 import warnings
 
 import pandas as pd
-import numpy as np
 
 warnings.filterwarnings("ignore")
 

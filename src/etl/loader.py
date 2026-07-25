@@ -51,3 +51,4 @@ def load_sectors():
 
 def load_stock_prices():
     return pd.read_excel(BASE_PATH / "supplementry" / "stock_prices.xlsx", skiprows=1)
+

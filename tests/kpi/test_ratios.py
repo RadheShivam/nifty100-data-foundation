@@ -1,11 +1,9 @@
-import pytest
 
 from src.analytics.ratios import (
     net_profit_margin,
     operating_profit_margin,
     return_on_equity,
     return_on_capital_employed,
-    return_on_assets,
     debt_to_equity,
     high_leverage_flag,
     interest_coverage_ratio,

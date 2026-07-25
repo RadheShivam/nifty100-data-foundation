@@ -27,7 +27,11 @@ def get_connection():
 
 
 @router.get("/")
-def get_companies(search: str | None = Query(default=None)):
+def get_companies(
+    search: str | None = Query(default=None),
+    sector: str | None = Query(default=None),
+    market_cap_category: str | None = Query(default=None),
+):
 
     conn = get_connection()
 
@@ -35,8 +39,11 @@ def get_companies(search: str | None = Query(default=None)):
     SELECT
         id,
         company_name,
-        roce_percentage,
+        broad_sector,
+        sub_sector,
         roe_percentage,
+        roce_percentage,
+        market_cap_category,
         website,
         company_logo
     FROM companies
@@ -54,12 +61,23 @@ def get_companies(search: str | None = Query(default=None)):
         """
         params.extend([f"%{search}%", f"%{search}%"])
 
+    if sector:
+        query += """
+        AND broad_sector = ?
+        """
+        params.append(sector)
+
+    if market_cap_category:
+        query += """
+        AND market_cap_category = ?
+        """
+        params.append(market_cap_category)
+
     query += """
     ORDER BY company_name
     """
 
     rows = conn.execute(query, params).fetchall()
-
     conn.close()
 
     return [dict(row) for row in rows]

@@ -1,13 +1,13 @@
 table_name,row_count
 companies,92
-profitandloss,1276
-balancesheet,1312
-cashflow,1187
+profitandloss,1263
+balancesheet,1224
+cashflow,1164
 analysis,20
 documents,1585
 prosandcons,16
 sectors,94
 marketcap,552
 stockprices,5520
-financial_ratios,0
+financial_ratios,1164
 peer_percentiles,6570

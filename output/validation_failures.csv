@@ -14,8 +14,8 @@ non_positive_sales.csv,1,High
 net_cash_flow_failures.csv,1,High
 invalid_tax_rates.csv,68,High
 invalid_dividend_payout.csv,50,High
-eps_sign_failures.csv,10,High
-documents_invalid_urls.csv,331,High
-profitandloss_year_coverage_failures.csv,19,High
-balancesheet_year_coverage_failures.csv,98,High
-cashflow_year_coverage_failures.csv,100,High
+eps_sign_failures.csv,2,High
+documents_invalid_urls.csv,4,High
+profitandloss_year_coverage_failures.csv,5,High
+balancesheet_year_coverage_failures.csv,5,High
+cashflow_year_coverage_failures.csv,8,High

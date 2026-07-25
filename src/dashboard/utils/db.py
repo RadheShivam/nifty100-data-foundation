@@ -67,19 +67,24 @@ def get_ratios(ticker, year=None):
 # --------------------------------------------------
 
 
+
 @st.cache_data(ttl=600)
 def get_ratios_by_year(year):
 
     conn = sqlite3.connect(DB_PATH)
 
+    selected_year = year.split()[-1]
+
+    query = """
+    SELECT *
+    FROM financial_ratios
+    WHERE substr(year, -4) = ?
+    """
+
     df = pd.read_sql(
-        """
-        SELECT *
-        FROM financial_ratios
-        WHERE year=?
-        """,
+        query,
         conn,
-        params=(year,),
+        params=(selected_year,),
     )
 
     conn.close()
@@ -331,6 +336,35 @@ def get_sector_info(ticker):
         """,
         conn,
         params=(ticker,),
+    )
+
+    conn.close()
+
+    return df
+
+
+# --------------------------------------------------
+# Market Cap Data (All Companies by Year)
+# --------------------------------------------------
+
+@st.cache_data(ttl=600)
+def get_market_cap_by_year(year):
+
+    conn = sqlite3.connect(DB_PATH)
+
+    # Extract numeric year (supports "Mar 2024" or "2024")
+    selected_year = str(year).split()[-1]
+
+    query = """
+    SELECT *
+    FROM market_cap
+    WHERE substr(year, -4) = ?
+    """
+
+    df = pd.read_sql(
+        query,
+        conn,
+        params=(selected_year,),
     )
 
     conn.close()

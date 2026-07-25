@@ -32,6 +32,64 @@ profit_df = load_profitandloss()
 balance_df = load_balancesheet()
 
 cashflow_df = load_cashflow()
+
+
+# ==========================
+# DEBUG AMBUJACEM
+# ==========================
+
+print("\n===== AMBUJACEM =====")
+
+print("\nProfit & Loss")
+print(profit_df[profit_df["company_id"] == "AMBUJACEM"][["company_id", "year"]])
+
+print("\nBalance Sheet")
+print(balance_df[balance_df["company_id"] == "AMBUJACEM"][["company_id", "year"]])
+
+print("\nCash Flow")
+print(cashflow_df[cashflow_df["company_id"] == "AMBUJACEM"][["company_id", "year"]])
+
+
+# ==========================
+# DEBUG JIOFIN
+# ==========================
+
+print("\n===== JIOFIN =====")
+
+print("\nProfit & Loss")
+print(profit_df[profit_df["company_id"] == "JIOFIN"][["company_id", "year"]])
+
+print("\nBalance Sheet")
+print(balance_df[balance_df["company_id"] == "JIOFIN"][["company_id", "year"]])
+
+print("\nCash Flow")
+print(cashflow_df[cashflow_df["company_id"] == "JIOFIN"][["company_id", "year"]])
+
+
+# -----------------------------
+# Normalize year values
+# -----------------------------
+
+profit_df["year"] = (
+    profit_df["year"]
+    .astype(str)
+    .str.replace(" 15", "", regex=False)
+    .str.strip()
+)
+
+balance_df["year"] = (
+    balance_df["year"]
+    .astype(str)
+    .str.replace(" 15", "", regex=False)
+    .str.strip()
+)
+
+cashflow_df["year"] = (
+    cashflow_df["year"]
+    .astype(str)
+    .str.replace(" 15", "", regex=False)
+    .str.strip()
+)
 # -----------------------------
 # Merge Profit & Balance Sheet
 # -----------------------------
@@ -79,6 +137,23 @@ merged_df = merged_df.sort_values(["company_id", "year"]).reset_index(drop=True)
 # -----------------------------
 # Create CAGR columns
 # -----------------------------
+
+
+print("\nAMBUJACEM after merge:")
+print(
+    merged_df[merged_df["company_id"] == "AMBUJACEM"][
+        ["company_id", "year"]
+    ]
+)
+
+print("\nProfit:")
+print(profit_df[profit_df["company_id"] == "AMBUJACEM"]["year"].tolist())
+
+print("\nBalance:")
+print(balance_df[balance_df["company_id"] == "AMBUJACEM"]["year"].tolist())
+
+print("\nCashflow:")
+print(cashflow_df[cashflow_df["company_id"] == "AMBUJACEM"]["year"].tolist())
 
 
 merged_df["revenue_cagr_3yr"] = None

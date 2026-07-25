@@ -1,9 +1,9 @@
 import os
 import sys
 
+import pandas as pd
 import streamlit as st
 import plotly.express as px
-import pandas as pd
 
 # -------------------------------------------------
 # Add project root to Python path
@@ -18,16 +18,21 @@ from src.dashboard.utils.db import (
     get_companies,
     get_sectors,
     get_ratios_by_year,
+    get_market_cap_by_year,
 )
 
 # -------------------------------------------------
 # Page Configuration
 # -------------------------------------------------
 
-st.set_page_config(page_title="Nifty 100 Analytics", page_icon="📈", layout="wide")
+st.set_page_config(
+    page_title="Nifty 100 Analytics",
+    page_icon="📈",
+    layout="wide",
+)
 
 # -------------------------------------------------
-# Page Title
+# Title
 # -------------------------------------------------
 
 st.title("🏠 Home Dashboard")
@@ -61,10 +66,7 @@ selected_year = st.sidebar.selectbox(
 companies = get_companies()
 sectors = get_sectors()
 ratios = get_ratios_by_year(selected_year)
-
-# -------------------------------------------------
-# Selected Year
-# -------------------------------------------------
+market_cap = get_market_cap_by_year(selected_year)
 
 st.markdown(f"### Financial Year : **{selected_year}**")
 
@@ -75,7 +77,8 @@ st.markdown(f"### Financial Year : **{selected_year}**")
 st.subheader("📊 Key Performance Indicators")
 
 valid_roe = ratios[
-    (ratios["return_on_equity_pct"] >= -100) & (ratios["return_on_equity_pct"] <= 100)
+    (ratios["return_on_equity_pct"] >= -100)
+    & (ratios["return_on_equity_pct"] <= 100)
 ]
 
 avg_roe = valid_roe["return_on_equity_pct"].mean()
@@ -88,22 +91,27 @@ debt_free = (ratios["debt_to_equity"] == 0).sum()
 
 total_companies = ratios["company_id"].nunique()
 
-# Day 26
+# -----------------------------
+# Median PE
+# -----------------------------
+
 median_pe = "N/A"
+
+if not market_cap.empty:
+
+    pe = market_cap["pe_ratio"].dropna()
+
+    if not pe.empty:
+        median_pe = f"{pe.median():.2f}"
 
 col1, col2, col3 = st.columns(3)
 col4, col5, col6 = st.columns(3)
 
 col1.metric("Average ROE", f"{avg_roe:.2f}%")
-
 col2.metric("Median D/E", f"{median_de:.2f}")
-
 col3.metric("Total Companies", total_companies)
-
 col4.metric("Median Revenue CAGR (5Y)", f"{median_revenue_cagr:.2f}%")
-
 col5.metric("Debt-Free Companies", debt_free)
-
 col6.metric("Median P/E", median_pe)
 
 st.divider()
@@ -114,7 +122,11 @@ st.divider()
 
 st.subheader("📊 Sector Distribution")
 
-sector_count = sectors.groupby("broad_sector").size().reset_index(name="Companies")
+sector_count = (
+    sectors.groupby("broad_sector")
+    .size()
+    .reset_index(name="Companies")
+)
 
 fig = px.pie(
     sector_count,
@@ -125,8 +137,10 @@ fig = px.pie(
 )
 
 fig.update_traces(textinfo="percent+label")
-
-fig.update_layout(height=550, legend_title="Sector")
+fig.update_layout(
+    height=550,
+    legend_title="Sector",
+)
 
 st.plotly_chart(fig, use_container_width=True)
 
@@ -147,7 +161,10 @@ top5 = (
             "roce_percentage",
         ]
     ]
-    .sort_values(by="composite_quality_score", ascending=False)
+    .sort_values(
+        by="composite_quality_score",
+        ascending=False,
+    )
     .head(5)
 )
 

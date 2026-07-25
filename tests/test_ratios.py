@@ -1,4 +1,3 @@
-import pytest
 
 from src.analytics.ratios import (
     net_profit_margin,

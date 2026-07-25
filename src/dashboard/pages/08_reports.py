@@ -79,7 +79,6 @@ st.markdown("---")
 
 st.subheader("📄 Available Annual Reports")
 
-import requests
 
 headers = {
     "User-Agent": (

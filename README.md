@@ -1,569 +1,247 @@
-# 📈 Nifty100 Data Foundation
+# 📈 Nifty100 Financial Intelligence Platform
 
-A production-style ETL and Data Quality framework for the Nifty100 dataset. The project ingests core and supplementary datasets, validates data quality, loads normalized data into SQLite, generates analytical reports, creates SQL views, and includes comprehensive automated tests.
+## Overview
 
----
+The **Nifty100 Financial Intelligence Platform** is a production-style
+data analytics application that processes financial data of Nifty 100
+companies. It provides an end-to-end solution for data ingestion,
+validation, storage, analysis, visualization, and reporting.
 
-## 🚀 Features
+The platform integrates an ETL pipeline, SQLite database, FastAPI
+backend, and Streamlit dashboard to enable users to explore company
+financial statements, compare sector performance, screen stocks based on
+financial metrics, analyze valuation, and generate interactive reports.
 
-- ETL pipeline for Nifty100 data
-- Data normalization and validation
-- SQLite database with 10 tables
-- Load audit and validation summaries
-- Analytical reports
-- SQL views
-- Exploratory SQL queries
-- 35+ automated unit tests
-- Supplementary datasets support
+The project follows software engineering best practices, including
+modular architecture, automated testing, documentation, performance
+optimization, and code quality checks.
 
----
+# 🚀 Features
 
-## 📂 Project Structure
+### ETL Pipeline
 
-```text
-nifty100-data-foundation
-│
-├── data
-│   ├── core
-│   └── supplementry
-│
-├── db
-│   ├── schema.sql
-│   └── nifty100.db
-│
-├── output
-│   ├── load_audit.csv
-│   ├── validation_failures.csv
-│   ├── top_sales.csv
-│   ├── top_roe.csv
-│   ├── top_cashflow.csv
-│   ├── top_dividend.csv
-│   ├── sector_distribution.csv
-│   └── kpi_summary.csv
-│
-├── notebooks
-│   └── exploratory_queries.sql
-│
-├── src
-│   └── etl
-│       ├── loader.py
-│       ├── normaliser.py
-│       ├── validator.py
-│       └── load_to_sqlite.py
-│
-├── tests
-│   ├── test_integrity.py
-│   ├── test_loader_columns.py
-│   ├── test_normaliser.py
-│   ├── test_reports.py
-│   ├── test_schema.py
-│   ├── test_sqlite.py
-│   └── test_views.py
-│
-└── README.md
+-   Reads raw financial datasets from Excel files.
+-   Cleans and normalizes financial information.
+-   Validates data integrity before loading.
+-   Generates audit logs and validation summaries.
+
+### SQLite Database
+
+-   Stores normalized financial data.
+-   Maintains relationships between companies and financial statements.
+-   Uses optimized indexes for faster queries.
+
+### Financial Analytics
+
+-   Revenue Growth Analysis
+-   Profit Growth Analysis
+-   ROE & ROCE Analysis
+-   Capital Allocation Analysis
+-   Sector Comparison
+-   Financial Ratio Analysis
+-   CAGR Calculations
+
+### FastAPI Backend
+
+-   RESTful API endpoints.
+-   Interactive Swagger documentation.
+-   JSON responses for dashboard integration.
+-   Company and sector data services.
+
+### Streamlit Dashboard
+
+-   Home Dashboard
+-   Company Profile
+-   Stock Screener
+-   Peer Comparison
+-   Trend Analysis
+-   Sector Analysis
+-   Capital Allocation
+-   Annual Reports
+
+### Reporting
+
+-   KPI Reports
+-   Validation Reports
+-   Load Audit Reports
+-   Performance Reports
+-   Integration Reports
+
+### Testing
+
+-   Unit Testing
+-   Integration Testing
+-   API Testing
+-   Dashboard Testing
+-   Data Quality Testing
+
+# 🏗 Project Architecture
+
+``` text
+Raw Excel Files
+        │
+        ▼
+ETL Pipeline
+        │
+        ▼
+Data Validation
+        │
+        ▼
+SQLite Database
+        │
+ ┌──────┴────────┐
+ │               │
+ ▼               ▼
+FastAPI      Streamlit
+ │               │
+ └──────┬────────┘
+        ▼
+Financial Intelligence Platform
 ```
 
----
+# 📂 Project Structure
 
-## 🗄 Database Tables
-
-1. companies
-2. profitandloss
-3. balancesheet
-4. cashflow
-5. analysis
-6. documents
-7. prosandcons
-8. sectors
-9. marketcap
-10. stockprices
-
----
-
-## ⚙️ ETL Components
-
-### loader.py
-
-Loads Excel files into Pandas DataFrames.
-
-### normaliser.py
-
-Performs:
-
-- String trimming
-- Uppercase company IDs
-- Null handling
-- Standardization
-
-### validator.py
-
-Performs:
-
-- Duplicate checks
-- Foreign key checks
-- Balance sheet equation checks
-- OPM consistency checks
-- Tax rate validations
-- Dividend payout validations
-- URL validations
-- Year coverage checks
-
-### load_to_sqlite.py
-
-Loads all datasets into SQLite.
-
----
-
-## 📊 Generated Reports
-
-Located inside:
-
-```text
-output/
+``` text
+nifty100-data-foundation/
+├── config/
+├── data/
+├── db/
+├── docs/
+├── notebooks/
+├── output/
+├── reports/
+├── scripts/
+├── sql/
+├── src/
+│   ├── analytics/
+│   ├── api/
+│   ├── dashboard/
+│   └── etl/
+├── tests/
+├── README.md
+├── requirements.txt
+├── pytest.ini
+└── .gitignore
 ```
 
-- load_audit.csv
-- validation_failures.csv
-- top_sales.csv
-- top_roe.csv
-- top_cashflow.csv
-- top_dividend.csv
-- sector_distribution.csv
-- kpi_summary.csv
+# 💻 Technology Stack
 
----
+-   Python 3.11
+-   SQLite
+-   FastAPI
+-   Uvicorn
+-   Streamlit
+-   Plotly
+-   Pandas
+-   NumPy
+-   OpenPyXL
+-   Scikit-Learn
+-   SQLAlchemy
+-   Pytest
+-   Black
+-   Ruff
 
-## 📈 SQL Views
+# ⚙ Installation
 
-- vw_top_sales
-- vw_top_roe
-- vw_sector_distribution
-
-Create views:
-
-```bash
-python create_views.py
+``` bash
+git clone <repository-url>
+cd nifty100-data-foundation
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
 ```
 
----
+# 📊 Database Setup
 
-## 📒 Exploratory Queries
-
-File:
-
-```text
-notebooks/exploratory_queries.sql
+``` bash
+python create_database.py
+python etl_pipeline.py
+python verify_companies.py
 ```
 
-Contains:
+# 🚀 Running FastAPI
 
-- Top sales
-- Top ROE
-- Top cash flow
-- Top dividend
-- Highest net profit
-- Highest EPS
-- Average ROE
-- Highest sales growth
-- Highest OPM
-- Sector distribution
-
----
-
-## 🧪 Automated Tests
-
-Run all tests:
-
-```bash
-pytest tests -v
+``` bash
+uvicorn src.api.main:app --reload
 ```
 
-Individual tests:
+Swagger: http://127.0.0.1:8000/docs
 
-```bash
-pytest tests/test_integrity.py -v 
-✅ 6 tests
+# 📈 Running Streamlit Dashboard
 
-pytest tests/test_loader_columns.py -v
-✅ 8 tests
-
-pytest tests/test_normaliser.py -v
-✅ 5 tests
-
-pytest tests/test_reports.py -v
-✅ 6 tests
-
-pytest tests/test_schema.py -v
-✅ 6 tests (including marketcap and stockprices)
-
-pytest tests/test_sqlite.py -v
-✅ 7 tests (including marketcap and stockprices
-
-pytest tests/test_views.py -v
-✅ 3 tests
-
-```
-
-
-
-## ▶ Running the Project
-
-Create database:
-
-```bash
-python test_sqlite.py
-```
-
-Create views:
-
-```bash
-python create_views.py
-```
-
-Generate reports:
-
-```bash
-python test_export_reports.py
-```
-
-Generate KPI summary:
-
-```bash
-python test_kpi_summary.py
-```
-
-Generate load audit:
-
-```bash
-python load_audit.py
-```
-
-Run tests:
-
-```bash
-pytest tests -v
-```
-
----
-
-## ✅ Deliverables
-
-- ETL Pipeline
-- Data Normalization
-- Data Validation
-- SQLite Database
-- 10 Database Tables
-- Analytical Reports
-- Validation Summary
-- SQL Views
-- Exploratory Queries
-- Load Audit
-- 41 Automated Tests
-
----
-
-## 🛠 Tech Stack
-
-- Python 3.11
-- Pandas
-- SQLite3
-- OpenPyXL
-- Pytest
-
----
-
-## 👨‍💻 Author
-
-**Shivam Tanwar**
-
-GitHub: https://github.com/Shivam2523
-
----
-
-# ✅ Project Status
-
-**Completed Successfully 🚀**
-
-
-# Nifty 100 Analytics Dashboard
-
-
-A Streamlit-based analytics dashboard for the Nifty 100 companies.
-
-The project provides:
-
-- Company Profile
-- Stock Screener
-- Peer Comparison
-- Trend Analysis
-- Sector Analysis
-- Capital Allocation
-- Annual Reports
-- Valuation Module
-
-The backend uses SQLite and Pandas, while Plotly is used for interactive visualizations.
-
-## Features
-
-- Interactive Streamlit Dashboard
-- 92 Nifty Companies
-- Financial Ratio Analysis
-- Peer Comparison
-- Trend Analysis
-- Sector Analysis
-- Capital Allocation Map
-- Annual Report Viewer
-- Company Screener
-- Valuation Module
-
-src/
-│
-├── analytics/
-│   └── valuation.py
-│
-├── dashboard/
-│   ├── app.py
-│   ├── pages/
-│   └── utils/
-│
-db/
-│
-output/
-│
-README.md
-
-
-## Run Dashboard
-
-```bash
+``` bash
 streamlit run src/dashboard/app.py
 ```
 
+Dashboard Pages: - Home - Company Profile - Screener - Peer Comparison -
+Trend Analysis - Sector Analysis - Capital Allocation - Reports
 
-## Generate Valuation Report
+# 🧪 Running Tests
 
-```bash
-python src/analytics/valuation.py
+``` bash
+pytest
+pytest --html=reports/pytest_report.html
 ```
 
-## Technology Stack
-
-- Python
-- Streamlit
-- SQLite
-- Pandas
-- Plotly
-- OpenPyXL
-
-
-## Dataset
-
-- 92 Nifty Companies
-- Financial Ratios
-- Balance Sheet
-- Cash Flow
-- Market Capitalization
-- Sector Information
-- Annual Reports
-
-
-
-
-
-
-## Take Screenshots
-
-docs/
-└── screenshots/
-    ├── home.png
-    ├── profile.png
-    ├── screener.png
-    ├── peers.png
-    ├── trends.png
-    ├── sectors.png
-    ├── capital.png
-    └── reports.png
-
-# Dashboard Screens
-
-### 1. Home Dashboard
-
-Displays:
-
-- KPI Summary
-- Sector Distribution
-- Top Companies
-- Overall Market Overview
-
-![Home](docs/screenshots/Home/Home1.png)
-![Home](docs/screenshots/Home/Home2.png)
-![Home](docs/screenshots/Home/Home3.png)
-
-### 2. Company Profile
-
-Displays:
-
-- Company Information
-- KPIs
-- Revenue & Profit Charts
-- ROE / ROCE Trends
-- Pros & Cons
-
-![Profile](docs/screenshots/Profile/Profile1.png)
-![Profile](docs/screenshots/Profile/Profile2.png)
-![Profile](docs/screenshots/Profile/Profile3.png)
-![Profile](docs/screenshots/Profile/Profile4.png)
-![Profile](docs/screenshots/Profile/Profile5.png)
-![Profile](docs/screenshots/Profile/Profile6.png)
-![Profile](docs/screenshots/Profile/Profile7.png)
-![Profile](docs/screenshots/Profile/Profile8.png)
-
-
-
-### 3. Screener
-
-Allows filtering companies using:
-
-- ROE
-- Debt/Equity
-- Revenue CAGR
-- PAT CAGR
-- P/E
-- Dividend Yield
-- CSV Export
-
-![Screener](docs/screenshots/Screener/Screener1.png)
-![Screener](docs/screenshots/Screener/Screener2.png)
-![Screener](docs/screenshots/Screener/Screener3.png)
-
-
-### 4. Peer Comparison
-
-Shows:
-
-- Radar Chart
-- Peer KPI Comparison
-- Industry Benchmark
-
-![Peers](docs/screenshots/Peers/Peers1.png)
-![Peers](docs/screenshots/Peers/Peers2.png)
-![Peers](docs/screenshots/Peers/Peers3.png)
-![Peers](docs/screenshots/Peers/Peers4.png)
-![Peers](docs/screenshots/Peers/Peers5.png)
-
-
-### 5. Trend Analysis
-
-Displays:
-
-- Multi-metric Line Charts
-- Historical Trends
-- YoY Analysis
-
-![Trends](docs/screenshots/Trends/1.png)
-![Trends](docs/screenshots/Trends/2.png)
-![Trends](docs/screenshots/Trends/3.png)
-![Trends](docs/screenshots/Trends/4.png)
-
-### 6. Sector Analysis
-
-Displays:
-
-- Bubble Chart
-- Sector Median KPIs
-
-![Sectors](docs/screenshots/Sectors/1.png)
-![Sectors](docs/screenshots/Sectors/2.png)
-![Sectors](docs/screenshots/Sectors/3.png)
-
-
-
-### 7. Capital Allocation
-
-Displays:
-
-- Treemap
-- Capital Allocation Categories
-
-![Capital](docs/screenshots/Capital/1.png)
-![Capital](docs/screenshots/Capital/2.png)
-
-
-### 8. Annual Reports
-
-Displays:
-
-- Annual Report Links
-- PDF Access
-- Report Availability
-
-![Reports](docs/screenshots/Reports/1.png)
-![Reports](docs/screenshots/Reports/2.png)
-
-
-# Sprint 4 Retrospective
-
-## Dashboard Features Completed
-
-- Built an 8-page interactive Streamlit dashboard.
-- Added Company Profile with financial KPIs and charts.
-- Implemented an advanced Stock Screener with CSV export.
-- Developed Peer Comparison using Radar Charts.
-- Added Trend Analysis with multiple financial metrics.
-- Created Sector Analysis using Bubble Charts.
-- Built Capital Allocation Treemap visualization.
-- Integrated Annual Report viewer with BSE report links.
-
----
-
-## Valuation Module
-
-Implemented a valuation engine that calculates:
-
-- Free Cash Flow Yield
-- Sector Median P/E
-- PE vs Sector Median
-- Fair / Discount / Caution valuation flags
-
-Generated:
-
-- valuation_summary.xlsx
-- valuation_flags.csv
-
----
-
-## Data Quality Improvements
-
-Resolved several data issues during development:
-
-- Fixed market cap merge using company ID and year.
-- Corrected SIEMENS financial year mismatch (September reporting).
-- Cleaned sector mapping from 94 companies to 92 companies.
-- Removed obsolete companies from the sectors table.
-- Improved handling of missing financial values.
-
----
-
-## Performance
-
-- Streamlit caching implemented using `@st.cache_data`.
-- Optimized SQLite queries.
-- Dashboard pages load within the required response time.
-- Plotly charts render interactively.
-
----
-
-## Challenges Faced
-
-- Financial year mismatches across companies.
-- Market Cap integration.
-- Missing financial ratios.
-- Annual report availability.
-- Data consistency across multiple database tables.
-
----
-
-## Outcome
-
-Sprint 4 successfully delivers a fully functional Nifty 100 Analytics Dashboard with valuation analytics and interactive visualizations.
-
+# 📑 Documentation
+
+-   README.md
+-   Analyst Guide
+-   API Documentation
+-   Release Notes
+-   Code Quality Report
+-   Integration Test Report
+-   Performance Notes
+-   Final Validation Report
+
+# 📊 Reports
+
+-   Load Audit Report
+-   KPI Summary
+-   Validation Report
+-   Financial Ratio Reports
+-   HTML Test Report
+-   Performance Report
+
+# 📸 Dashboard Screenshots
+
+Store screenshots in `docs/screenshots/`.
+
+Suggested: - Home - Company Profile - Screener - Peer Comparison - Trend
+Analysis - Sector Analysis - Capital Allocation - Reports
+
+# 📈 Key Achievements
+
+-   Developed a complete ETL pipeline.
+-   Built a normalized SQLite database.
+-   Created REST APIs using FastAPI.
+-   Developed an interactive Streamlit dashboard.
+-   Implemented financial analytics and KPI calculations.
+-   Optimized database performance using indexes.
+-   Added automated testing and validation.
+-   Produced comprehensive project documentation.
+
+# 🔮 Future Improvements
+
+-   User authentication
+-   Portfolio management
+-   Watchlist functionality
+-   Real-time stock data
+-   PostgreSQL/MySQL support
+-   Docker
+-   GitHub Actions CI/CD
+-   Cloud deployment
+
+# 👨‍💻 Author
+
+**Shivam Kumar Mehta**
+
+-   B.Tech in Computer Science and Engineering
+-   Lovely Professional University
+-   Data Analyst
+-   GitHub: Add your profile link
+-   LinkedIn: Add your profile link
+
+# 📄 License
+
+This project is licensed under the MIT License.

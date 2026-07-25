@@ -15,8 +15,6 @@ from src.etl.validator import (
     check_sector_availability,
     check_year_coverage,
     check_duplicate_rows,
-    check_ticker_normalization,
-    check_mandatory_columns,
 )
 
 

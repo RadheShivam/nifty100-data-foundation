@@ -1,6 +1,5 @@
 # CAGR function
 
-import math
 
 """
 Functions for calculating Compound Annual Growth Rate (CAGR).
